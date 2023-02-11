@@ -100,9 +100,9 @@ export const products = [
   },
 ];
 /////////////////////////////////////////////////////////////////////////////
-export const categories = ["Solar", "Inverter", "Battery"];
+export const categories = ["All", "Solar", "Inverter", "Battery", "Other"];
 
-export const countries = ["China", "India", "South korea", "Oman", "Veitnam", "Thailand"];
+export const countries = ["All", "China", "India", "South korea", "Oman", "Veitnam", "Thailand", "Other"];
 ////////////////////////////////////////////////////////////////////
 export const china = ["Huawei", "Felicity", "Growatt", "SunRay", "Must Power", "Voltronic", "Enkeel", "Dongjin", "Longi", "Jinhua Jujiang", "Suoer"];
 

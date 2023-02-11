@@ -129,7 +129,8 @@ const ProductForm = ({ currentId, setCurrentId }) => {
     console.log(bls);
     console.log(productData);
     try {
-      //  const { data } = await createProduct(productData);
+      const { data } = await createProduct(productData);
+      clear();
     } catch (e) {
       console.log(e);
     }
@@ -143,7 +144,7 @@ const ProductForm = ({ currentId, setCurrentId }) => {
         </Typography>
         <FormControl fullWidth sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
-          <Select helperText="Please select your currency" required labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" value={productData.category} label="Category" onChange={(e) => setProductData({ ...productData, category: e.target.value })}>
+          <Select required labelId="demo-simple-select-helper-label" id="demo-simple-select-helper" value={productData.category} label="Category" onChange={(e) => setProductData({ ...productData, category: e.target.value })}>
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
