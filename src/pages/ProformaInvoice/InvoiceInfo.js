@@ -8,6 +8,21 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mate
 
 function InvoiceInfo() {
   const [exporter, setExporter] = useState("");
+   const [invoiceInfo, setInvoiceInfo] = useState({
+     exporter: "",
+     invoiceNo: "",
+     date: "",
+     buyerAdress: "",
+     cons: "",
+     price: "",
+     capacity: "",
+     image: "",
+     description: "",
+     netWeight: "",
+     grossWeight: "",
+     palatSize: "",
+     bl: [],
+   });
   const handleExporterChange = (event) => {
     setExporter(event.target.value);
     console.log(exporter);
