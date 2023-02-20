@@ -1,10 +1,10 @@
-export const products = [
+export const staticProducts = [
   {
     _id: 1,
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -15,7 +15,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -26,7 +26,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -37,7 +37,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -48,7 +48,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -59,7 +59,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -70,7 +70,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -81,7 +81,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -92,7 +92,7 @@ export const products = [
     category: "Solar",
     country: "China",
     company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V EXP",
+    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
     capacity: "1100",
     image: "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
     price: 200,
@@ -110,7 +110,7 @@ export const india = ["Pacer", "Z Power", "Exide", "LUMINOUS", "Deepak"];
 
 export const southkorea = ["DN Automotive", "Sebang"];
 
-export const oman = ["OMAN REEM"];
+export const oman = ["REEM Battery"];
 
 export const veitnam = ["SEBANG VINA"];
 
@@ -119,14 +119,14 @@ export const thailand = ["3k"];
 export const companyBrandCapacity = [
   {
     companyName: "Huawei",
-    brands: [{ brandName: "Huawei", capacities: ["50 KTL", "60 KTL", "65", "75", "100", "110", "125", "25", "30", "2", "3", "4", "5", "6"] }],
+    brands: [{ brandName: "Huawei", capacities: ["50 KTL", "60 KTL", "65 KTL", "75 KTL", "100 KTL", "110 KTL", "125 KTL", "25 KTL", "30 KTL", "2 KTL", "3 KTL", "4 KTL", "5 KTL", "6 KTL"] }],
   },
   {
     companyName: "Felicity",
     brands: [
       {
         brandName: "Felicity",
-        capacities: ["100 AH", "200 AH", "300 AH"],
+        capacities: ["100 AH", "200 AH", "250 AH", "300 AH"],
       },
     ],
   },
@@ -135,7 +135,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "Growatt",
-        capacities: ["5000 W", "8000 W", "10000 W"],
+        capacities: ["5 KW", "8 KW", "10 KW"],
       },
     ],
   },
@@ -144,7 +144,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "AGS",
-        capacities: ["1500 W", "3500 W", "3600 W", "5500 W", "6200 W"],
+        capacities: ["1.5 KW", "3.5 KW", "3.6 KW", "5.5 KW", "6.2 KW"],
       },
     ],
   },
@@ -153,7 +153,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "AGS",
-        capacities: ["1000 W", "3000 W", "5200 W"],
+        capacities: ["1 KW", "3 KW", "5.2 KW"],
       },
     ],
   },
@@ -162,7 +162,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "AGS",
-        capacities: ["4000 W", "6000 W", "8000 W", "11000"],
+        capacities: ["4 KW", "6 KW", "8 KW", "11 KW"],
       },
     ],
   },
@@ -171,19 +171,19 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "AGS",
-        capacities: ["3", "4", "5", "6.5", "7", "9"],
+        capacities: ["3 AH", "4 AH", "5 AH", "6.5 AH", "7 AH", "9 AH"],
       },
       {
         brandName: "World East",
-        capacities: ["3", "4", "5", "6.5", "7", "9"],
+        capacities: ["3 AH", "4 AH", "5 AH", "6.5 AH", "7 AH", "9 AH"],
       },
       {
         brandName: "Megan",
-        capacities: ["3", "4", "5", "6.5", "7", "9"],
+        capacities: ["3 AH", "4 AH", "5 AH", "6.5 AH", "7 AH", "9 AH"],
       },
       {
         brandName: "Super Power",
-        capacities: ["6.5"],
+        capacities: ["3 AH", "4 AH", "5 AH", "6.5 AH", "7 AH", "9 AH"],
       },
     ],
   },
@@ -192,11 +192,11 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "Donjin",
-        capacities: ["30", "32", "45", "58"],
+        capacities: ["30 AH", "32 AH", "45 AH", "58 AH"],
       },
       {
         brandName: "Kinfon",
-        capacities: ["8", "14", "22", "28", "100", "150", "200", "70"],
+        capacities: ["8 AH", "14 AH", "22 AH", "28 AH", "100 AH", "150 AH", "200 AH", "70 AH"],
       },
     ],
   },
@@ -204,16 +204,12 @@ export const companyBrandCapacity = [
     companyName: "Longi",
     brands: [
       {
-        brandName: "Himo 6 ",
+        brandName: "Himo 6",
         capacities: ["570 W", "575 W"],
       },
       {
         brandName: "Himo 5",
-        capacities: ["540", "545", "550", "555", "bi facial 540", "bi facial 550"],
-      },
-      {
-        brandName: "Himo 5",
-        capacities: ["540", "545", "550", "555", "bi facial 540", "bi facial 550"],
+        capacities: ["540 W", "545 W", "550 W", "555 W", "bi facial 540 W", "bi facial 550 W"],
       },
     ],
   },
@@ -222,11 +218,11 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "Golden Power",
-        capacities: ["30", "40", "55 ", "66", "70", "74", "90", "100", "150", "200"],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "Rambo",
-        capacities: ["540", "545", "550", "555", "bi facial 540", "bi facial 550"],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
     ],
   },
@@ -235,11 +231,19 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "Suoer Charger ",
-        capacities: ["5 A", "10 A", "20 A ", "30 A", "40 A", "50 A"],
+        capacities: ["5 A", "10 A", "20 A", "30 A", "40 A", "50 A"],
       },
       {
         brandName: "Suoer Inverter",
         capacities: ["1.5 KVA", "2 KVA"],
+      },
+      {
+        brandName: "Suoer Controller PWM",
+        capacities: ["10 A", "20 A", "30 A", "40 A", "50 A", "60 A"],
+      },
+      {
+        brandName: "Suoer Controller MPPT",
+        capacities: ["20 A"],
       },
     ],
   },
@@ -248,11 +252,11 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "Pacer",
-        capacities: ["200 AH", "220 AH", "240 AH"],
+        capacities: ["200 AH", "220 AH", "230 AH", "240 AH"],
       },
       {
         brandName: "Infinity",
-        capacities: ["200 AH", "220 AH", "240 AH"],
+        capacities: ["200 AH", "220 AH", "230 AH", "240 AH"],
       },
     ],
   },
@@ -261,7 +265,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "3M",
-        capacities: ["200 AH", "220 AH", "240 AH"],
+        capacities: ["200 AH", "220 AH", "230 AH", "240 AH"],
       },
     ],
   },
@@ -270,15 +274,15 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "EXIDE",
-        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "240 AH"],
+        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "230 AH", "240 AH"],
       },
       {
         brandName: "INDEX",
-        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "240 AH"],
+        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "230 AH", "240 AH"],
       },
       {
         brandName: "CEIL",
-        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "240 AH"],
+        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "230 AH", "240 AH"],
       },
     ],
   },
@@ -351,7 +355,7 @@ export const companyBrandCapacity = [
     ],
   },
   {
-    companyName: "OMAN REEM",
+    companyName: "REEM Battery",
     brands: [
       {
         brandName: "GRAND STAR",

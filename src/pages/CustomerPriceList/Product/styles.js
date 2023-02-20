@@ -23,7 +23,6 @@ export default makeStyles({
     borderRadius: "15px",
     height: "100%",
     position: "relative",
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
   },
   overlay: {
     position: "absolute",
@@ -79,15 +78,4 @@ export default makeStyles({
     display: "block",
     textAlign: "initial",
   },
-  if_checked: {
-    padding: "10px 0px 10px 3px",
-    display: "flex",
-  },
-  qty: {
-    flex: 1,
-  },
-  qty_text: {
-    flex: 1,
-  },
-  palet: { marginLeft: "10px ", paddingLeft: "0px", flex: 1 },
 });

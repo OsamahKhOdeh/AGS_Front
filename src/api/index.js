@@ -1,6 +1,6 @@
 import axios from "axios";
-
-const API = axios.create({ baseURL: "https://agsserver.onrender.com" });
+console.log("From api");
+const API = axios.create({ baseURL: "https://server1-ustg.onrender.com" });
 /*
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -9,8 +9,10 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
+
 */
-export const createProduct = (newProduct) => API.post("/products", newProduct);
+//export const createProduct = (newProduct) => API.post("/products", newProduct);
+export const createProduct = (newProduct) => axios.post("https://server1-ustg.onrender.com/products", newProduct);
 
 /*
 export const fetchPost = (id) => API.get(`/posts/${id}`);

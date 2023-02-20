@@ -7,15 +7,12 @@ import { addProductToCheckedList, removeProductFromCheckedList, setProductQty } 
 
 const Product = ({ product }) => {
   const selectedProducts = useSelector((state) => state.products);
-  const showPrice = useSelector((state) => state.show.showPrice);
-  const showStock = useSelector((state) => state.show.showStock);
-  const showDatasheet = useSelector((state) => state.show.showDatasheet);
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
   const [isPallet, setIsPallet] = useState(false);
   // const QtyRef = useRef('')
 
-  const [qty, setQty] = useState("");
+  const [qty, setQty] = useState(0);
 
   const classes = useStyles();
   const handleCheckboxChange = (event) => {
@@ -41,13 +38,6 @@ const Product = ({ product }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
-      <Checkbox
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-        style={{
-          transform: "scale(2)",
-        }}
-      />
       <CardMedia
         style={{
           width: "auto",
@@ -56,42 +46,34 @@ const Product = ({ product }) => {
         className={classes.media}
         image={product.image || "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"}
       ></CardMedia>
-      <div className={classes.overlay}></div>
-      <Typography className={classes.title} variant="h6" component="h2">
+      <Typography className={classes.title} gutterBottom variant="h6" component="h2">
         {product.code}
       </Typography>{" "}
-      <Typography className={classes.capacity} variant="h6">
-        Capacity :<b style={{ backgroundColor: "#87FFB0" }}> {product.capacity}</b>
+      <Typography className={classes.capacity} gutterBottom variant="h6">
+        Capacity :<b style={{ backgroundColor: "#87FFB0" }}>{product.capacity}</b>
       </Typography>
-      {showPrice && (
-        <Typography className={classes.price} style={{ display: "inline" }}>
-          Price :<b style={{ backgroundColor: "#E0E5E4", color: "red" }}>{product.price}</b>
-        </Typography>
-      )}
-      {showStock && (
-        <Typography className={classes.stock} style={{ display: "inline" }}>
-          Stock :<b style={{ backgroundColor: "#E0E5E4" }}> {stock}</b>
-        </Typography>
-      )}
+      <Typography className={classes.price} display="inline">
+        Price :<b style={{ backgroundColor: "#E0E5E4", color: "red" }}> {product.price}</b>
+      </Typography>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           DESCRIPTION :{product?.description.split(" ").splice(0, 10).join(" ")}...
         </Typography>
         {isChecked && (
-          <div className={classes.if_checked}>
-            <Typography className={classes.qty} variant="h5">
-              Qty :
+          <div style={{ display: "flex" }}>
+            <Typography variant="h5" style={{ width: "50%", flex: 1 }}>
+              Quantity :
             </Typography>
             <TextField
-              className={classes.qty_text}
               value={qty}
               onChange={handleQtyChange}
               onBlur={() => {
                 dispatch(setProductQty({ id: product._id, qty: qty }));
               }}
+              style={{ width: "50%", flex: 1 }}
             />
             <FormControlLabel
-              className={classes.palet}
+              style={{ flex: 1 }}
               control={
                 <Switch
                   onChange={() => {
@@ -105,13 +87,6 @@ const Product = ({ product }) => {
           </div>
         )}
       </CardContent>
-      {showDatasheet && (
-        <CardActions className={classes.cardActions}>
-          <Button variant="contained" size="large" fullWidth color="primary" onClick={handleDownloadDatasheet}>
-            Download Datasheet
-          </Button>
-        </CardActions>
-      )}
     </Card>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import "node_modules/react-select/dist/react-select.css";
+import "react-select/dist/react-select.css";
 
 const DropDown = (props) => {
   const options = props.multi ? [{ label: "Select All", value: "all" }, ...props.options] : props.options;

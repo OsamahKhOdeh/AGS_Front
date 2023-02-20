@@ -1,32 +1,132 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Container } from "@material-ui/core";
-import { ToggleButton } from "@mui/material";
+import { AppBar, Checkbox, Container, FormControlLabel, Grid, Grow, Paper, Toolbar, Typography } from "@material-ui/core";
+import { Button, ToggleButton } from "@mui/material";
+import DropdownTreeSelect from "react-dropdown-tree-select";
+import "./priceList.css";
+import "react-dropdown-tree-select/dist/styles.css";
+import { useDispatch, useSelector } from "react-redux";
+
+import china from "./china.json";
+import india from "./india.json";
+import south_korea from "./south_korea.json";
+import oman from "./oman.json";
+import veitnam from "./veitnam.json";
+import thailand from "./thailand.json";
+
 import useStyles from "./styles";
 import { categories, countries } from "../../data";
-//import DropDown from "./DropDown";
 import Select from "react-select";
-
+import Products from "../../Components/Products/Products";
+import { availabiltyStatus, priceCurrency, priceOnLocation } from "./showingFilters";
+import { changeShowDatasheet, changeShowPrice, changeShowStock } from "../../store/showingSlice";
+import { setFiltersState } from "../../store/filtersSlice";
+let choosenCompanies = [];
+let choosenBrands = [];
+let choosenCapacities = [];
 const PriceList = () => {
-  const allfruits = [
-    { label: "Mango", value: "mg" },
-    { label: "Guava", value: "gv" },
-    { label: "Peach", value: "pc" },
-    { label: "Apple", value: "ap" },
-  ];
-
-  const [fruits, setFruits] = useState(null);
-  const handleChange = (value) => {
-    setFruits(value);
-  };
+  const dispatch = useDispatch();
+  const stateFilters = useSelector((state) => state.filters);
+  console.log(stateFilters);
   const classes = useStyles();
+  const selectedProducts = useSelector((state) => state.products);
+  const shows = useSelector((state) => state.show.showPrice);
+  // console.log(shows);
+  // console.log(selectedProducts);
+  const navigate = useNavigate();
+  const [filters, setFilters] = useState({});
   const [choosenCategories, setCategories] = useState(["all"]);
   const [choosenCountries, setCountries] = useState(["all"]);
+  //Side Filters//////////////////////////////////////////////
 
-  console.log(choosenCategories);
+  const [showPrice, setShowPrice] = useState(useSelector((state) => state.show.showPrice));
+  const [showStock, setShowStock] = useState(useSelector((state) => state.show.showStock));
+  const [showDatasheet, setShowDatasheet] = useState(useSelector((state) => state.show.showDatasheet));
+
+  const handleShowPriceChange = (e) => {
+    setShowPrice(e.target.checked);
+    dispatch(changeShowPrice(!showPrice));
+  };
+  const handleShowStockChange = (e) => {
+    setShowStock(e.target.checked);
+    dispatch(changeShowStock(!showStock));
+  };
+
+  const handleShowDatasheetChange = (e) => {
+    setShowDatasheet(e.target.checked);
+    dispatch(changeShowDatasheet(!showDatasheet));
+  };
+
+  ///////////////////////////////////////////////////////////////////////
+  let arrayOfSelectedNodes = [];
+
+  const onChange = (currentNode, selectedNodes) => {
+    let choosenCapacitiesr = [];
+    Object.keys(selectedNodes).forEach((k) => {
+      const node = selectedNodes[k];
+      if (node._depth === 0) {
+        choosenCompanies.push(node.label);
+        // console.log(choosenCompanies);
+      }
+      if (node._depth === 1) {
+        choosenBrands.push(node.label);
+        // console.log(choosenBrands);
+      }
+      if (node._depth === 2) {
+        let father = findFateher(node);
+        // let grandFather = findFateher(father);
+        // console.log("FATHER :" + father + "GRAND Father " + grandFather);
+        const cap = node.label;
+        choosenCapacities.push({ cap, father });
+      }
+    });
+    //console.log(choosenCapacities);
+
+    arrayOfSelectedNodes = selectedNodes.map((node) => {
+      let str = JSON.stringify(node);
+      return str;
+    });
+  };
+
+  let toggled = [];
+
+  const onNodeToggle = (currentNode) => {
+    toggled.push(currentNode);
+  };
+
+  const findFateher = (child) => {
+    let found = "";
+    Object.keys(toggled).forEach((k) => {
+      const node = toggled[k];
+      if (child._parent === node._id) {
+        found = node.label;
+      }
+    });
+    return found;
+  };
+
+  const assignObjectPaths = (obj, stack) => {
+    Object.keys(obj).forEach((k) => {
+      const node = obj[k];
+      if (typeof node === "object") {
+        node.path = stack ? `${stack}.${k}` : k;
+        assignObjectPaths(node, node.path);
+      }
+    });
+  };
+
+  assignObjectPaths(china);
+  assignObjectPaths(india);
+  assignObjectPaths(south_korea);
+  assignObjectPaths(oman);
+  assignObjectPaths(veitnam);
+  assignObjectPaths(thailand);
+
   const handleCategoryChange = (e) => {
     let cat = e.target.value;
-    console.log(cat);
+
+    //console.log(cat);
     let cats = [...choosenCategories];
 
     if (cat === "all" || choosenCategories.includes("all")) {
@@ -37,18 +137,16 @@ const PriceList = () => {
     } else {
       cats.splice(cats.indexOf(cat), 1);
     }
-
     setCategories(cats);
-    // console.log(choosenCategories);
-    // console.log(categories);
+    dispatch(setFiltersState({ ...filters, categories: cats }));
+    setFilters({ ...filters, categories: cats });
   };
   const handleCountryChange = (e) => {
     let count = e.target.value;
-    console.log(count);
+    //console.log(count);
     let counts = [...choosenCountries];
-    if (count === "all") {
-      setCountries(["all"]);
-      return;
+    if (count === "all" || choosenCountries.includes("all")) {
+      counts.splice(counts.indexOf("all"), 1);
     }
     if (!choosenCountries.includes(count)) {
       counts.push(count);
@@ -57,34 +155,141 @@ const PriceList = () => {
     }
 
     setCountries(counts);
-    //  console.log(choosenCountries);
-    // console.log(categories);
+    dispatch(setFiltersState({ ...filters, countries: counts }));
+
+    setFilters({ ...filters, countries: counts });
   };
+  //console.log(filters);
+
+  const handleSearch = () => {
+    // console.log("clicked search");
+    let companies = [...new Set(choosenCompanies)];
+    let brands = [...new Set(choosenBrands)];
+    // let capacities = [...new Set(choosenCapacities)];
+    var capacities = choosenCapacities.reduce((unique, o) => {
+      if (!unique.some((obj) => obj.father === o.father && obj.cap === o.cap)) {
+        unique.push(o);
+      }
+      return unique;
+    }, []);
+    dispatch(setFiltersState({ ...filters, companies: companies, brands: brands, capacities: capacities }));
+
+    setFilters({ ...filters, companies: companies, brands: brands, capacities: capacities });
+
+    choosenCompanies = [];
+    choosenBrands = [];
+  };
+
+  const handleNext = () => {
+    dispatch(setFiltersState(filters));
+
+    navigate("/table");
+  };
+
   return (
-    <Container>
-      <ToggleButtonGroup fullWidth value={choosenCategories} onChange={handleCategoryChange} aria-label="text formatting">
-        {categories.map((cat, i) => {
-          return (
-            <ToggleButton key={i} value={cat.toLocaleLowerCase()} aria-label={cat}>
-              {cat}
-            </ToggleButton>
-          );
-        })}
-      </ToggleButtonGroup>
-      <ToggleButtonGroup fullWidth value={choosenCountries} onChange={handleCountryChange} aria-label="text formatting">
-        {countries.map((country, i) => {
-          return (
-            <ToggleButton key={i} value={country.toLocaleLowerCase()} aria-label={country}>
-              {country}
-            </ToggleButton>
-          );
-        })}
-      </ToggleButtonGroup>
-      <div>
-        <Select defaultValue={[fruits[2], fruits[3]]} isMulti name="fruits" options={allfruits} className="basic-multi-select" classNamePrefix="select" />
-        {fruits && <p>{JSON.stringify(fruits)}</p>}
-      </div>
-    </Container>
+    <>
+      <AppBar position="absolute" color="default" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="h6" color="inherit" noWrap>
+            AGS
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Grow in>
+        <Container maxWidth="xl">
+          <Grid container justifyContent="space-between" alignitems="stretch" spacing={3} className={classes.gridContainer}>
+            <Grid item xs={12} sm={6} md={9}>
+              <Container>
+                <ToggleButtonGroup fullWidth value={useSelector((state) => state.filters.filters.categories)} onChange={handleCategoryChange} aria-label="text formatting">
+                  {categories.map((cat, i) => {
+                    return (
+                      <ToggleButton style={{ fontSize: "22px", fontWeight: "bold", color: "#44435B" }} key={i} value={cat} aria-label={cat}>
+                        {cat}
+                      </ToggleButton>
+                    );
+                  })}
+                </ToggleButtonGroup>
+                {console.log(useSelector((state) => state.filters.filters.countries))}
+                {console.log(choosenCountries)}
+
+                <ToggleButtonGroup fullWidth value={useSelector((state) => state.filters.filters.countries)} onChange={handleCountryChange} aria-label="text formatting">
+                  {countries.map((country, i) => {
+                    return (
+                      <ToggleButton style={{ fontSize: "20px", fontWeight: "bold" }} key={i} value={country} aria-label={country}>
+                        {country}
+                      </ToggleButton>
+                    );
+                  })}
+                </ToggleButtonGroup>
+                <div className={classes.gridContainer}>
+                  <div className="dropdowns">
+                    <DropdownTreeSelect texts={{ placeholder: "CHINA" }} data={china} onChange={onChange} onNodeToggle={onNodeToggle} className="mdl-demo" />
+                    <DropdownTreeSelect texts={{ placeholder: "INDIA" }} data={india} onChange={onChange} onNodeToggle={onNodeToggle} className="mdl-demo" />
+                    <DropdownTreeSelect texts={{ placeholder: "SOUTH KOREA" }} data={south_korea} onChange={onChange} onNodeToggle={onNodeToggle} className="mdl-demo" />
+                    <DropdownTreeSelect texts={{ placeholder: "OMAN" }} data={oman} onChange={onChange} onNodeToggle={onNodeToggle} className="mdl-demo" />
+                    <DropdownTreeSelect texts={{ placeholder: "VIETNAM" }} data={veitnam} onChange={onChange} onNodeToggle={onNodeToggle} className="mdl-demo" />
+                    <DropdownTreeSelect texts={{ placeholder: "THAILAND" }} data={thailand} onChange={onChange} onNodeToggle={onNodeToggle} className="mdl-demo" />
+                  </div>
+                </div>
+                <div className={classes.buttons}>
+                  <Button className={classes.button} variant="contained" color="success" onClick={handleSearch}>
+                    Search
+                  </Button>
+                  <Button className={classes.button} variant="contained" color="primary" onClick={handleNext}>
+                    MAKE PI
+                  </Button>
+                  <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="error"
+                    onClick={() => {
+                      navigate("/customer-price-list");
+                    }}
+                  >
+                    Show PriceList
+                  </Button>
+                </div>
+              </Container>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <ToggleButtonGroup fullWidth value={choosenCategories} onChange={() => {}} aria-label="text formatting">
+                {availabiltyStatus.map((status, i) => {
+                  return (
+                    <ToggleButton key={i} value={status} aria-label={status}>
+                      {status}
+                    </ToggleButton>
+                  );
+                })}
+              </ToggleButtonGroup>
+              <ToggleButtonGroup fullWidth value={choosenCategories} onChange={() => {}} aria-label="text formatting">
+                {priceOnLocation.map((location, i) => {
+                  return (
+                    <ToggleButton key={i} value={location} aria-label={location}>
+                      {location}
+                    </ToggleButton>
+                  );
+                })}
+              </ToggleButtonGroup>
+              <ToggleButtonGroup fullWidth value={choosenCategories} onChange={() => {}} aria-label="text formatting">
+                {priceCurrency.map((curr, i) => {
+                  return (
+                    <ToggleButton key={i} value={curr} aria-label={curr}>
+                      {curr}
+                    </ToggleButton>
+                  );
+                })}
+              </ToggleButtonGroup>
+              <Paper style={{ display: "flex" }}>
+                <FormControlLabel style={{ flex: 1 }} control={<Checkbox checked={showPrice} onChange={handleShowPriceChange} />} label="Price" />
+                <FormControlLabel style={{ flex: 1 }} control={<Checkbox checked={showStock} onChange={handleShowStockChange} />} label="Stock" />
+                <FormControlLabel style={{ flex: 1 }} control={<Checkbox checked={showDatasheet} onChange={handleShowDatasheetChange} />} label="Datasheet" />
+              </Paper>
+            </Grid>
+          </Grid>
+          <Products filters={filters} />
+        </Container>
+      </Grow>
+    </>
   );
 };
 

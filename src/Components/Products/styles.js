@@ -28,6 +28,13 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     width: "400px",
   },
+
+  products_count: {
+    textAlign: "center",
+    fontSize: "24px",
+    fontWeight: "bold",
+  },
+
   userName: {
     display: "flex",
     alignItems: "center",

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { TextField, Button, Typography, Paper, Container } from "@material-ui/core";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { createProduct } from "../../api";
 //import { CloudinaryContext, Image } from "cloudinary-react";
 import InputLabel from "@mui/material/InputLabel";
@@ -109,7 +112,7 @@ const ProductForm = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
 
   const clear = () => {
-    setProductData({ category: "", country: "", company: "", code: "", brand: "", price: 0, capacity: "", image: "", description: "", netWeight: 0, grossWeight: 0, palatSize: 12, bl: [] });
+    setProductData({ category: "", country: "", company: "", code: "", brand: "", price: 0, capacity: "", image: "", description: "", netWeight: 0, grossWeight: 0, palatSize: 0, bl: [] });
   };
 
   const handleUpload = async () => {
@@ -130,14 +133,42 @@ const ProductForm = ({ currentId, setCurrentId }) => {
     console.log(productData);
     try {
       const { data } = await createProduct(productData);
+      showToastMessage();
       clear();
     } catch (e) {
+      showErrorMessage();
       console.log(e);
     }
   };
 
+  const showToastMessage = () => {
+    toast.success("Product added Succesfully ✅", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  const showErrorMessage = () => {
+    toast.error("Please complete all mandatory fields or enter a valid image", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   return (
     <Paper className={classes.paper} elevation={6}>
+      <ToastContainer />
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant="h3" style={{ backgroundColor: "" }}>
           Adding Product
@@ -219,9 +250,8 @@ const ProductForm = ({ currentId, setCurrentId }) => {
           </Select>
         </FormControl>
 
-        <TextField required name="code" variant="outlined" label="Product Code" fullWidth value={productData.code} onChange={(e) => setProductData({ ...productData, code: e.target.value })} />
+        <TextField name="code" variant="outlined" label="Product Code" fullWidth value={productData.code} onChange={(e) => setProductData({ ...productData, code: e.target.value })} />
         <TextField
-          required
           name="netWeight"
           variant="outlined"
           label="Net Weight"
@@ -232,7 +262,6 @@ const ProductForm = ({ currentId, setCurrentId }) => {
           }}
         />
         <TextField
-          required
           name="grossWeight"
           variant="outlined"
           label="Gross Weight"
@@ -243,7 +272,6 @@ const ProductForm = ({ currentId, setCurrentId }) => {
           }}
         />
         <TextField
-          required
           name="paletSize"
           variant="outlined"
           label="Palet Size"
@@ -253,7 +281,7 @@ const ProductForm = ({ currentId, setCurrentId }) => {
             if (e.target.value === "" || regex.test(e.target.value)) setProductData({ ...productData, palatSize: e.target.value });
           }}
         />
-        <TextField required name="description" variant="outlined" label="DESECRIPTION" fullWidth multiline minRows={4} value={productData.description} onChange={(e) => setProductData({ ...productData, description: e.target.value })} />
+        <TextField name="description" variant="outlined" label="DESECRIPTION" fullWidth multiline minRows={4} value={productData.description} onChange={(e) => setProductData({ ...productData, description: e.target.value })} />
         <Container>
           <TextField name="0" variant="outlined" label="BL Code" value={productData.bl.code} onChange={handleBlCodeChange} />
           <TextField name="0" variant="outlined" label="BL Quantity" value={productData.bl.qty} onChange={handleBlQtyChange} />
