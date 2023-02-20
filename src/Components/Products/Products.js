@@ -29,7 +29,7 @@ const Products = ({ filters }) => {
       let isFilters = Object.keys(filters).length;
       try {
         dispatch(setIsLoading(true));
-        const res = await axios.get(isFilters !== 0 ? `http://localhost:5000/products/search?categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands}&capacities=${fathers}` : "http://localhost:5000/products");
+        const res = await axios.get(isFilters !== 0 ? `https://ags-server.onrender.com/products/search?categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands}&capacities=${fathers}` : "https://ags-server.onrender.com/products");
         dispatch(setIsLoading(false));
         if (isCapacities) {
           let fathersProducts = res.data.data;
