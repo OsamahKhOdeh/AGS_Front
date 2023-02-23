@@ -10,6 +10,9 @@ const Product = ({ product }) => {
   const showPrice = useSelector((state) => state.show.showPrice);
   const showStock = useSelector((state) => state.show.showStock);
   const showDatasheet = useSelector((state) => state.show.showDatasheet);
+  const currency = useSelector((state) => state.filters.currency);
+  const location = useSelector((state) => state.filters.location);
+  const usdToAedRate = useSelector((state) => state.filters.usdToAedRate);
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
   const [isPallet, setIsPallet] = useState(false);
@@ -65,7 +68,14 @@ const Product = ({ product }) => {
       </Typography>
       {showPrice && (
         <Typography className={classes.price} style={{ display: "inline" }}>
-          Price :<b style={{ backgroundColor: "#E0E5E4", color: "red" }}>{product.price}</b>
+          Price :
+          <b style={{ backgroundColor: "#E0E5E4", color: "red" }}>
+            {location === "freezone" ? (
+              <>{currency === "USD" ? product.price + "  $" : (Math.round(product.price * usdToAedRate * 100) / 100).toFixed(2) + "  AED"}</>
+            ) : (
+              <>{currency === "USD" ? product.price + product.price / 10 + "  $" : (Math.round((product.price + product.price / 10) * usdToAedRate * 100) / 100).toFixed(2) + "  AED"}</>
+            )}
+          </b>
         </Typography>
       )}
       {showStock && (

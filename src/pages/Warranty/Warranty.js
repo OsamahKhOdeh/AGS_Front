@@ -6,31 +6,27 @@ import { Button, ToggleButton } from "@mui/material";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import DropdownTreeSelect from "react-dropdown-tree-select";
-import "./priceList.css";
+//import "./priceList.css";
 import "react-dropdown-tree-select/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import china from "./china.json";
-import india from "./india.json";
+import { china, india, south_korea, oman, veitnam, thailand } from "./data";
+/*import india from "./india.json";
 import south_korea from "./south_korea.json";
 import oman from "./oman.json";
 import veitnam from "./veitnam.json";
 import thailand from "./thailand.json";
-
+*/
 import useStyles from "./styles";
 import { categories, countries } from "../../data";
 import Select from "react-select";
-import Products from "../../Components/Products/Products";
-import { availabiltyStatus, priceCurrency, priceOnLocation } from "./showingFilters";
-import { changeShowDatasheet, changeShowPrice, changeShowStock } from "../../store/showingSlice";
+import Products from "./Products/Products";
 import { changeCurrency, changeLocation, setFiltersState, setUsdToAedRate } from "../../store/filtersSlice";
 let choosenCompanies = [];
 let choosenBrands = [];
 let choosenCapacities = [];
-const PriceList = () => {
+const Warranty = () => {
   const dispatch = useDispatch();
-  const stateFilters = useSelector((state) => state.filters);
-  console.log(stateFilters);
   const classes = useStyles();
   const selectedProducts = useSelector((state) => state.products);
   const shows = useSelector((state) => state.show.showPrice);
@@ -40,25 +36,6 @@ const PriceList = () => {
   const [filters, setFilters] = useState({});
   const [choosenCategories, setCategories] = useState(useSelector((state) => state.filters.filters.categories));
   const [choosenCountries, setCountries] = useState(useSelector((state) => state.filters.filters.countries));
-  //Side Filters//////////////////////////////////////////////
-
-  const [showPrice, setShowPrice] = useState(useSelector((state) => state.show.showPrice));
-  const [showStock, setShowStock] = useState(useSelector((state) => state.show.showStock));
-  const [showDatasheet, setShowDatasheet] = useState(useSelector((state) => state.show.showDatasheet));
-
-  const handleShowPriceChange = (e) => {
-    setShowPrice(e.target.checked);
-    dispatch(changeShowPrice(!showPrice));
-  };
-  const handleShowStockChange = (e) => {
-    setShowStock(e.target.checked);
-    dispatch(changeShowStock(!showStock));
-  };
-
-  const handleShowDatasheetChange = (e) => {
-    setShowDatasheet(e.target.checked);
-    dispatch(changeShowDatasheet(!showDatasheet));
-  };
 
   ///////////////////////////////////////////////////////////////////////
   let arrayOfSelectedNodes = [];
@@ -183,21 +160,7 @@ const PriceList = () => {
   };
 
   const handleNext = () => {
-    dispatch(setFiltersState(filters));
-
-    navigate("/table");
-  };
-
-  ////////////////////////////////////////////Usd To Aed //////
-  const usdToAedRate = useSelector((state) => state.filters.usdToAedRate);
-  const [usdToAedRateUseState, setUsdToAedRateUseState] = useState(useSelector((state) => state.filters.usdToAedRate));
-  const location = useSelector((state) => state.filters.location);
-  const currency = useSelector((state) => state.filters.currency);
-  const handleCurrencyChange = (e) => {
-    dispatch(changeCurrency(e.target.value));
-  };
-  const handleLocationChange = (e) => {
-    dispatch(changeLocation(e.target.value));
+    navigate("/warranty-check");
   };
 
   //Hid & Show Filters //////////////////////////////////////////////////////////////
@@ -208,14 +171,6 @@ const PriceList = () => {
 
   return (
     <>
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            AGS
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
       <Grow in>
         <Container maxWidth="xl">
           <div>
@@ -225,7 +180,7 @@ const PriceList = () => {
           </div>
           {showFilters && (
             <Grid container justifyContent="space-between" alignitems="stretch" spacing={3} className={classes.gridContainer}>
-              <Grid item xs={12} sm={6} md={9}>
+              <Grid item xs={12} sm={12} md={12}>
                 <Container>
                   <ToggleButtonGroup fullWidth value={choosenCategories} onChange={handleCategoryChange} aria-label="text formatting">
                     {categories.map((cat, i) => {
@@ -257,74 +212,11 @@ const PriceList = () => {
                     </div>
                   </div>
                   <div className={classes.buttons}>
-                    <Button className={classes.button} variant="contained" color="success" onClick={handleSearch}>
-                      Search
-                    </Button>
                     <Button className={classes.button} variant="contained" color="primary" onClick={handleNext}>
-                      MAKE PI
-                    </Button>
-                    <Button
-                      className={classes.button}
-                      variant="contained"
-                      color="error"
-                      onClick={() => {
-                        navigate("/customer-price-list");
-                      }}
-                    >
-                      Show PriceList
+                      Next{" "}
                     </Button>
                   </div>
                 </Container>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <ToggleButtonGroup fullWidth value={choosenCategories} onChange={() => {}} aria-label="text formatting">
-                  {availabiltyStatus.map((status, i) => {
-                    return (
-                      <ToggleButton key={i} value={status} aria-label={status}>
-                        {status}
-                      </ToggleButton>
-                    );
-                  })}
-                </ToggleButtonGroup>
-                <ToggleButtonGroup fullWidth value={location} onChange={handleLocationChange} aria-label="text formatting">
-                  {priceOnLocation.map((location, i) => {
-                    return (
-                      <ToggleButton key={i} value={location} aria-label={location}>
-                        {location}
-                      </ToggleButton>
-                    );
-                  })}
-                </ToggleButtonGroup>
-                <div style={{ display: "flex" }}>
-                  <ToggleButtonGroup style={{ flex: 2 }} value={currency} onChange={handleCurrencyChange} aria-label="text formatting">
-                    {priceCurrency.map((curr, i) => {
-                      return (
-                        <ToggleButton style={{ flex: 2 }} key={i} value={curr} aria-label={curr}>
-                          {curr}
-                        </ToggleButton>
-                      );
-                    })}
-                  </ToggleButtonGroup>
-                  <TextField
-                    style={{ flex: 1 }}
-                    placeholder="Rate"
-                    color="primary"
-                    value={usdToAedRateUseState}
-                    onChange={(e) => setUsdToAedRateUseState(e.target.value)}
-                    onBlur={(e) => {
-                      dispatch(setUsdToAedRate(usdToAedRateUseState));
-                    }}
-                    variant="outlined"
-                  ></TextField>
-                </div>
-                <Paper style={{ display: "flex", backgroundColor: "#c5d2d4" }}>
-                  <FormControlLabel style={{ flex: 1 }} control={<Checkbox checked={showPrice} onChange={handleShowPriceChange} />} label="Price" />
-                  <FormControlLabel style={{ flex: 1 }} control={<Checkbox checked={showStock} onChange={handleShowStockChange} />} label="Stock" />
-                  <FormControlLabel style={{ flex: 1 }} control={<Checkbox checked={showDatasheet} onChange={handleShowDatasheetChange} />} label="Datasheet" />
-                </Paper>
-                <Paper>
-                  <TextField label="Promo Code" id="outlined-size-small" fullWidth variant="outlined" defaultValue="" size="normal" />
-                </Paper>
               </Grid>
             </Grid>
           )}
@@ -336,4 +228,4 @@ const PriceList = () => {
   );
 };
 
-export default PriceList;
+export default Warranty;

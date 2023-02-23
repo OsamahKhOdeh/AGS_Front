@@ -6,28 +6,28 @@ import { Button, ToggleButton } from "@mui/material";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import DropdownTreeSelect from "react-dropdown-tree-select";
-import "./priceList.css";
+//import "./priceList.css";
 import "react-dropdown-tree-select/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 
-import china from "./china.json";
-import india from "./india.json";
+import { china, india, south_korea, oman, veitnam, thailand } from "./data";
+/*import india from "./india.json";
 import south_korea from "./south_korea.json";
 import oman from "./oman.json";
 import veitnam from "./veitnam.json";
 import thailand from "./thailand.json";
-
+*/
 import useStyles from "./styles";
 import { categories, countries } from "../../data";
 import Select from "react-select";
 import Products from "../../Components/Products/Products";
-import { availabiltyStatus, priceCurrency, priceOnLocation } from "./showingFilters";
+import { availabiltyStatus, priceCurrency, priceOnLocation } from "./data";
 import { changeShowDatasheet, changeShowPrice, changeShowStock } from "../../store/showingSlice";
 import { changeCurrency, changeLocation, setFiltersState, setUsdToAedRate } from "../../store/filtersSlice";
 let choosenCompanies = [];
 let choosenBrands = [];
 let choosenCapacities = [];
-const PriceList = () => {
+const MakiPi = () => {
   const dispatch = useDispatch();
   const stateFilters = useSelector((state) => state.filters);
   console.log(stateFilters);
@@ -208,14 +208,6 @@ const PriceList = () => {
 
   return (
     <>
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            AGS
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
       <Grow in>
         <Container maxWidth="xl">
           <div>
@@ -336,4 +328,4 @@ const PriceList = () => {
   );
 };
 
-export default PriceList;
+export default MakiPi;

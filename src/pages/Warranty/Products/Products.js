@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Grid, CircularProgress, Paper, Container, Typography } from "@material-ui/core";
 import Product from "./Product/Product";
 import useStyles from "./styles";
-import { staticProducts } from "../../data";
+import { staticProducts } from "../../../data";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLoading } from "../../store/showingSlice";
+import { setIsLoading } from "../../../store/showingSlice";
 
 const Products = ({ filters }) => {
   const dispatch = useDispatch();
