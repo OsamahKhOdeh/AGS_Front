@@ -1,0 +1,30 @@
+.filter__search {
+  display: flex;
+  background-color: #9b9b9b;
+  color: white;
+  width: max-content;
+  justify-content: center;
+  place-items: center;
+  align-items: center;
+  max-width: 1400px;
+  margin: auto;
+  padding: 10px;
+  gap: 20px;
+}
+
+.item__search {
+  padding: 30px;
+  border: 1px dashed black;
+  border-radius: 5px;
+
+  cursor: pointer;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+.item_search:hover {
+  background-color: blue;
+  color: black;
+  border: 1px solid black;
+}

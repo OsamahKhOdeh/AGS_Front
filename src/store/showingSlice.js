@@ -24,6 +24,11 @@ export const showingSlice = createSlice({
   },
 });
 
-export const { changeShowPrice, changeShowStock, changeShowDatasheet, setIsLoading } = showingSlice.actions;
+export const {
+  changeShowPrice,
+  changeShowStock,
+  changeShowDatasheet,
+  setIsLoading,
+} = showingSlice.actions;
 
 export default showingSlice.reducer;

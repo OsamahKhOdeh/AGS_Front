@@ -7,9 +7,11 @@ export default makeStyles((theme) => ({
     margin: "30px 0",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
-    padding: "10px 50px",
+    alignItems: "baseline",
+    marginInline: "auto",
+    maxWidth: 1400,
   },
   heading: {
     color: "rgba(0,183,255, 1)",
