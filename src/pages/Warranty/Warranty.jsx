@@ -21,6 +21,7 @@ import DropdownTreeSelect from "react-dropdown-tree-select";
 import "react-dropdown-tree-select/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { china, india, south_korea, oman, veitnam, thailand } from "./data";
+import * as data from "./data";
 /*import india from "./india.json";
 import south_korea from "./south_korea.json";
 import oman from "./oman.json";
@@ -38,6 +39,8 @@ import {
   setUsdToAedRate,
 } from "../../store/filtersSlice";
 import "./style/warranty.css";
+import CardItem from "./CardItem";
+import CountryItem from "./Country";
 
 let choosenCompanies = [];
 let choosenBrands = [];
@@ -198,61 +201,161 @@ const Warranty = () => {
 
   //Hid & Show Filters //////////////////////////////////////////////////////////////
   const [showFilters, setShowFilters] = useState(true);
-  const handleShowFilters = () => {
-    setShowFilters(!showFilters);
-  };
+  const handleShowFilters = () => {};
 
   const [checklevel1, setcheck] = useState([]);
   const [checklevel2, setcheck2] = useState([]);
-  console.log(checklevel1);
+
+  const [selectedItems, setSelectedItems] = useState([]);
+  const handleCheckboxClick = (item) => {
+    console.log("the first item", item);
+    const index = selectedItems.indexOf(item);
+    if (index === -1) {
+      // If the item is not in the array, add it
+      setSelectedItems([...selectedItems, item]);
+    } else {
+      // If the item is already in the array, remove it
+      setSelectedItems(selectedItems.filter((_, i) => i !== index));
+    }
+  };
 
   return (
     <>
       <Grow in>
         <Container maxWidth='xl'>
           <div>
-            <Button onClick={handleShowFilters}>
+            <Button onClick={() => setShowFilters(!showFilters)}>
               <ExpandCircleDownIcon />
             </Button>
           </div>
           {showFilters && (
             <div className=''>
-              <div className='filter__search'>
-                {["all", "solor", "Inverter", "Battery", "other"].map(
-                  (item) => (
-                    <div className='item__search'>
-                      <label htmlFor=''>{item}</label>
-                      <input
-                        type='checkbox'
-                        name={item}
-                        value={item}
-                        onChange={() => setcheck([...checklevel1, item])}
-                      />
+              <div className='allWrapper'>
+                {/* end of header */}
+                <section className='quiz_section' id='quizeSection'>
+                  <div className='container'>
+                    <div className='row'>
+                      <div className='col-sm-12'>
+                        <div className='quiz_content_area'>
+                          <h1 className='quiz_title'>Search Items</h1>
+                          <div className='row'>
+                            {[
+                              "All",
+                              "solor",
+                              "Inverter",
+                              "Battery",
+                              "other",
+                            ].map((item) => (
+                              <CardItem
+                                title={item}
+                                checklevel1={checklevel1}
+                                setcheck={setcheck}
+                              />
+                            ))}
+                          </div>
+                          {/* end of quiz_card_area */}
+                        </div>
+                        {/* end of quiz_content_area */}
+                      </div>
+                      {/* end of col12 */}
                     </div>
-                  )
-                )}
+                    {/* end of row */}
+                  </div>
+                  {/* end of container */}
+                </section>
+                {/* end of quiz_section */}
               </div>
               {checklevel1.length !== 0 && (
                 <div className='filter__search'>
                   {[
                     "all",
-                    "China",
-                    "India",
-                    "South Korea",
-                    "Oman",
-                    "Veitnam",
-                    "Thailand",
+                    "china",
+                    "india",
+                    "south_korea",
+                    "oman",
+                    "veitnam",
+                    "thailand",
                     "Other",
                   ].map((item) => (
-                    <div className='item__search'>{item}</div>
+                    <>
+                      <CountryItem title={item} onClick={handleCheckboxClick} />
+                    </>
                   ))}
                 </div>
               )}
-
-              <div className='filter__search'>
-                <select>
-                  <option value='China'> China</option>
-                </select>
+              <div className='list__filter'>
+                {selectedItems.length !== 0
+                  ? selectedItems.map((item) => (
+                      <div className='select__list'>
+                        {item === "china" && (
+                          <DropdownTreeSelect
+                            texts={{
+                              placeholder: JSON.stringify(String(item)),
+                            }}
+                            data={china}
+                            onChange={onChange}
+                            onNodeToggle={onNodeToggle}
+                            className='mdl-demo'
+                          />
+                        )}
+                        {item === "india" && (
+                          <DropdownTreeSelect
+                            texts={{
+                              placeholder: JSON.stringify(String(item)),
+                            }}
+                            data={india}
+                            onChange={onChange}
+                            onNodeToggle={onNodeToggle}
+                            className='mdl-demo'
+                          />
+                        )}
+                        {item === "south_korea" && (
+                          <DropdownTreeSelect
+                            texts={{
+                              placeholder: JSON.stringify(String(item)),
+                            }}
+                            data={south_korea}
+                            onChange={onChange}
+                            onNodeToggle={onNodeToggle}
+                            className='mdl-demo'
+                          />
+                        )}
+                        {item === "veitnam" && (
+                          <DropdownTreeSelect
+                            texts={{
+                              placeholder: JSON.stringify(String(item)),
+                            }}
+                            data={veitnam}
+                            onChange={onChange}
+                            onNodeToggle={onNodeToggle}
+                            className='mdl-demo'
+                          />
+                        )}
+                        {item === "thailand" && (
+                          <DropdownTreeSelect
+                            texts={{
+                              placeholder: JSON.stringify(String(item)),
+                            }}
+                            data={thailand}
+                            onChange={onChange}
+                            onNodeToggle={onNodeToggle}
+                            className='mdl-demo'
+                          />
+                        )}
+                        {item === "oman" && (
+                          <DropdownTreeSelect
+                            texts={{
+                              placeholder: JSON.stringify(String(item)),
+                            }}
+                            data={oman}
+                            onChange={onChange}
+                            onNodeToggle={onNodeToggle}
+                            className='mdl-demo'
+                          />
+                        )}
+                      </div>
+                    ))
+                  : null}
               </div>
             </div>
             // <Grid
