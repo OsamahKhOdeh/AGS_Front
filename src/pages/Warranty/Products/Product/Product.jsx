@@ -21,6 +21,11 @@ import {
   removeProductFromWarrantyList,
   setProductQty,
 } from "../../../../store/warrantySlice";
+
+import {
+  addProducttocart,
+  deletProductformCart,
+} from "../../../../store/cartSlice";
 import product from "../Product/style/product.css";
 const Product = ({ product }) => {
   const dispatch = useDispatch();
@@ -47,6 +52,10 @@ const Product = ({ product }) => {
   product.bl.map((item) => {
     stock = stock + item.qty;
   });
+
+  const addTocart = (items) => {
+    dispatch(addProducttocart(items));
+  };
 
   return (
     <>
@@ -82,9 +91,12 @@ const Product = ({ product }) => {
         <CardContent>
           {isChecked && (
             <div className={classes.if_checked}>
-              <Typography className={classes.qty} variant='h5'>
+              <Typograp className={classes.qty} variant='h5'>
                 Qty :
-              </Typography>
+              </Typograp
+  const spliceCart = (item) => {
+    dispatch(deletProductformCart(item));
+  };hy>
               
               <TextField
                 className={classes.qty_text}
@@ -108,7 +120,13 @@ const Product = ({ product }) => {
             }
             alt=''
           />
-          <div className='check__product'>+</div>
+          <div
+            className='check__product'
+            onClick={() => {
+              addTocart(product.code);
+            }}>
+            +
+          </div>
         </div>
         <div className='product__description'>
           <div className='Product__title'>Luminous Battery</div>

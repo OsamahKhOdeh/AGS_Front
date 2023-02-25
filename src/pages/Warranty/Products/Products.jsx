@@ -6,13 +6,17 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
+import { AiTwotoneDelete } from "react-icons/ai";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 import { staticProducts } from "../../../data";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../../../store/showingSlice";
-
+import {
+  addProducttocart,
+  deletProductformCart,
+} from "../../../store/cartSlice";
 const Products = ({ filters }) => {
   const dispatch = useDispatch();
   // console.log(Object.keys(filters).length);
@@ -66,6 +70,12 @@ const Products = ({ filters }) => {
 
   const allProducts = staticProducts;
   const isLoading = useSelector((state) => state.show.isLoading);
+  const cart = useSelector((state) => state.cart.cart);
+
+  const spliceCart = (item) => {
+    dispatch(deletProductformCart(item));
+  };
+
   const classes = useStyles();
   console.log(products.length);
   let productsCount = products.length;
@@ -100,6 +110,28 @@ const Products = ({ filters }) => {
           <h1>Loading</h1>
         )}
       </Grid>
+
+      <div class='sidebar'>
+        <span>List of Items </span>
+        <ul className='list__ofItems'>
+          {cart.map((item, index) => (
+            <div className='card__item'>
+              <div>{item}</div>
+              <div
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  spliceCart(index);
+                }}>
+                <AiTwotoneDelete color='#E34A44' size={18} />
+              </div>
+            </div>
+          ))}
+        </ul>
+
+        <div className='next'>
+          <span>Next button </span>
+        </div>
+      </div>
     </>
   );
 };

@@ -11,7 +11,9 @@ export const productSlice = createSlice({
       state.products.push(action.payload);
     },
     removeProductFromCheckedList: (state, action) => {
-      const filtered = state.products.filter((item) => item._id !== action.payload._id);
+      const filtered = state.products.filter(
+        (item) => item._id !== action.payload._id
+      );
       state.products = filtered;
     },
     setProductQty: (state, action) => {
@@ -25,6 +27,10 @@ export const productSlice = createSlice({
   },
 });
 
-export const { addProductToCheckedList, removeProductFromCheckedList, setProductQty } = productSlice.actions;
+export const {
+  addProductToCheckedList,
+  removeProductFromCheckedList,
+  setProductQty,
+} = productSlice.actions;
 
 export default productSlice.reducer;

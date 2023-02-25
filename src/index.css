@@ -56,3 +56,53 @@ select {
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+.sidebar {
+  position: fixed;
+  right: 0;
+  height: 100dvh;
+  width: 20%;
+  top: 0;
+  background-color: #435971;
+  padding: 20px;
+}
+
+.sidebar > span {
+  color: #ffff;
+  font-weight: bold;
+}
+
+.list__ofItems {
+  padding-top: 20px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  cursor: pointer;
+}
+.next {
+  position: absolute;
+  bottom: 0;
+  padding: 8px;
+  background-color: #e9e9e9;
+  cursor: pointer;
+  border: 0;
+  margin: 8px;
+  width: 160px;
+  background-color: cadetblue;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.next > span {
+  color: white;
+}
+.card__item {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  gap: 3px;
+  width: 100%;
+  align-items: baseline;
+}
