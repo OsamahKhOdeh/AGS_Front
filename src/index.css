@@ -80,22 +80,40 @@ select {
   row-gap: 20px;
   cursor: pointer;
 }
-.next {
+
+.sidebar__buttons {
+  display: grid;
   position: absolute;
   bottom: 0;
   padding: 8px;
+  margin: 8px;
+  place-content: center;
+  place-items: center;
+  width: 100%;
+}
+.next {
   background-color: #e9e9e9;
   cursor: pointer;
   border: 0;
-  margin: 8px;
-  width: 160px;
   background-color: cadetblue;
   display: grid;
   place-items: center;
   font-weight: bold;
   border-radius: 10px;
+  padding: 10px 20px;
+  width: 30%;
 }
-
+.delete {
+  background-color: #e9e9e9;
+  cursor: pointer;
+  border: 0;
+  background-color: cadetblue;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
 .next > span {
   color: white;
 }
@@ -105,4 +123,9 @@ select {
   gap: 3px;
   width: 100%;
   align-items: baseline;
+}
+
+.sidebar__buttons {
+  display: flex;
+  justify-content: space-around;
 }

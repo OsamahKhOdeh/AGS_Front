@@ -16,6 +16,7 @@ import { setIsLoading } from "../../../store/showingSlice";
 import {
   addProducttocart,
   deletProductformCart,
+  deleteAll,
 } from "../../../store/cartSlice";
 const Products = ({ filters }) => {
   const dispatch = useDispatch();
@@ -76,6 +77,10 @@ const Products = ({ filters }) => {
     dispatch(deletProductformCart(item));
   };
 
+  const deleteALl = () => {
+    dispatch(deleteAll());
+  };
+
   const classes = useStyles();
   console.log(products.length);
   let productsCount = products.length;
@@ -128,8 +133,13 @@ const Products = ({ filters }) => {
           ))}
         </ul>
 
-        <div className='next'>
-          <span>Next button </span>
+        <div className='sidebar__buttons'>
+          <div className='next'>
+            <span> Next </span>
+          </div>
+          <div className='delete' onClick={() => deleteALl()}>
+            <span> Delete all </span>
+          </div>
         </div>
       </div>
     </>

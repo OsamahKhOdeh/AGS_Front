@@ -13,9 +13,13 @@ export const addToCart = createSlice({
       const index = Object.keys(state.cart).indexOf(action.payload);
       state.cart.splice(index, 1);
     },
+    deleteAll: (state, action) => {
+      state.cart = [];
+    },
   },
 });
 
-export const { addProducttocart, deletProductformCart } = addToCart.actions;
+export const { addProducttocart, deletProductformCart, deleteAll } =
+  addToCart.actions;
 
 export default addToCart.reducer;
