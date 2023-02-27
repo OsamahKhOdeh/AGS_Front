@@ -96,6 +96,7 @@ select {
 
 .background_color {
   background-color: #e7e9eb !important;
+  transition: 0.5s;
 }
 
 .sidebar__buttons {
