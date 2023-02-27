@@ -5,7 +5,7 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
-import { AiTwotoneDelete } from "react-icons/ai";
+import { AiFillCloseCircle, AiTwotoneDelete } from "react-icons/ai";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 import { staticProducts } from "../../../data";
@@ -44,7 +44,7 @@ const Products = ({ filters }) => {
               }&countries=${filters.countries || ""}&companies=${
                 filters.companies || ""
               }&brands=${filters.brands}&capacities=${fathers}`
-            : "http://ags-server.onrender.com/products"
+            : "http://localhost:5000/products"
         );
         dispatch(setIsLoading(false));
         if (isCapacities) {
@@ -82,6 +82,12 @@ const Products = ({ filters }) => {
   //   navigate("/table");
   // };
 
+  const cartLength = useSelector((state) => state.cart.cart);
+
+  const closeside = () => {
+    document.querySelector(".sidebar").style.display = "none";
+  };
+
   const classes = useStyles();
   let productsCount = products.length;
   return isLoading ? (
@@ -106,46 +112,52 @@ const Products = ({ filters }) => {
         alignitems='stretch'
         spacing={3}>
         {products ? (
-          products?.map((product) => (
+          products?.map((product, index) => (
             <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
-              <Product product={product} />
+              <Product product={product} index={index} />
             </Grid>
           ))
         ) : (
           <h1>Loading</h1>
         )}
       </Grid>
-
-      <div class='sidebar'>
-        <span>List of Items </span>
-        <ul className='list__ofItems'>
-          {cart.map((item, index) => (
-            <div className='card__item'>
-              <div>{item.code}</div>
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  spliceCart(index);
-                }}>
-                <AiTwotoneDelete color='#E34A44' size={18} />
-              </div>
+      {cartLength.length > 0 ? (
+        <div class='sidebar'>
+          <div className='list__'>
+            <span>List of Items </span>
+            <div className='close__' onClick={() => closeside()}>
+              <AiFillCloseCircle color='red' size={30} />
             </div>
-          ))}
-        </ul>
-
-        <div className='sidebar__buttons'>
-          <div
-            className='next'
-            onClick={() => {
-              navigate("/checkCustomer");
-            }}>
-            <span> Next </span>
           </div>
-          <div className='delete' onClick={() => deleteALl()}>
-            <span> Delete all </span>
+          <ul className='list__ofItems'>
+            {cart.map((item, index) => (
+              <div className='card__item' key={index}>
+                <div>{item.code}</div>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    spliceCart(index);
+                  }}>
+                  <AiTwotoneDelete color='#E34A44' size={18} />
+                </div>
+              </div>
+            ))}
+          </ul>
+
+          <div className='sidebar__buttons'>
+            <div
+              className='next'
+              onClick={() => {
+                navigate("/checkCustomer");
+              }}>
+              <span> Next </span>
+            </div>
+            <div className='delete' onClick={() => deleteALl()}>
+              <span> Delete all </span>
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </>
   );
 };

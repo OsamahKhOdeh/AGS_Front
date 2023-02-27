@@ -14,7 +14,7 @@ import {
   deletProductformCart,
 } from "../../../../store/cartSlice";
 import product from "../Product/style/product.css";
-const Product = ({ product }) => {
+const Product = ({ product, index }) => {
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
   // const QtyRef = useRef('')
@@ -40,66 +40,24 @@ const Product = ({ product }) => {
     stock = stock + item.qty;
   });
 
-  const addTocart = (items) => {
+  const addTocart = (items, index) => {
     dispatch(addProducttocart(items));
+    document.querySelector(".sidebar").style.display = "block";
   };
+
+  const itemfromCart = useSelector((state) => state.cart.cart);
+  // const data = itemfromCart.map((item) =>
+  //   item._id.includes(product._id) ? true : false
+  // );
+
+  const exist = itemfromCart.some((item) => item._id === product._id);
 
   return (
     <>
-      {/* <Card className={classes.card} raised elevation={6}>
-        <Checkbox
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-          style={{
-            transform: "scale(2)",
-          }}
-        />
-        <CardMedia
-          style={{
-            width: "auto",
-            maxHeight: "200px",
-          }}
-          className={classes.media}
-          image={
-            product.image ||
-            "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"
-          }></CardMedia>
-
-        <div className={classes.overlay}></div>
-        <Typography className={classes.title} variant='h6' component='h2'>
-          {product.code}
-        </Typography>
-
-        <Typography className={classes.capacity} variant='h6'>
-          Capacity :
-          <b style={{ backgroundColor: "#87FFB0" }}> {product.capacity}</b>
-        </Typography>
-
-        <CardContent>
-          {isChecked && (
-            <div className={classes.if_checked}>
-              <Typograp className={classes.qty} variant='h5'>
-                Qty :
-              </Typograp
-  const spliceCart = (item) => {
-    dispatch(deletProductformCart(item));
-  };hy>
-              
-              <TextField
-                className={classes.qty_text}
-                value={qty}
-                onChange={handleQtyChange}
-                onBlur={() => {
-                  dispatch(setProductQty({ id: product._id, qty: qty }));
-                }}
-              />
-            </div>
-          )}
-        </CardContent>
-      </Card> */}
-
-      <div className='product__item'>
-        <div className='product__image'>
+      <div
+        className={exist ? "product__item background_color" : "product__item"}
+        style={{}}>
+        <div className='product__image '>
           <img
             src={
               product.image ||
@@ -110,7 +68,7 @@ const Product = ({ product }) => {
           <div
             className='check__product'
             onClick={() => {
-              addTocart(product);
+              addTocart(product, index);
             }}>
             +
           </div>

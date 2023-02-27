@@ -60,18 +60,24 @@ select {
 .sidebar {
   position: fixed;
   right: 0;
-  height: 100dvh;
+  height: 100%;
   width: 20%;
   top: 0;
   background-color: #435971;
   padding: 20px;
 }
-
-.sidebar > span {
+.list__ {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.list__ > span {
   color: #ffff;
   font-weight: bold;
 }
-
+.close__ {
+  cursor: pointer;
+}
 .list__ofItems {
   padding-top: 20px;
   font-weight: bold;
@@ -79,6 +85,17 @@ select {
   flex-direction: column;
   row-gap: 20px;
   cursor: pointer;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  height: 90%;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+.background_color {
+  background-color: #e7e9eb !important;
 }
 
 .sidebar__buttons {
@@ -138,8 +155,23 @@ select {
 .list__ite {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  max-width: 1440px;
+  max-width: 1400px;
   margin: auto;
   gap: 50px;
   width: 100%;
+}
+
+.list__product {
+  background-color: #fff;
+  padding: 13px;
+  border: 2.3px solid #d6d6d6;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+}
+.description__product {
+  padding-top: 20px;
+}
+.price {
+  font-weight: bold;
 }
