@@ -129,3 +129,17 @@ select {
   display: flex;
   justify-content: space-around;
 }
+
+.items__print {
+  display: flex;
+  flex-direction: row;
+}
+
+.list__ite {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  max-width: 1440px;
+  margin: auto;
+  gap: 50px;
+  width: 100%;
+}

@@ -1,18 +1,5 @@
 import React, { useRef, useState } from "react";
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Button,
-  Typography,
-  ButtonBase,
-  Checkbox,
-  TextField,
-  Paper,
-  FormControlLabel,
-  Switch,
-} from "@material-ui/core/";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
@@ -123,7 +110,7 @@ const Product = ({ product }) => {
           <div
             className='check__product'
             onClick={() => {
-              addTocart(product.code);
+              addTocart(product);
             }}>
             +
           </div>

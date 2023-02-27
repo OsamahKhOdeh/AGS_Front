@@ -1,43 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import {
-  AppBar,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Grid,
-  Grow,
-  Paper,
-  TextField,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
+import { Container, Grow } from "@material-ui/core";
 import { Button, ToggleButton } from "@mui/material";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
-import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import DropdownTreeSelect from "react-dropdown-tree-select";
-//import "./priceList.css";
 import "react-dropdown-tree-select/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { china, india, south_korea, oman, veitnam, thailand } from "./data";
-import * as data from "./data";
-/*import india from "./india.json";
-import south_korea from "./south_korea.json";
-import oman from "./oman.json";
-import veitnam from "./veitnam.json";
-import thailand from "./thailand.json";
-*/
 import useStyles from "./styles";
-import { categories, countries } from "../../data";
-import Select from "react-select";
 import Products from "./Products/Products";
-import {
-  changeCurrency,
-  changeLocation,
-  setFiltersState,
-  setUsdToAedRate,
-} from "../../store/filtersSlice";
+import { setFiltersState, setUsdToAedRate } from "../../store/filtersSlice";
 import "./style/warranty.css";
 import CardItem from "./CardItem";
 import CountryItem from "./Country";
@@ -199,6 +171,10 @@ const Warranty = () => {
     navigate("/warranty-check");
   };
 
+  const navigateToChekCustomer = () => {
+    navigate("/checkCustomer");
+  };
+
   //Hid & Show Filters //////////////////////////////////////////////////////////////
   const [showFilters, setShowFilters] = useState(true);
   const handleShowFilters = () => {};
@@ -274,7 +250,6 @@ const Warranty = () => {
                     "south_korea",
                     "oman",
                     "veitnam",
-                    "thailand",
                     "Other",
                   ].map((item) => (
                     <>

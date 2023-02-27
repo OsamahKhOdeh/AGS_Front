@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Grid,
   CircularProgress,
-  Paper,
   Container,
   Typography,
 } from "@material-ui/core";
@@ -18,15 +17,13 @@ import {
   deletProductformCart,
   deleteAll,
 } from "../../../store/cartSlice";
+import { useNavigate } from "react-router-dom";
 const Products = ({ filters }) => {
   const dispatch = useDispatch();
-  // console.log(Object.keys(filters).length);
+  const navigate = useNavigate();
+
   let isFilters = Object.keys(filters).length;
-  // console.log(filters.capacities);
   let isCapacities = filters?.capacities?.length > 0;
-  // console.log("IsCapacities: " + isCapacities);
-  console.log(filters.brands);
-  // console.log(filters.companies);
   const notUniqeFathers = filters?.capacities?.map((cap) => {
     return cap.father;
   });
@@ -81,8 +78,11 @@ const Products = ({ filters }) => {
     dispatch(deleteAll());
   };
 
+  // const navigate = () => {
+  //   navigate("/table");
+  // };
+
   const classes = useStyles();
-  console.log(products.length);
   let productsCount = products.length;
   return isLoading ? (
     <Container
@@ -121,7 +121,7 @@ const Products = ({ filters }) => {
         <ul className='list__ofItems'>
           {cart.map((item, index) => (
             <div className='card__item'>
-              <div>{item}</div>
+              <div>{item.code}</div>
               <div
                 style={{ cursor: "pointer" }}
                 onClick={() => {
@@ -134,7 +134,11 @@ const Products = ({ filters }) => {
         </ul>
 
         <div className='sidebar__buttons'>
-          <div className='next'>
+          <div
+            className='next'
+            onClick={() => {
+              navigate("/checkCustomer");
+            }}>
             <span> Next </span>
           </div>
           <div className='delete' onClick={() => deleteALl()}>
