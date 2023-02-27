@@ -136,7 +136,7 @@ const Products = ({ filters }) => {
                 <div
                   style={{ cursor: "pointer" }}
                   onClick={() => {
-                    spliceCart(index);
+                    spliceCart(item);
                   }}>
                   <AiTwotoneDelete color='#E34A44' size={18} />
                 </div>

@@ -45,6 +45,10 @@ const Product = ({ product, index }) => {
     document.querySelector(".sidebar").style.display = "block";
   };
 
+  const removefromcart = (items, index) => {
+    dispatch(deletProductformCart(items, index));
+  };
+
   const itemfromCart = useSelector((state) => state.cart.cart);
   // const data = itemfromCart.map((item) =>
   //   item._id.includes(product._id) ? true : false
@@ -65,13 +69,23 @@ const Product = ({ product, index }) => {
             }
             alt=''
           />
-          <div
-            className='check__product'
-            onClick={() => {
-              addTocart(product, index);
-            }}>
-            +
-          </div>
+          {exist ? (
+            <div
+              className='check__product'
+              onClick={() => {
+                removefromcart(product, index);
+              }}>
+              -
+            </div>
+          ) : (
+            <div
+              className='check__product'
+              onClick={() => {
+                addTocart(product, index);
+              }}>
+              +
+            </div>
+          )}
         </div>
         <div className='product__description'>
           <div className='Product__title'>Luminous Battery</div>

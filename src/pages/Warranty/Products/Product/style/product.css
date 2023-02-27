@@ -9,6 +9,7 @@ img {
   padding: 13px;
   border: 2.3px solid #d6d6d6;
   border-radius: 13px;
+  transition: 0.5s;
 }
 .product__image {
   height: 100%;
