@@ -18,7 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index path="/" element={<Home />}></Route>
-        <Route path="/pricelist" element={<PriceList />}></Route>
+        <Route path="/products" element={<PriceList />}></Route>
         <Route path="/addproduct" element={<ProductForm />}></Route>
         <Route path="/makepi" element={<PiStepper />}></Route>
         <Route path="/table" element={<ProformaInvoice />}></Route>

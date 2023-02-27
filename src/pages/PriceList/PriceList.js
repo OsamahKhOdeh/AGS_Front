@@ -24,15 +24,33 @@ import Products from "../../Components/Products/Products";
 import { availabiltyStatus, priceCurrency, priceOnLocation } from "./showingFilters";
 import { changeShowDatasheet, changeShowPrice, changeShowStock } from "../../store/showingSlice";
 import { changeCurrency, changeLocation, setFiltersState, setUsdToAedRate } from "../../store/filtersSlice";
+import { useHistory, useLocation } from "react-router-dom";
+import Pagination from "./Pagination";
+import { getFilteredProducts } from "../../actions/products";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 let choosenCompanies = [];
 let choosenBrands = [];
 let choosenCapacities = [];
+
 const PriceList = () => {
+  const query = useQuery();
+  const page = query.get("page") || 1;
+
   const dispatch = useDispatch();
-  const stateFilters = useSelector((state) => state.filters);
+  const stateFilters = useSelector((state) => state.filters.filters);
+  console.log(useSelector((state) => state.filters.filters.categories.includes("Other")));
+  const testFilters = useSelector((state) => state.filters.filters.categories.includes("Other"));
+  if (!testFilters) {
+    console.log("RUNNN");
+    dispatch(getFilteredProducts(stateFilters));
+  }
   console.log(stateFilters);
   const classes = useStyles();
-  const selectedProducts = useSelector((state) => state.products);
+  const selectedProducts = useSelector((state) => state.priceList.chosenProducts);
   const shows = useSelector((state) => state.show.showPrice);
   // console.log(shows);
   // console.log(selectedProducts);
@@ -329,7 +347,38 @@ const PriceList = () => {
             </Grid>
           )}
 
-          <Products filters={filters} />
+          {testFilters && (
+            <Paper className={classes.pagination} elevation={6}>
+              <Pagination page={page} />
+            </Paper>
+          )}
+
+          <Grid container justifyContent="space-between" alignitems="stretch" spacing={1} className={classes.gridContainer}>
+            <Grid style={{ marginLeft: "0px" }} item xs={12} sm={6} md={10}>
+              <Products />
+            </Grid>
+            <Grid item xs={12} sm={6} md={2}>
+              <div style={{ height: "900px", alignItems: "center" }}>
+                <Typography variant="h4" color="error">
+                  You choosed :{" "}
+                </Typography>
+                {selectedProducts &&
+                  selectedProducts?.map((product) => {
+                    return <Typography>{product.code}</Typography>;
+                  })}
+                <Button
+                  onClick={() => {
+                    navigate("/customer-price-list");
+                  }}
+                  style={{ marginTop: "200px" }}
+                  color="primary"
+                  variant="contained"
+                >
+                  Next
+                </Button>
+              </div>
+            </Grid>
+          </Grid>
         </Container>
       </Grow>
     </>

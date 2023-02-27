@@ -8,7 +8,13 @@ export const productSlice = createSlice({
   },
   reducers: {
     addProductToCheckedList: (state, action) => {
-      state.products.push(action.payload);
+      const item = action.payload;
+      const existItem = state.products.find((x) => x._id === item._id);
+      if (!existItem) {
+        state.products.push(action.payload);
+      } else {
+        console.log("product already exists");
+      }
     },
     removeProductFromCheckedList: (state, action) => {
       const filtered = state.products.filter((item) => item._id !== action.payload._id);

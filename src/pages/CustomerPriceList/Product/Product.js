@@ -59,33 +59,6 @@ const Product = ({ product }) => {
         <Typography variant="body2" color="textSecondary" component="p">
           DESCRIPTION :{product?.description.split(" ").splice(0, 10).join(" ")}...
         </Typography>
-        {isChecked && (
-          <div style={{ display: "flex" }}>
-            <Typography variant="h5" style={{ width: "50%", flex: 1 }}>
-              Quantity :
-            </Typography>
-            <TextField
-              value={qty}
-              onChange={handleQtyChange}
-              onBlur={() => {
-                dispatch(setProductQty({ id: product._id, qty: qty }));
-              }}
-              style={{ width: "50%", flex: 1 }}
-            />
-            <FormControlLabel
-              style={{ flex: 1 }}
-              control={
-                <Switch
-                  onChange={() => {
-                    setIsPallet(!isPallet);
-                  }}
-                  checked={isPallet}
-                />
-              }
-              label="Palet"
-            />
-          </div>
-        )}
       </CardContent>
     </Card>
   );

@@ -7,29 +7,34 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsLoading } from "../../store/showingSlice";
 
-const Products = ({ filters }) => {
+const Products = () => {
   const dispatch = useDispatch();
   // console.log(Object.keys(filters).length);
-  let isFilters = Object.keys(filters).length;
+  //let isFilters = Object.keys(filters).length;
   // console.log(filters.capacities);
-  let isCapacities = filters?.capacities?.length > 0;
+  /// let isCapacities = filters?.capacities?.length > 0;
   // console.log("IsCapacities: " + isCapacities);
-  console.log(filters.brands);
+  //console.log(filters.brands);
   // console.log(filters.companies);
-  const notUniqeFathers = filters?.capacities?.map((cap) => {
-    return cap.father;
-  });
-  let fathers = [...new Set(notUniqeFathers)];
+  //const notUniqeFathers = filters?.capacities?.map((cap) => {
+  //return cap.father;
+  //});
+  // let fathers = [...new Set(notUniqeFathers)];
   //console.log(fathers);
 
-  const [products, setProducts] = useState([]);
+  //const [products, setProducts] = useState([]);
+  const products = useSelector((state) => state.products.products);
+  console.log("NEW");
+  console.log(products);
   const [filteredProducts, setFilteredProducts] = useState([]);
+
+  /*
   useEffect(() => {
     const getProducts = async () => {
       let isFilters = Object.keys(filters).length;
       try {
         dispatch(setIsLoading(true));
-        const res = await axios.get(isFilters !== 0 ? `https://ags-server.onrender.com/products/search?categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands}&capacities=${fathers}` : "https://ags-server.onrender.com/products");
+        const res = await axios.get(isFilters !== 0 ? `https://ags-server.onrender.com/products/search?categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands || ""}&capacities=${fathers || ""}` : "http://localhost:5000/products");
         dispatch(setIsLoading(false));
         if (isCapacities) {
           let fathersProducts = res.data.data;
@@ -47,20 +52,21 @@ const Products = ({ filters }) => {
     };
     getProducts();
   }, [filters, isFilters]);
+  */
   // console.log(products.data);
 
   const allProducts = staticProducts;
   const isLoading = useSelector((state) => state.show.isLoading);
   const classes = useStyles();
-  console.log(products.length);
-  let productsCount = products.length;
+  console.log(products?.length);
+  let productsCount = products?.length;
   return isLoading ? (
     <Container alignitems="center" style={{ alignItems: "center", width: "100%" }}>
       <CircularProgress style={{ alignSelf: "auto", marginLeft: "50%", marginTop: "10%" }} />
     </Container>
   ) : (
     <>
-      <Typography className={classes.products_count}>{products.length < 1 && !isLoading ? "No products Found" : `There are  ${productsCount} products found`}</Typography>
+      <Typography className={classes.products_count}>{products?.length < 1 && !isLoading ? "No products Found" : `There are  ${productsCount} products found`}</Typography>
 
       <Grid container className={classes.mainContainer} alignitems="stretch" spacing={3}>
         {products ? (

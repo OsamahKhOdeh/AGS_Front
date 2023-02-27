@@ -4,18 +4,21 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { addProductToCheckedList, removeProductFromCheckedList, setProductQty } from "../../../store/productSlice";
+import { addToPriceList, removeFromPriceList } from "../../../store/priceListSlice";
 
 const Product = ({ product }) => {
-  const selectedProducts = useSelector((state) => state.products);
+  const selectedProducts = useSelector((state) => state.priceList.chosenProducts);
   const showPrice = useSelector((state) => state.show.showPrice);
   const showStock = useSelector((state) => state.show.showStock);
   const showDatasheet = useSelector((state) => state.show.showDatasheet);
   const currency = useSelector((state) => state.filters.currency);
   const location = useSelector((state) => state.filters.location);
   const usdToAedRate = useSelector((state) => state.filters.usdToAedRate);
+  const productExists = selectedProducts.find((item) => item._id === product._id);
   const dispatch = useDispatch();
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(productExists);
   const [isPallet, setIsPallet] = useState(false);
+
   // const QtyRef = useRef('')
 
   const [qty, setQty] = useState("");
@@ -24,9 +27,9 @@ const Product = ({ product }) => {
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
     if (!isChecked) {
-      dispatch(addProductToCheckedList({ ...product, qty, isPallet }));
+      dispatch(addToPriceList(product));
     } else {
-      dispatch(removeProductFromCheckedList(product));
+      dispatch(removeFromPriceList(product));
     }
   };
 

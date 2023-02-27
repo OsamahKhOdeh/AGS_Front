@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 const CustomerPriceList = () => {
-  const products = useSelector((state) => state.products.products);
+  const products = useSelector((state) => state.priceList.chosenProducts);
   const classes = useStyles();
   console.log("CustomerPriceList");
   return (

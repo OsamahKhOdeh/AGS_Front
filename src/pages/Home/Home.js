@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <Grow in>
       <Container style={{ display: "flex", flexDirection: "column", alignItems: "center" }} maxWidth="xl">
-        <Button style={{ width: "25%", padding: "25px" }} variant="contained" onClick={() => navigate("/pricelist")}>
+        <Button style={{ width: "25%", padding: "25px" }} variant="contained" onClick={() => navigate("/products")}>
           Price List
         </Button>
         <Button style={{ width: "25%", padding: "25px" }} variant="outlined" onClick={() => navigate("/makepi")}>

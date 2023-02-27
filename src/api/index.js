@@ -1,18 +1,13 @@
 import axios from "axios";
 console.log("From api");
-const API = axios.create({ baseURL: "https://server1-ustg.onrender.com" });
-/*
-API.interceptors.request.use((req) => {
-  if (localStorage.getItem("profile")) {
-    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem("profile")).token}`;
-  }
+const API = axios.create({ baseURL: "http://localhost:5000" });
 
-  return req;
-});
-
-*/
 //export const createProduct = (newProduct) => API.post("/products", newProduct);
 export const createProduct = (newProduct) => axios.post("https://server1-ustg.onrender.com/products", newProduct);
+
+export const fetchProducts = (page) => API.get(`/products?page=${page}`);
+
+export const fetchFilteredProducts = (filters) => API.get(`/products/search?page=${1}&categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands || ""}`);
 
 /*
 export const fetchPost = (id) => API.get(`/posts/${id}`);
