@@ -3,8 +3,8 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBa
 import DeleteIcon from "@material-ui/icons/Delete";
 import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
-import { addProductToCheckedList, removeProductFromCheckedList, setProductQty } from "../../../store/productSlice";
 import { addToPriceList, removeFromPriceList } from "../../../store/priceListSlice";
+import { addProductToCheckedList, removeProductFromCheckedList, setProductQty } from "../../../store/productSlice";
 
 const Product = ({ product }) => {
   const selectedProducts = useSelector((state) => state.priceList.chosenProducts);
@@ -88,7 +88,8 @@ const Product = ({ product }) => {
       )}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          DESCRIPTION :{product?.description.split(" ").splice(0, 10).join(" ")}...
+          DESCRIPTION :{product?.description.split(" ").splice(0, 10).join(" ")}
+          ...
         </Typography>
         {isChecked && (
           <div className={classes.if_checked}>

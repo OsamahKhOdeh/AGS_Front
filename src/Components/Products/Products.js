@@ -41,7 +41,8 @@ const Products = () => {
           let products = [];
           filters.capacities.map((cap) => {
             fathersProducts.map((item) => {
-              if (cap.father === item.brand && cap.cap === item.capacity) products.push(item);
+              if (cap.father === item.brand && cap.cap === item.capacity)
+                products.push(item);
             });
           });
           setProducts(products);

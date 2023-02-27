@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import cartSlice from "./cartSlice";
 import filtersSlice from "./filtersSlice";
 import priceListSlice from "./priceListSlice";
 import productReducer from "./productSlice";
@@ -11,6 +12,8 @@ export default configureStore({
     priceList: priceListSlice,
     products: productsSlice,
     products1: productReducer,
+    cart: cartSlice,
+    products: productReducer,
     show: showingSlice,
     filters: filtersSlice,
     warranty: warrantySlice,
