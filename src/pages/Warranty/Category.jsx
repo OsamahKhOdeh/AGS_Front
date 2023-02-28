@@ -1,6 +1,10 @@
 import React from "react";
-function CardItem(props) {
+import { useDispatch, useSelector } from "react-redux";
+import { setFiltersState } from "../../store/filtersSlice";
+function Category(props) {
+  const dispatch = useDispatch();
   const { title, checklevel1, setcheck } = props;
+  const filters = useSelector((state)=>state.filters.filters)
   return (
     <div className='col-sm-3'>
       <div className='quiz_card_area'>
@@ -9,7 +13,10 @@ function CardItem(props) {
           type='checkbox'
           id={2}
           defaultValue={2}
-          onChange={() => setcheck([...checklevel1, title])}
+         onClick={() => props.onClick(title)}
+
+         
+            
         />
         <div className='single_quiz_card'>
           <div className='quiz_card_content'>
@@ -33,4 +40,4 @@ function CardItem(props) {
   );
 }
 
-export default CardItem;
+export default Category;

@@ -5,10 +5,10 @@ import { fetchAll, fetchFilterd } from "../store/productsSlice";
 
 export const getProducts = (page) => async (dispatch) => {
   try {
-    console.log("page : " + page);
+    // console.log("page : " + page);
     dispatch(setIsLoading(true));
     const data = await api.fetchProducts(page);
-    console.log(data);
+    //  console.log(data);
     dispatch(fetchAll(data.data, data.currentPage, data.numberOfPages));
     dispatch(setIsLoading(false));
   } catch (error) {
@@ -18,12 +18,8 @@ export const getProducts = (page) => async (dispatch) => {
 
 export const getFilteredProducts = (filters) => async (dispatch) => {
   try {
-    //console.log("page : " + page);
-    console.log(";;;;;;;;;;;;;;;");
-    console.log(filters);
     dispatch(setIsLoading(true));
     const data = await api.fetchFilteredProducts(filters);
-    console.log(data);
     dispatch(fetchFilterd(data.data));
     dispatch(setIsLoading(false));
   } catch (error) {

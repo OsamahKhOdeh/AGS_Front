@@ -9,9 +9,7 @@ import { AiTwotoneDelete } from "react-icons/ai";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 import { staticProducts } from "../../../data";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsLoading } from "../../../store/showingSlice";
 import {
   addProducttocart,
   deletProductformCart,
@@ -21,50 +19,7 @@ import { useNavigate } from "react-router-dom";
 const Products = ({ filters }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  let isFilters = Object.keys(filters).length;
-  let isCapacities = filters?.capacities?.length > 0;
-  const notUniqeFathers = filters?.capacities?.map((cap) => {
-    return cap.father;
-  });
-  let fathers = [...new Set(notUniqeFathers)];
-  //console.log(fathers);
-
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  useEffect(() => {
-    const getProducts = async () => {
-      let isFilters = Object.keys(filters).length;
-      try {
-        dispatch(setIsLoading(true));
-        const res = await axios.get(
-          isFilters !== 0
-            ? `http://ags-server.onrender.com/products/search?categories=${
-                filters.categories || ""
-              }&countries=${filters.countries || ""}&companies=${
-                filters.companies || ""
-              }&brands=${filters.brands}&capacities=${fathers}`
-            : "http://ags-server.onrender.com/products"
-        );
-        dispatch(setIsLoading(false));
-        if (isCapacities) {
-          let fathersProducts = res.data.data;
-          let products = [];
-          filters.capacities.map((cap) => {
-            fathersProducts.map((item) => {
-              if (cap.father === item.brand && cap.cap === item.capacity)
-                products.push(item);
-            });
-          });
-          setProducts(products);
-          return;
-        }
-        setProducts(res.data.data);
-      } catch (err) {}
-    };
-    getProducts();
-  }, [filters, isFilters]);
-  // console.log(products.data);
+  const products = useSelector((state) => state.products.products);
 
   const allProducts = staticProducts;
   const isLoading = useSelector((state) => state.show.isLoading);
@@ -77,11 +32,6 @@ const Products = ({ filters }) => {
   const deleteALl = () => {
     dispatch(deleteAll());
   };
-
-  // const navigate = () => {
-  //   navigate("/table");
-  // };
-
   const classes = useStyles();
   let productsCount = products.length;
   return isLoading ? (
@@ -116,7 +66,7 @@ const Products = ({ filters }) => {
         )}
       </Grid>
 
-      <div class='sidebar'>
+      <div className='sidebar'>
         <span>List of Items </span>
         <ul className='list__ofItems'>
           {cart.map((item, index) => (

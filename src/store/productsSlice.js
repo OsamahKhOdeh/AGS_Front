@@ -9,13 +9,14 @@ export const productsSlice = createSlice({
   reducers: {
     fetchAll: (state, action) => {
       const { data, currentPage, numberOfPages } = action.payload;
+      // console.log(data, currentPage, numberOfPages);
       state.products = data;
       state.currentPage = currentPage;
       state.numberOfPages = numberOfPages;
     },
     fetchFilterd: (state, action) => {
-      console.log("Setting filtered");
-      console.log(state.products);
+      //console.log("Setting filtered");
+      // console.log(state.products);
       const { data } = action.payload;
       state.products = data;
     },

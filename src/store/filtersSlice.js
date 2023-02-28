@@ -10,7 +10,6 @@ export const filtersSlice = createSlice({
   },
   reducers: {
     setFiltersState: (state, action) => {
-      console.log(action.payload);
       state.filters = action.payload;
     },
     setUsdToAedRate(state, action) {

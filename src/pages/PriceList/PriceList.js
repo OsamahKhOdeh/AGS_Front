@@ -43,11 +43,8 @@ const PriceList = () => {
   const dispatch = useDispatch();
   const stateFilters = useSelector((state) => state.filters.filters);
   console.log(useSelector((state) => state.filters.filters.categories.includes("Other")));
-  const testFilters = useSelector((state) => state.filters.filters.categories.includes("Other"));
-  if (!testFilters) {
-    console.log("RUNNN");
-    dispatch(getFilteredProducts(stateFilters));
-  }
+  const testFilters = useSelector((state) => state.filters.filters.categories.lenght > 1);
+
   console.log(stateFilters);
   const classes = useStyles();
   const selectedProducts = useSelector((state) => state.priceList.chosenProducts);
@@ -82,7 +79,6 @@ const PriceList = () => {
   let arrayOfSelectedNodes = [];
 
   const onChange = (currentNode, selectedNodes) => {
-    let choosenCapacitiesr = [];
     Object.keys(selectedNodes).forEach((k) => {
       const node = selectedNodes[k];
       if (node._depth === 0) {

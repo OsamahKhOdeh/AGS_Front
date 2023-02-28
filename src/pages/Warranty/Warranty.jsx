@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Container, Grow } from "@material-ui/core";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Container, Grow, Paper } from "@material-ui/core";
 import { Button, ToggleButton } from "@mui/material";
+import Pagination from "./Pagination";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import DropdownTreeSelect from "react-dropdown-tree-select";
 import "react-dropdown-tree-select/dist/styles.css";
@@ -9,44 +10,78 @@ import { useDispatch, useSelector } from "react-redux";
 import { china, india, south_korea, oman, veitnam, thailand } from "./data";
 import useStyles from "./styles";
 import Products from "./Products/Products";
-import { setFiltersState, setUsdToAedRate } from "../../store/filtersSlice";
+import { changeCurrency, changeLocation, setFiltersState, setUsdToAedRate } from "../../store/filtersSlice";
+
 import "./style/warranty.css";
-import CardItem from "./CardItem";
+import Category from "./Category";
 import CountryItem from "./Country";
+import { categories, countries } from "../../data";
+import { getFilteredProducts } from "../../actions/products";
+import { useEffect } from "react";
+import SideFilters from "./SideFilters/SideFilters";
 
 let choosenCompanies = [];
 let choosenBrands = [];
 let choosenCapacities = [];
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 const Warranty = () => {
+
+   const handleSearch = () => {
+    let companies = [...new Set(choosenCompanies)];
+    let brands = [...new Set(choosenBrands)];
+    var capacities = choosenCapacities.reduce((unique, o) => {
+      if (!unique.some((obj) => obj.father === o.father && obj.cap === o.cap)) {
+        unique.push(o);
+      }
+      return unique;
+    }, []);
+    dispatch(setFiltersState({ ...filters, companies: companies, brands: brands, capacities: capacities }));
+   // setFilters({ ...filters, companies: companies, brands: brands, capacities: capacities });
+
+    choosenCompanies = [];
+    choosenBrands = [];
+  };
+  
+
+  const [chinaTree , setChinaTree] = useState(china);
+//Osama///////////
+   const query = useQuery();
+    const page = query.get("page") || 1;
+///////////////////////////
   const dispatch = useDispatch();
   const classes = useStyles();
   const selectedProducts = useSelector((state) => state.products);
   const shows = useSelector((state) => state.show.showPrice);
-  // console.log(shows);
-  // console.log(selectedProducts);
   const navigate = useNavigate();
-  const [filters, setFilters] = useState({});
-  const [choosenCategories, setCategories] = useState(
-    useSelector((state) => state.filters.filters.categories)
-  );
-  const [choosenCountries, setCountries] = useState(
-    useSelector((state) => state.filters.filters.countries)
-  );
-
+  const filters = useSelector((state) => state.filters.filters)
+ 
   ///////////////////////////////////////////////////////////////////////
   let arrayOfSelectedNodes = [];
+ 
+ let allCompanies = [];
+let choosenCompanies = [];
+
+let choosenBrands = [];
+let choosenCapacities = [];
+
 
   const onChange = (currentNode, selectedNodes) => {
-    let choosenCapacitiesr = [];
+     choosenCompanies =[];
+     choosenBrands = [];
+     choosenCapacities = [];
+
     Object.keys(selectedNodes).forEach((k) => {
       const node = selectedNodes[k];
       if (node._depth === 0) {
         choosenCompanies.push(node.label);
-        // console.log(choosenCompanies);
+      
       }
       if (node._depth === 1) {
         choosenBrands.push(node.label);
-        // console.log(choosenBrands);
       }
       if (node._depth === 2) {
         let father = findFateher(node);
@@ -56,6 +91,7 @@ const Warranty = () => {
         choosenCapacities.push({ cap, father });
       }
     });
+   
     //console.log(choosenCapacities);
 
     arrayOfSelectedNodes = selectedNodes.map((node) => {
@@ -98,75 +134,6 @@ const Warranty = () => {
   assignObjectPaths(veitnam);
   assignObjectPaths(thailand);
 
-  const handleCategoryChange = (e) => {
-    let cat = e.target.value;
-
-    //console.log(cat);
-    let cats = [...choosenCategories];
-
-    if (cat === "All" || choosenCategories.includes("All")) {
-      cats.splice(cats.indexOf("All"), 1);
-    }
-    if (!choosenCategories.includes(cat)) {
-      cats.push(cat);
-    } else {
-      cats.splice(cats.indexOf(cat), 1);
-    }
-    setCategories(cats);
-    dispatch(setFiltersState({ ...filters, categories: cats }));
-    setFilters({ ...filters, categories: cats });
-  };
-  const handleCountryChange = (e) => {
-    let count = e.target.value;
-    //console.log(count);
-    let counts = [...choosenCountries];
-    if (count === "All" || choosenCountries.includes("All")) {
-      counts.splice(counts.indexOf("All"), 1);
-    }
-    if (!choosenCountries.includes(count)) {
-      counts.push(count);
-    } else {
-      counts.splice(counts.indexOf(count), 1);
-    }
-
-    setCountries(counts);
-    dispatch(setFiltersState({ ...filters, countries: counts }));
-
-    setFilters({ ...filters, countries: counts });
-  };
-  //console.log(filters);
-
-  const handleSearch = () => {
-    // console.log("clicked search");
-    let companies = [...new Set(choosenCompanies)];
-    let brands = [...new Set(choosenBrands)];
-    // let capacities = [...new Set(choosenCapacities)];
-    var capacities = choosenCapacities.reduce((unique, o) => {
-      if (!unique.some((obj) => obj.father === o.father && obj.cap === o.cap)) {
-        unique.push(o);
-      }
-      return unique;
-    }, []);
-    dispatch(
-      setFiltersState({
-        ...filters,
-        companies: companies,
-        brands: brands,
-        capacities: capacities,
-      })
-    );
-
-    setFilters({
-      ...filters,
-      companies: companies,
-      brands: brands,
-      capacities: capacities,
-    });
-
-    choosenCompanies = [];
-    choosenBrands = [];
-  };
-
   const handleNext = () => {
     navigate("/warranty-check");
   };
@@ -177,23 +144,77 @@ const Warranty = () => {
 
   //Hid & Show Filters //////////////////////////////////////////////////////////////
   const [showFilters, setShowFilters] = useState(true);
+  
+
+  
+  useEffect(() => {
+   if(showFilters) {
+   dispatch(getFilteredProducts(filters));
+  }
+  }, [dispatch, filters, showFilters]);
+
+
   const handleShowFilters = () => {};
 
   const [checklevel1, setcheck] = useState([]);
+  
   const [checklevel2, setcheck2] = useState([]);
 
+ // console.log(checklevel1);
+
   const [selectedItems, setSelectedItems] = useState([]);
-  const handleCheckboxClick = (item) => {
-    console.log("the first item", item);
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const handleCountryChange = (item) => {
+    const isALL  =selectedItems.includes("All")
     const index = selectedItems.indexOf(item);
-    if (index === -1) {
+    if(item === "All"){
+       dispatch(setFiltersState({ ...filters, countries: ["All"]}));
+      setSelectedItems( ["All"]);
+      return
+    }
+    if(item !== "All")
+    {
+      const selectedItems2 = selectedItems;
+      if(isALL) selectedItems2.splice(selectedItems.indexOf("All",1))
       // If the item is not in the array, add it
-      setSelectedItems([...selectedItems, item]);
+    if (index === -1) {
+      
+      dispatch(setFiltersState({ ...filters, countries: [...selectedItems2, item]}));
+      setSelectedItems([...selectedItems2, item]);
     } else {
       // If the item is already in the array, remove it
-      setSelectedItems(selectedItems.filter((_, i) => i !== index));
+       dispatch(setFiltersState({ ...filters, countries: selectedItems2.filter((_, i) => i !== index)}));
+      setSelectedItems(selectedItems2.filter((_, i) => i !== index));
     }
+  }
   };
+  
+  const handleCategoryChange = (item) => {
+    const isALL  =selectedCategories.includes("All")
+    const index = selectedCategories.indexOf(item);
+    if(item === "All"){
+       dispatch(setFiltersState({ ...filters, categories: ["All"]}));
+      setSelectedCategories( ["All"]);
+      return
+    }
+    if(item !== "All")
+    {
+      const selectedItems2 = selectedCategories;
+      if(isALL) selectedItems2.splice(selectedCategories.indexOf("All",1))
+      // If the item is not in the array, add it
+    if (index === -1) {
+      
+      dispatch(setFiltersState({ ...filters, categories: [...selectedItems2, item]}));
+      setSelectedCategories([...selectedItems2, item]);
+    } else {
+      // If the item is already in the array, remove it
+       dispatch(setFiltersState({ ...filters, categories: selectedItems2.filter((_, i) => i !== index)}));
+      setSelectedCategories(selectedItems2.filter((_, i) => i !== index));
+    }
+  }
+  }; 
 
   return (
     <>
@@ -203,8 +224,13 @@ const Warranty = () => {
             <Button onClick={() => setShowFilters(!showFilters)}>
               <ExpandCircleDownIcon />
             </Button>
+            
           </div>
           {showFilters && (
+            <>
+            <div>
+              <SideFilters/>
+            </div>
             <div className=''>
               <div className='allWrapper'>
                 {/* end of header */}
@@ -215,17 +241,13 @@ const Warranty = () => {
                         <div className='quiz_content_area'>
                           <h1 className='quiz_title'>Search Items</h1>
                           <div className='row'>
-                            {[
-                              "All",
-                              "solor",
-                              "Inverter",
-                              "Battery",
-                              "other",
-                            ].map((item) => (
-                              <CardItem
+                            { categories.map((item ,i) => (
+                              <Category
                                 title={item}
-                                checklevel1={checklevel1}
-                                setcheck={setcheck}
+                                onClick = {handleCategoryChange}
+                                key = {i}
+                              //  checklevel1={checklevel1}
+                               // setcheck={setcheck}
                               />
                             ))}
                           </div>
@@ -241,40 +263,34 @@ const Warranty = () => {
                 </section>
                 {/* end of quiz_section */}
               </div>
-              {checklevel1.length !== 0 && (
+              {selectedCategories.length !== 0 && (
                 <div className='filter__search'>
-                  {[
-                    "all",
-                    "china",
-                    "india",
-                    "south_korea",
-                    "oman",
-                    "veitnam",
-                    "Other",
-                  ].map((item) => (
+                  {countries.map((item , i) => (
                     <>
-                      <CountryItem title={item} onClick={handleCheckboxClick} />
+                      <CountryItem key={i} title={item} onClick={handleCountryChange} />
                     </>
                   ))}
                 </div>
               )}
               <div className='list__filter'>
                 {selectedItems.length !== 0
-                  ? selectedItems.map((item) => (
-                      <div className='select__list'>
-                        {item === "china" && (
+                  ? selectedItems.map((item , i) => (
+                      <div className='select__list' key={i}>
+                        {item === "China" && (
                           <DropdownTreeSelect
+                          key={i}
                             texts={{
                               placeholder: JSON.stringify(String(item)),
                             }}
-                            data={china}
+                            data={chinaTree}
                             onChange={onChange}
                             onNodeToggle={onNodeToggle}
                             className='mdl-demo'
                           />
                         )}
-                        {item === "india" && (
+                        {item === "India" && (
                           <DropdownTreeSelect
+                            key={i}
                             texts={{
                               placeholder: JSON.stringify(String(item)),
                             }}
@@ -284,8 +300,9 @@ const Warranty = () => {
                             className='mdl-demo'
                           />
                         )}
-                        {item === "south_korea" && (
+                        {item === "South korea" && (
                           <DropdownTreeSelect
+                          key={i}
                             texts={{
                               placeholder: JSON.stringify(String(item)),
                             }}
@@ -295,8 +312,9 @@ const Warranty = () => {
                             className='mdl-demo'
                           />
                         )}
-                        {item === "veitnam" && (
+                        {item === "Veitnam" && (
                           <DropdownTreeSelect
+                          key={i}
                             texts={{
                               placeholder: JSON.stringify(String(item)),
                             }}
@@ -306,8 +324,9 @@ const Warranty = () => {
                             className='mdl-demo'
                           />
                         )}
-                        {item === "thailand" && (
+                        {item === "Thailand" && (
                           <DropdownTreeSelect
+                          key={i}
                             texts={{
                               placeholder: JSON.stringify(String(item)),
                             }}
@@ -317,8 +336,9 @@ const Warranty = () => {
                             className='mdl-demo'
                           />
                         )}
-                        {item === "oman" && (
+                        {item === "Oman" && (
                           <DropdownTreeSelect
+                          key={i}
                             texts={{
                               placeholder: JSON.stringify(String(item)),
                             }}
@@ -332,113 +352,16 @@ const Warranty = () => {
                     ))
                   : null}
               </div>
-            </div>
-            // <Grid
-            //   container
-            //   justifyContent='space-between'
-            //   alignitems='stretch'
-            //   spacing={3}
-            //   className={classes.gridContainer}>
-            //   <Grid item xs={12} sm={12} md={12}>
-            //     <Container>
-            //       <ToggleButtonGroup
-            //         fullWidth
-            //         value={choosenCategories}
-            //         onChange={handleCategoryChange}
-            //         aria-label='text formatting'>
-            //         {categories.map((cat, i) => {
-            //           return (
-            //             <ToggleButton
-            //               style={{
-            //                 fontSize: "22px",
-            //                 fontWeight: "bold",
-            //                 color: "#44435B",
-            //               }}
-            //               key={i}
-            //               value={cat}
-            //               aria-label={cat}>
-            //               {cat}
-            //             </ToggleButton>
-            //           );
-            //         })}
-            //       </ToggleButtonGroup>
+                                      <Button onClick={handleSearch}>Show</Button>
 
-            //       <ToggleButtonGroup
-            //         fullWidth
-            //         value={choosenCountries}
-            //         onChange={handleCountryChange}
-            //         aria-label='text formatting'>
-            //         {countries.map((country, i) => {
-            //           return (
-            //             <ToggleButton
-            //               style={{ fontSize: "20px", fontWeight: "bold" }}
-            //               key={i}
-            //               value={country}
-            //               aria-label={country}>
-            //               {country}
-            //             </ToggleButton>
-            //           );
-            //         })}
-            //       </ToggleButtonGroup>
-            //       <div className={classes.gridContainer}>
-            //         <div className='dropdowns'>
-            //           <DropdownTreeSelect
-            //             texts={{ placeholder: "CHINA" }}
-            //             data={china}
-            //             onChange={onChange}
-            //             onNodeToggle={onNodeToggle}
-            //             className='mdl-demo'
-            //           />
-            //           <DropdownTreeSelect
-            //             texts={{ placeholder: "INDIA" }}
-            //             data={india}
-            //             onChange={onChange}
-            //             onNodeToggle={onNodeToggle}
-            //             className='mdl-demo'
-            //           />
-            //           <DropdownTreeSelect
-            //             texts={{ placeholder: "SOUTH KOREA" }}
-            //             data={south_korea}
-            //             onChange={onChange}
-            //             onNodeToggle={onNodeToggle}
-            //             className='mdl-demo'
-            //           />
-            //           <DropdownTreeSelect
-            //             texts={{ placeholder: "OMAN" }}
-            //             data={oman}
-            //             onChange={onChange}
-            //             onNodeToggle={onNodeToggle}
-            //             className='mdl-demo'
-            //           />
-            //           <DropdownTreeSelect
-            //             texts={{ placeholder: "VIETNAM" }}
-            //             data={veitnam}
-            //             onChange={onChange}
-            //             onNodeToggle={onNodeToggle}
-            //             className='mdl-demo'
-            //           />
-            //           <DropdownTreeSelect
-            //             texts={{ placeholder: "THAILAND" }}
-            //             data={thailand}
-            //             onChange={onChange}
-            //             onNodeToggle={onNodeToggle}
-            //             className='mdl-demo'
-            //           />
-            //         </div>
-            //       </div>
-            //       <div className={classes.buttons}>
-            //         <Button
-            //           className={classes.button}
-            //           variant='contained'
-            //           color='primary'
-            //           onClick={handleNext}>
-            //           Next{" "}
-            //         </Button>
-            //       </div>
-            //     </Container>
-            //   </Grid>
-            // </Grid>
-          )}
+            </div>
+            </>
+                     )}
+                     { !showFilters &&
+            <Paper className={classes.pagination} elevation={6}>
+              <Pagination page={page} />
+            </Paper>
+}
 
           <Products filters={filters} />
         </Container>

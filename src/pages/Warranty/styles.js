@@ -30,4 +30,7 @@ export default makeStyles((theme) => ({
       flexDirection: "column-reverse",
     },
   },
+  ul: {
+    justifyContent: "space-around",
+  },
 }));

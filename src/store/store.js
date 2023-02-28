@@ -13,7 +13,7 @@ export default configureStore({
     products: productsSlice,
     products1: productReducer,
     cart: cartSlice,
-    products: productReducer,
+    // products: productReducer,
     show: showingSlice,
     filters: filtersSlice,
     warranty: warrantySlice,

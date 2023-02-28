@@ -14,7 +14,12 @@ import {
   deletProductformCart,
 } from "../../../../store/cartSlice";
 import product from "../Product/style/product.css";
+import Price from "./Price";
 const Product = ({ product }) => {
+
+  const showPrice = useSelector((state) => state.show.showPrice);
+  const showStock = useSelector((state) => state.show.showStock);
+  const showDatasheet = useSelector((state) => state.show.showDatasheet);
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(false);
   // const QtyRef = useRef('')
@@ -46,58 +51,6 @@ const Product = ({ product }) => {
 
   return (
     <>
-      {/* <Card className={classes.card} raised elevation={6}>
-        <Checkbox
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-          style={{
-            transform: "scale(2)",
-          }}
-        />
-        <CardMedia
-          style={{
-            width: "auto",
-            maxHeight: "200px",
-          }}
-          className={classes.media}
-          image={
-            product.image ||
-            "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"
-          }></CardMedia>
-
-        <div className={classes.overlay}></div>
-        <Typography className={classes.title} variant='h6' component='h2'>
-          {product.code}
-        </Typography>
-
-        <Typography className={classes.capacity} variant='h6'>
-          Capacity :
-          <b style={{ backgroundColor: "#87FFB0" }}> {product.capacity}</b>
-        </Typography>
-
-        <CardContent>
-          {isChecked && (
-            <div className={classes.if_checked}>
-              <Typograp className={classes.qty} variant='h5'>
-                Qty :
-              </Typograp
-  const spliceCart = (item) => {
-    dispatch(deletProductformCart(item));
-  };hy>
-              
-              <TextField
-                className={classes.qty_text}
-                value={qty}
-                onChange={handleQtyChange}
-                onBlur={() => {
-                  dispatch(setProductQty({ id: product._id, qty: qty }));
-                }}
-              />
-            </div>
-          )}
-        </CardContent>
-      </Card> */}
-
       <div className='product__item'>
         <div className='product__image'>
           <img
@@ -116,21 +69,32 @@ const Product = ({ product }) => {
           </div>
         </div>
         <div className='product__description'>
-          <div className='Product__title'>Luminous Battery</div>
-          <div className='item__prices'>
+          <div className='Product__title'>{product.code}</div>
+           <div className='item__prices'>
             <div>
-              <label htmlFor=''>Price : 300 </label>
+              <label htmlFor=''>Capacity : {product.capacity} </label>
             </div>
+          </div>
+          <div className='item__prices'>
+           {showPrice &&
+            <div>
+              <label htmlFor=''>Price : <Price price={product.price} /> </label>
+            </div>
+}
+{showStock &&
             <div>
               <label htmlFor=''>Stock : 250 </label>
             </div>
+}
           </div>
 
-          <div className='product__description'>{product.code}</div>
+          <div className='product__description'>Description : mmm nnn mmm nnn mmm nn 12 rk</div>
+          {showDatasheet &&
           <div className='product__button'>
             <div className='detaills__product'>Download Datasheet</div>
           </div>
-        </div>
+}
+       </div>
       </div>
     </>
   );
