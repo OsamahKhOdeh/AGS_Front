@@ -9,6 +9,7 @@ img {
   padding: 13px;
   border: 2.3px solid #d6d6d6;
   border-radius: 13px;
+  transition: 0.5s;
 }
 .product__image {
   height: 100%;
@@ -82,4 +83,33 @@ img {
   justify-content: space-between;
   font-size: 16px;
   font-weight: bold;
+}
+
+.battery__bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+.bottom > img {
+  height: 70px !important;
+}
+.bottom {
+  position: relative;
+  z-index: -1;
+}
+.battery__coutn {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  color: #fff;
+  font-weight: bold;
+  position: absolute;
+  top: -10px;
+  z-index: 3;
+  background-color: #5580c2;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  right: 0;
 }

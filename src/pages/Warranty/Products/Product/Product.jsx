@@ -15,8 +15,7 @@ import {
 } from "../../../../store/cartSlice";
 import product from "../Product/style/product.css";
 import Price from "./Price";
-const Product = ({ product }) => {
-
+const Product = ({ product, index }) => {
   const showPrice = useSelector((state) => state.show.showPrice);
   const showStock = useSelector((state) => state.show.showStock);
   const showDatasheet = useSelector((state) => state.show.showDatasheet);
@@ -45,14 +44,28 @@ const Product = ({ product }) => {
     stock = stock + item.qty;
   });
 
-  const addTocart = (items) => {
+  const addTocart = (items, index) => {
     dispatch(addProducttocart(items));
+    // document.querySelector(".sidebar").style.display = "block";
   };
+
+  const removefromcart = (items, index) => {
+    dispatch(deletProductformCart(items, index));
+  };
+
+  const itemfromCart = useSelector((state) => state.cart.cart);
+  // const data = itemfromCart.map((item) =>
+  //   item._id.includes(product._id) ? true : false
+  // );
+
+  const exist = itemfromCart.some((item) => item._id === product._id);
 
   return (
     <>
-      <div className='product__item'>
-        <div className='product__image'>
+      <div
+        className={exist ? "product__item background_color" : "product__item"}
+        style={{}}>
+        <div className='product__image '>
           <img
             src={
               product.image ||
@@ -60,41 +73,56 @@ const Product = ({ product }) => {
             }
             alt=''
           />
-          <div
-            className='check__product'
-            onClick={() => {
-              addTocart(product);
-            }}>
-            +
-          </div>
+          {exist ? (
+            <div
+              className='check__product'
+              onClick={() => {
+                removefromcart(product, index);
+              }}>
+              -
+            </div>
+          ) : (
+            <div
+              className='check__product'
+              onClick={() => {
+                addTocart(product, index);
+              }}>
+              +
+            </div>
+          )}
         </div>
         <div className='product__description'>
           <div className='Product__title'>{product.code}</div>
-           <div className='item__prices'>
+          <div className='item__prices'>
             <div>
               <label htmlFor=''>Capacity : {product.capacity} </label>
+              <label htmlFor=''>Price : {product.price} </label>
             </div>
           </div>
           <div className='item__prices'>
-           {showPrice &&
-            <div>
-              <label htmlFor=''>Price : <Price price={product.price} /> </label>
-            </div>
-}
-{showStock &&
-            <div>
-              <label htmlFor=''>Stock : 250 </label>
-            </div>
-}
+            {showPrice && (
+              <div>
+                <label htmlFor=''>
+                  Price : <Price price={product.price} />{" "}
+                </label>
+              </div>
+            )}
+            {showStock && (
+              <div>
+                <label htmlFor=''>Stock : 250 </label>
+              </div>
+            )}
           </div>
 
-          <div className='product__description'>Description : mmm nnn mmm nnn mmm nn 12 rk</div>
-          {showDatasheet &&
-          <div className='product__button'>
-            <div className='detaills__product'>Download Datasheet</div>
+          <div className='product__description'>
+            Description : mmm nnn mmm nnn mmm nn 12 rk
           </div>
-}
-       </div>
+          {showDatasheet && (
+            <div className='product__button'>
+              <div className='detaills__product'>Download Datasheet</div>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

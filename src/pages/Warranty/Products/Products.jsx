@@ -5,7 +5,7 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
-import { AiTwotoneDelete } from "react-icons/ai";
+import { AiFillCloseCircle, AiTwotoneDelete } from "react-icons/ai";
 import Product from "./Product/Product";
 import useStyles from "./styles";
 import { staticProducts } from "../../../data";
@@ -16,6 +16,7 @@ import {
   deleteAll,
 } from "../../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { FaCarBattery } from "react-icons/fa";
 const Products = ({ filters }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,6 +33,23 @@ const Products = ({ filters }) => {
   const deleteALl = () => {
     dispatch(deleteAll());
   };
+
+  // const navigate = () => {
+  //   navigate("/table");
+  // };
+
+  const cartLength = useSelector((state) => state.cart.cart);
+
+  const closeside = () => {
+    document.querySelector(".sidebar").style.display = "none";
+    document.querySelector(".modal").style.display = "none";
+  };
+
+  const showList = () => {
+    document.querySelector(".sidebar").style.display = "block";
+    document.querySelector(".modal").style.display = "block";
+  };
+
   const classes = useStyles();
   let productsCount = products.length;
   return isLoading ? (
@@ -56,9 +74,9 @@ const Products = ({ filters }) => {
         alignitems='stretch'
         spacing={3}>
         {products ? (
-          products?.map((product) => (
+          products?.map((product, index) => (
             <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
-              <Product product={product} />
+              <Product product={product} index={index} />
             </Grid>
           ))
         ) : (
@@ -66,36 +84,53 @@ const Products = ({ filters }) => {
         )}
       </Grid>
 
-      <div className='sidebar'>
-        <span>List of Items </span>
-        <ul className='list__ofItems'>
-          {cart.map((item, index) => (
-            <div className='card__item'>
-              <div>{item.code}</div>
-              <div
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  spliceCart(index);
-                }}>
-                <AiTwotoneDelete color='#E34A44' size={18} />
-              </div>
-            </div>
-          ))}
-        </ul>
+      <div className='battery__bottom' onClick={showList}>
+        <div className='bottom'>
+          <img src='/images/battery.png' width={80} height={80} />
 
-        <div className='sidebar__buttons'>
-          <div
-            className='next'
-            onClick={() => {
-              navigate("/checkCustomer");
-            }}>
-            <span> Next </span>
-          </div>
-          <div className='delete' onClick={() => deleteALl()}>
-            <span> Delete all </span>
-          </div>
+          <div className='battery__coutn'>{cart.length}</div>
         </div>
       </div>
+
+      {cartLength.length > 0 ? (
+        <div className='modal'>
+          <div class='sidebar'>
+            <div className='list__'>
+              <span>List of Items : {cart.length} </span>
+              <div className='close__' onClick={() => closeside()}>
+                <AiFillCloseCircle color='' size={40} />
+              </div>
+            </div>
+            <ul className='list__ofItems'>
+              {cart.map((item, index) => (
+                <div className='card__item' key={index}>
+                  <div>{item.code}</div>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      spliceCart(item);
+                    }}>
+                    <AiTwotoneDelete color='#E34A44' size={20} />
+                  </div>
+                </div>
+              ))}
+            </ul>
+
+            <div className='sidebar__buttons'>
+              <div
+                className='next'
+                onClick={() => {
+                  navigate("/checkCustomer");
+                }}>
+                <span> Next </span>
+              </div>
+              <div className='delete' onClick={() => deleteALl()}>
+                <span> Delete all </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 };

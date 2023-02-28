@@ -11,8 +11,10 @@ function CheckCustomer() {
         {cart.map((item, index) => (
           <div className='list__product' key={index}>
             <img src={item.image} alt='' />
-            <div className='product__description'>{item.code}</div>
-            <div>Price : {item.price}</div>
+            <div className='description__product'>
+              <div className='price'>Price : {item.price}</div>
+              <div className='product__description'>{item.code}</div>
+            </div>
           </div>
         ))}
       </div>

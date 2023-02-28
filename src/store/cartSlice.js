@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import { createSlice } from "@reduxjs/toolkit";
 export const addToCart = createSlice({
   name: "cart",
@@ -7,11 +8,18 @@ export const addToCart = createSlice({
   },
   reducers: {
     addProducttocart: (state, action) => {
-      state.cart.push(action.payload);
+      state.cart.some((item) => item._id === action.payload._id)
+        ? null
+        : state.cart.push(action.payload);
     },
     deletProductformCart: (state, action) => {
-      const index = Object.keys(state.cart).indexOf(action.payload);
-      state.cart.splice(index, 1);
+
+      let index = state.cart.findIndex( obj => obj._id === action.payload._id); 
+      if(index != -1 ){ 
+        state.cart.splice(index,1)
+      }
+
+      
     },
     deleteAll: (state, action) => {
       state.cart = [];
