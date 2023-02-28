@@ -364,10 +364,10 @@ const Warranty = () => {
                       : null}
                   </div>
                 </div>
-                <div className='right__filters'>
+                {/* <div className='right__filters'>
                   <SideFilters />
                   <Button onClick={handleSearch}>Show</Button>
-                </div>
+                </div> */}
               </div>
             </>
           )}
