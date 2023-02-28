@@ -18,6 +18,7 @@ import {
   deleteAll,
 } from "../../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { FaCarBattery } from "react-icons/fa";
 const Products = ({ filters }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -86,6 +87,12 @@ const Products = ({ filters }) => {
 
   const closeside = () => {
     document.querySelector(".sidebar").style.display = "none";
+    document.querySelector(".modal").style.display = "none";
+  };
+
+  const showList = () => {
+    document.querySelector(".sidebar").style.display = "block";
+    document.querySelector(".modal").style.display = "block";
   };
 
   const classes = useStyles();
@@ -121,39 +128,50 @@ const Products = ({ filters }) => {
           <h1>Loading</h1>
         )}
       </Grid>
-      {cartLength.length > 0 ? (
-        <div class='sidebar'>
-          <div className='list__'>
-            <span>List of Items </span>
-            <div className='close__' onClick={() => closeside()}>
-              <AiFillCloseCircle color='red' size={30} />
-            </div>
-          </div>
-          <ul className='list__ofItems'>
-            {cart.map((item, index) => (
-              <div className='card__item' key={index}>
-                <div>{item.code}</div>
-                <div
-                  style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    spliceCart(item);
-                  }}>
-                  <AiTwotoneDelete color='#E34A44' size={18} />
-                </div>
-              </div>
-            ))}
-          </ul>
 
-          <div className='sidebar__buttons'>
-            <div
-              className='next'
-              onClick={() => {
-                navigate("/checkCustomer");
-              }}>
-              <span> Next </span>
+      <div className='battery__bottom' onClick={showList}>
+        <div className='bottom'>
+          <img src='/images/battery.png' width={80} height={80} />
+
+          <div className='battery__coutn'>{cart.length}</div>
+        </div>
+      </div>
+
+      {cartLength.length > 0 ? (
+        <div className='modal'>
+          <div class='sidebar'>
+            <div className='list__'>
+              <span>List of Items : {cart.length} </span>
+              <div className='close__' onClick={() => closeside()}>
+                <AiFillCloseCircle color='' size={40} />
+              </div>
             </div>
-            <div className='delete' onClick={() => deleteALl()}>
-              <span> Delete all </span>
+            <ul className='list__ofItems'>
+              {cart.map((item, index) => (
+                <div className='card__item' key={index}>
+                  <div>{item.code}</div>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      spliceCart(item);
+                    }}>
+                    <AiTwotoneDelete color='#E34A44' size={20} />
+                  </div>
+                </div>
+              ))}
+            </ul>
+
+            <div className='sidebar__buttons'>
+              <div
+                className='next'
+                onClick={() => {
+                  navigate("/checkCustomer");
+                }}>
+                <span> Next </span>
+              </div>
+              <div className='delete' onClick={() => deleteALl()}>
+                <span> Delete all </span>
+              </div>
             </div>
           </div>
         </div>

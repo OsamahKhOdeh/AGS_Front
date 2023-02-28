@@ -42,7 +42,7 @@ const Product = ({ product, index }) => {
 
   const addTocart = (items, index) => {
     dispatch(addProducttocart(items));
-    document.querySelector(".sidebar").style.display = "block";
+    // document.querySelector(".sidebar").style.display = "block";
   };
 
   const removefromcart = (items, index) => {
@@ -91,7 +91,7 @@ const Product = ({ product, index }) => {
           <div className='Product__title'>Luminous Battery</div>
           <div className='item__prices'>
             <div>
-              <label htmlFor=''>Price : 300 </label>
+              <label htmlFor=''>Price : {product.price} </label>
             </div>
             <div>
               <label htmlFor=''>Stock : 250 </label>
