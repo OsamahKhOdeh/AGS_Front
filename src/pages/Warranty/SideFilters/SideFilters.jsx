@@ -88,7 +88,7 @@ const dispatch = useDispatch();
                   <FormControlLabel style={{ flex: 1 }} control={<Checkbox checked={showDatasheet} onChange={handleShowDatasheetChange} />} label="Datasheet" />
                 </Paper>
                 <Paper>
-                  <TextField label="Promo Code" id="outlined-size-small" fullWidth variant="outlined" defaultValue="" size="normal" />
+                  <TextField label="Promo Code" id="outlined-size-small" fullWidth variant="outlined" defaultValue="" size="medium" />
                 </Paper>
               </Grid></div>
   )

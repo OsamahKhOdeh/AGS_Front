@@ -92,9 +92,9 @@ const Products = ({ filters }) => {
         </div>
       </div>
 
-      {cartLength.length > 0 ? (
+      {cartLength.length > 0 ? (  
         <div className='modal'>
-          <div class='sidebar'>
+          <div className='sidebar'>
             <div className='list__'>
               <span>List of Items : {cart.length} </span>
               <div className='close__' onClick={() => closeside()}>

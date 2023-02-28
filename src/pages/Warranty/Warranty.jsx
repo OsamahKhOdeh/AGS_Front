@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Grow, Paper } from "@material-ui/core";
-import { Button, ToggleButton } from "@mui/material";
+import { Button } from "@mui/material";
 import Pagination from "./Pagination";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
-import DropdownTreeSelect from "react-dropdown-tree-select";
 import "react-dropdown-tree-select/dist/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { china, india, south_korea, oman, veitnam, thailand } from "./data";
 import useStyles from "./styles";
 import Products from "./Products/Products";
-import { changeCurrency, changeLocation, setFiltersState, setUsdToAedRate } from "../../store/filtersSlice";
+import {setFiltersState } from "../../store/filtersSlice";
 
 import "./style/warranty.css";
 import Category from "./Category";
@@ -19,6 +18,7 @@ import { categories, countries } from "../../data";
 import { getFilteredProducts } from "../../actions/products";
 import { useEffect } from "react";
 import SideFilters from "./SideFilters/SideFilters";
+import DropDown from "./DropDown";
 
 let choosenCompanies = [];
 let choosenBrands = [];
@@ -40,21 +40,18 @@ const Warranty = () => {
       return unique;
     }, []);
     dispatch(setFiltersState({ ...filters, companies: companies, brands: brands, capacities: capacities }));
-   // setFilters({ ...filters, companies: companies, brands: brands, capacities: capacities });
 
     choosenCompanies = [];
     choosenBrands = [];
   };
   
 
-  const [chinaTree , setChinaTree] = useState(china);
 //Osama///////////
    const query = useQuery();
     const page = query.get("page") || 1;
 ///////////////////////////
   const dispatch = useDispatch();
   const classes = useStyles();
-  const selectedProducts = useSelector((state) => state.products);
   const shows = useSelector((state) => state.show.showPrice);
   const navigate = useNavigate();
   const filters = useSelector((state) => state.filters.filters)
@@ -62,7 +59,6 @@ const Warranty = () => {
   ///////////////////////////////////////////////////////////////////////
   let arrayOfSelectedNodes = [];
  
- let allCompanies = [];
 let choosenCompanies = [];
 
 let choosenBrands = [];
@@ -152,15 +148,6 @@ let choosenCapacities = [];
    dispatch(getFilteredProducts(filters));
   }
   }, [dispatch, filters, showFilters]);
-
-
-  const handleShowFilters = () => {};
-
-  const [checklevel1, setcheck] = useState([]);
-  
-  const [checklevel2, setcheck2] = useState([]);
-
- // console.log(checklevel1);
 
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -275,79 +262,12 @@ let choosenCapacities = [];
               <div className='list__filter'>
                 {selectedItems.length !== 0
                   ? selectedItems.map((item , i) => (
-                      <div className='select__list' key={i}>
-                        {item === "China" && (
-                          <DropdownTreeSelect
-                          key={i}
-                            texts={{
-                              placeholder: JSON.stringify(String(item)),
-                            }}
-                            data={chinaTree}
+                      <div className='select__list'>
+                        <DropDown
+                            item={item}
                             onChange={onChange}
                             onNodeToggle={onNodeToggle}
-                            className='mdl-demo'
                           />
-                        )}
-                        {item === "India" && (
-                          <DropdownTreeSelect
-                            key={i}
-                            texts={{
-                              placeholder: JSON.stringify(String(item)),
-                            }}
-                            data={india}
-                            onChange={onChange}
-                            onNodeToggle={onNodeToggle}
-                            className='mdl-demo'
-                          />
-                        )}
-                        {item === "South korea" && (
-                          <DropdownTreeSelect
-                          key={i}
-                            texts={{
-                              placeholder: JSON.stringify(String(item)),
-                            }}
-                            data={south_korea}
-                            onChange={onChange}
-                            onNodeToggle={onNodeToggle}
-                            className='mdl-demo'
-                          />
-                        )}
-                        {item === "Veitnam" && (
-                          <DropdownTreeSelect
-                          key={i}
-                            texts={{
-                              placeholder: JSON.stringify(String(item)),
-                            }}
-                            data={veitnam}
-                            onChange={onChange}
-                            onNodeToggle={onNodeToggle}
-                            className='mdl-demo'
-                          />
-                        )}
-                        {item === "Thailand" && (
-                          <DropdownTreeSelect
-                          key={i}
-                            texts={{
-                              placeholder: JSON.stringify(String(item)),
-                            }}
-                            data={thailand}
-                            onChange={onChange}
-                            onNodeToggle={onNodeToggle}
-                            className='mdl-demo'
-                          />
-                        )}
-                        {item === "Oman" && (
-                          <DropdownTreeSelect
-                          key={i}
-                            texts={{
-                              placeholder: JSON.stringify(String(item)),
-                            }}
-                            data={oman}
-                            onChange={onChange}
-                            onNodeToggle={onNodeToggle}
-                            className='mdl-demo'
-                          />
-                        )}
                       </div>
                     ))
                   : null}
