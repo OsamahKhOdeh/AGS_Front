@@ -3,40 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFiltersState } from "../../store/filtersSlice";
 function Category(props) {
   const dispatch = useDispatch();
-  const { title, checklevel1, setcheck } = props;
-  const filters = useSelector((state)=>state.filters.filters)
+  const { title, img, checklevel1, setcheck } = props;
+  const filters = useSelector((state) => state.filters.filters);
   return (
-    <div className='col-sm-3'>
-      <div className='quiz_card_area'>
-        <input
-          className='quiz_checkbox'
-          type='checkbox'
-          id={2}
-          defaultValue={2}
-         onClick={() => props.onClick(title)}
-
-         
-            
-        />
-        <div className='single_quiz_card'>
-          <div className='quiz_card_content'>
-            <div className='quiz_card_icon'>
-              <div className='quiz_icon quiz_icon3' />
-            </div>
-            {/* end of quiz_card_media */}
-            <div className='quiz_card_title'>
-              <h3>
-                <i className='fa fa-check' aria-hidden='true' /> {title}
-              </h3>
-            </div>
-            {/* end of quiz_card_title */}
-          </div>
-          {/* end of quiz_card_content */}
-        </div>
-        {/* end of single_quiz_card */}
+    <>
+      <div class='checkbox'>
+        <label class='checkbox-wrapper'>
+          <input
+            type='checkbox'
+            class='checkbox-input'
+            onClick={() => props.onClick(title)}
+          />
+          <span class='checkbox-tile'>
+            <img src={img} alt='' srcset='' className='logo__level1' />
+          </span>
+        </label>
       </div>
-      {/* end of quiz_card_area */}
-    </div>
+    </>
   );
 }
 

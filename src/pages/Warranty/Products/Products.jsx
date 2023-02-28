@@ -62,11 +62,11 @@ const Products = ({ filters }) => {
     </Container>
   ) : (
     <>
-      <Typography className={classes.products_count}>
+      <p className='total__product'>
         {products.length < 1 && !isLoading
           ? "No products Found"
           : `There are  ${productsCount} products found`}
-      </Typography>
+      </p>
 
       <Grid
         container
@@ -87,7 +87,6 @@ const Products = ({ filters }) => {
       <div className='battery__bottom' onClick={showList}>
         <div className='bottom'>
           <img src='/images/battery.png' width={80} height={80} />
-
           <div className='battery__coutn'>{cart.length}</div>
         </div>
       </div>

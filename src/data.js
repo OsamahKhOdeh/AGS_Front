@@ -119,17 +119,23 @@ export const staticProducts = [
 ];
 
 /////////////////////////////////////////////////////////////////////////////
-export const categories = ["All", "Solar", "Inverter", "Battery", "Other"];
+export const categories = [
+  { label: "All", img: "/images/All.png" },
+  { label: "Solar", img: "/images/Solar.png" },
+  { label: "Inverter", img: "/images/Inverter.png" },
+  { label: "Battery", img: "/images/Battery.png" },
+  { label: "Other", img: "/images/Other.png" },
+];
 
 export const countries = [
-  "All",
-  "China",
-  "India",
-  "South korea",
-  "Oman",
-  "Veitnam",
-  "Thailand",
-  "Other",
+  { label: "All", img: "/images/All.png" },
+  { label: "China", img: "/images/flag/china.png" },
+  { label: "India", img: "/images/flag/india.png" },
+  { label: "South korea", img: "/images/flag/korea.png" },
+  { label: "Oman", img: "/images/flag/oman.png" },
+  { label: "Veitnam", img: "/images/flag/vietnam.png" },
+  { label: "Thailand", img: "/images/flag/thailand.jpg" },
+  { label: "Other", img: "/images/Other.png" },
 ];
 ////////////////////////////////////////////////////////////////////
 export const china = [
