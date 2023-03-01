@@ -68,6 +68,7 @@ const [chosenCompanies , setChosenCompanies] = useState([]);
   let choosenCapacities = [];
 
   const onChange = (currentNode, selectedNodes) => {
+    console.log("im the best in the world");
     choosenCompanies = [];
     choosenBrands = [];
     choosenCapacities = [];
@@ -232,6 +233,7 @@ const showFilters = useSelector((state)=>state.show.showFilters)
               <ExpandCircleDownIcon />
             </Button>
           </div>
+
           {showFilters && (
             <>
               <div className='search__list'>
