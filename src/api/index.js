@@ -7,7 +7,7 @@ export const createProduct = (newProduct) => axios.post("https://server1-ustg.on
 
 export const fetchProducts = (page) => API.get(`/products?page=${page}`);
 
-export const fetchFilteredProducts = (filters) => API.get(`/products/search?page=${1}&categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands || ""}`);
+export const fetchFilteredProducts = (filters) => API.get(`/products/search?categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands || ""}&capacities=${JSON.stringify(filters.capacities) || ""}`);
 
 /*
 export const fetchPost = (id) => API.get(`/posts/${id}`);

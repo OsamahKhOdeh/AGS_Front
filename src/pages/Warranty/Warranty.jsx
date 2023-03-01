@@ -40,7 +40,6 @@ const Warranty = () => {
       return unique;
     }, []);
     dispatch(setFiltersState({ ...filters, companies: companies, brands: brands, capacities: capacities }));
-
     choosenCompanies = [];
     choosenBrands = [];
   };
@@ -67,11 +66,14 @@ const [chosenCompanies , setChosenCompanies] = useState([]);
   let choosenBrands = [];
   let choosenCapacities = [];
 
+function onAction(node, action) {
+  console.log('onAction::', action, node)
+}
   const onChange = (currentNode, selectedNodes) => {
     console.log("im the best in the world");
-    choosenCompanies = [];
-    choosenBrands = [];
-    choosenCapacities = [];
+    //choosenCompanies = [];
+   // choosenBrands = []; 
+   // choosenCapacities = [];
 
     Object.keys(selectedNodes).forEach((k) => {
       const node = selectedNodes[k];
@@ -256,40 +258,6 @@ const showFilters = useSelector((state)=>state.show.showFilters)
                 {/* end of quiz_section */}
               </div>
               {selectedCategories.length !== 0 && (
-                <div className='filter__search'>
-                  {countries.map((item , i) => (
-                    <>
-                      <CountryItem key={i} title={item} onClick={handleCountryChange} />
-                    </>
-                  ))}
-                </div>
-              )}
-              <div className='list__filter'>
-                {selectedItems.length !== 0
-                  ? selectedItems.map((item , i) => (
-                      <div className='select__list'>
-                        <DropDown
-                            item={item}
-                            onChange={onChange}
-                            onNodeToggle={onNodeToggle}
-                          />
-                      </div>
-                    ))
-                  : null}
-              </div>
-                                      <Button onClick={handleSearch}>Show</Button>
-
-                  {/* end of quiz_content_area */}
-
-                  {/* end of col12 */}
-
-                  {/* end of row */}
-
-                  {/* end of container */}
-
-                  {/* end of quiz_section */}
-
-                  {selectedCategories.length !== 0 && (
                     <div className='filter__search'>
                       {countries.map((item, i) => (
                         <>
@@ -303,6 +271,46 @@ const showFilters = useSelector((state)=>state.show.showFilters)
                       ))}
                     </div>
                   )}
+              <div className='list__filter'>
+                {selectedItems.length !== 0
+                  ? selectedItems.map((item , i) => (
+                      <div className='select__list'>
+                        <DropDown
+                            item={item}
+                            onChange={onChange}
+                            onNodeToggle={onNodeToggle}
+                            onAction={onAction}
+                          />
+                      </div>
+                    ))
+                  : null}
+              </div>
+              <Button onClick={handleSearch}>Show</Button>
+
+                  {/* end of quiz_content_area */}
+
+                  {/* end of col12 */}
+
+                  {/* end of row */}
+
+                  {/* end of container */}
+
+                  {/* end of quiz_section */}
+
+                  {/* {selectedCategories.length !== 0 && (
+                    <div className='filter__search'>
+                      {countries.map((item, i) => (
+                        <>
+                          <CountryItem
+                            key={i}
+                            title={item.label}
+                            img={item.img}
+                            onClick={handleCountryChange}
+                          />
+                        </>
+                      ))}
+                    </div>
+                  )} */}
               
                 </div>
                 {/* <div className='right__filters'>

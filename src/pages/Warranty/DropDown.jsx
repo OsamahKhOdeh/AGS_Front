@@ -1,8 +1,9 @@
 import React from 'react'
+import { useMemo } from 'react';
 import DropdownTreeSelect from 'react-dropdown-tree-select'
 import { china, india, oman, south_korea, thailand, veitnam } from './data';
 
-const DropDown = ({item , onChange ,onNodeToggle }) => {
+const DropDown =  ({item , onChange ,onNodeToggle ,onAction }) => {
     let tree =[];    
     switch (item) {
         case "China":
@@ -28,7 +29,8 @@ const DropDown = ({item , onChange ,onNodeToggle }) => {
             break;
     }
 
-  return (
+    const dropdown = useMemo(()=>{
+      return (
     <DropdownTreeSelect
                             texts={{
                               placeholder: JSON.stringify(item),
@@ -37,7 +39,13 @@ const DropDown = ({item , onChange ,onNodeToggle }) => {
                             onChange={onChange}
                             onNodeToggle={onNodeToggle}
                             className='mdl-demo'
+                            onAction={onAction}
                           />
+  )
+    },[])
+
+  return (
+   dropdown
   )
 }
 
