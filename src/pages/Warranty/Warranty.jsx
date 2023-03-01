@@ -79,6 +79,7 @@ const Warranty = () => {
   let choosenCapacities = [];
 
   const onChange = (currentNode, selectedNodes) => {
+    console.log("im the best in the world");
     choosenCompanies = [];
     choosenBrands = [];
     choosenCapacities = [];
@@ -240,6 +241,7 @@ const Warranty = () => {
               <ExpandCircleDownIcon />
             </Button>
           </div>
+
           {showFilters && (
             <>
               <div className='search__list'>
@@ -294,7 +296,6 @@ const Warranty = () => {
                                   placeholder: JSON.stringify(String(item)),
                                 }}
                                 data={chinaTree}
-                                onChange={onChange}
                                 onNodeToggle={onNodeToggle}
                                 className='mdl-demo'
                               />
@@ -306,7 +307,6 @@ const Warranty = () => {
                                   placeholder: JSON.stringify(String(item)),
                                 }}
                                 data={india}
-                                onChange={onChange}
                                 onNodeToggle={onNodeToggle}
                                 className='mdl-demo'
                               />
@@ -318,7 +318,6 @@ const Warranty = () => {
                                   placeholder: JSON.stringify(String(item)),
                                 }}
                                 data={south_korea}
-                                onChange={onChange}
                                 onNodeToggle={onNodeToggle}
                                 className='mdl-demo'
                               />
@@ -330,7 +329,6 @@ const Warranty = () => {
                                   placeholder: JSON.stringify(String(item)),
                                 }}
                                 data={veitnam}
-                                onChange={onChange}
                                 onNodeToggle={onNodeToggle}
                                 className='mdl-demo'
                               />
@@ -366,8 +364,10 @@ const Warranty = () => {
                 </div>
                 {/* <div className='right__filters'>
                   <SideFilters />
-                  <Button onClick={handleSearch}>Show</Button>
                 </div> */}
+                <button onClick={handleSearch} className='add__items'>
+                  Show
+                </button>
               </div>
             </>
           )}
