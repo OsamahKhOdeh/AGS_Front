@@ -92,7 +92,6 @@ const Product = ({ product, index }) => {
           )}
         </div>
         <div className='product__description'>
-          <div className='Product__title'>{product.code}</div>
           <div className='item__prices'>
             <div>
               <label htmlFor=''>Capacity : {product.capacity} </label>
@@ -102,9 +101,7 @@ const Product = ({ product, index }) => {
           <div className='item__prices'>
             {showPrice && (
               <div>
-                <label htmlFor=''>
-                  Price : <Price price={product.price} />{" "}
-                </label>
+                <label htmlFor=''>Price : {product.price}</label>
               </div>
             )}
             {showStock && (
@@ -114,9 +111,7 @@ const Product = ({ product, index }) => {
             )}
           </div>
 
-          <div className='product__description'>
-            Description : mmm nnn mmm nnn mmm nn 12 rk
-          </div>
+          <div className='product__description'>{product.code}</div>
           {showDatasheet && (
             <div className='product__button'>
               <div className='detaills__product'>Download Datasheet</div>

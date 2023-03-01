@@ -17,7 +17,9 @@ import {
 } from "../../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { FaCarBattery } from "react-icons/fa";
-const Products = ({ filters }) => {
+import FilteredPagination from "../FilteredPagination";
+const Products = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
@@ -52,6 +54,48 @@ const Products = ({ filters }) => {
 
   const classes = useStyles();
   let productsCount = products.length;
+
+
+
+
+//Pagination//////////////////////////////
+
+const showFilters = useSelector((state)=>state.show.showFilters)
+
+const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [displayData, setDisplayData] = useState([]);
+useEffect(() => {
+    const totalPages = Math.ceil(products.length / 12);
+    setTotalPages(totalPages);
+    const startIndex = (currentPage - 1) * 12;
+    const endIndex = startIndex + 12;
+    const displayData = products.slice(startIndex, endIndex);
+    setDisplayData(displayData);
+  }, [currentPage, products]);
+
+  const handlePrevClick = () => {
+    setCurrentPage((currentPage) => Math.max(currentPage - 1, 1));
+  };
+
+  const handleNextClick = () => {
+    setCurrentPage((currentPage) => Math.min(currentPage + 1, totalPages));
+  };
+
+
+
+
+
+//End Pagination ////////////////
+
+
+
+
+
+
+
+
+
   return isLoading ? (
     <Container
       alignitems='center'
@@ -61,25 +105,50 @@ const Products = ({ filters }) => {
       />
     </Container>
   ) : (
-    <>
+    <>  
       <p className='total__product'>
         {products.length < 1 && !isLoading
-          ? "No products Found"
+          ? "No products Found" 
           : `There are  ${productsCount} products found`}
       </p>
+
+      {showFilters && 
+      <div>
+      
+      <button onClick={handlePrevClick} disabled={currentPage === 1}>
+        Prev
+      </button>
+      <button onClick={handleNextClick} disabled={currentPage === totalPages}>
+        Next
+      </button>
+    </div>
+
+      }
 
       <Grid
         container
         className={classes.mainContainer}
         alignitems='stretch'
         spacing={3}>
-        {products ? (
-          products?.map((product, index) => (
+        {products ? 
+        
+        showFilters ?
+        (
+          displayData?.map((product, index) => (
             <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
               <Product product={product} index={index} />
             </Grid>
-          ))
-        ) : (
+          )) 
+        )
+
+:       
+ (products?.map((product, index) => (
+            <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
+              <Product product={product} index={index} />
+            </Grid>
+          ))) 
+          
+        : (
           <h1>Loading</h1>
         )}
       </Grid>

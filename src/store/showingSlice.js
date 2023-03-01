@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const showingSlice = createSlice({
   name: "show",
   initialState: {
+    showFilters: true,
     isLoading: false,
     showPrice: true,
     showStock: true,
@@ -21,14 +22,12 @@ export const showingSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setShowFilters: (state, action) => {
+      state.showFilters = action.payload;
+    },
   },
 });
 
-export const {
-  changeShowPrice,
-  changeShowStock,
-  changeShowDatasheet,
-  setIsLoading,
-} = showingSlice.actions;
+export const { changeShowPrice, changeShowStock, changeShowDatasheet, setIsLoading, setShowFilters } = showingSlice.actions;
 
 export default showingSlice.reducer;

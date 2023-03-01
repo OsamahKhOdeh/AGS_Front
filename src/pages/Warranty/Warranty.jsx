@@ -19,6 +19,7 @@ import { getFilteredProducts } from "../../actions/products";
 import { useEffect } from "react";
 import SideFilters from "./SideFilters/SideFilters";
 import DropDown from "./DropDown";
+import { setShowFilters } from "../../store/showingSlice";
 
 let choosenCompanies = [];
 let choosenBrands = [];
@@ -58,6 +59,7 @@ const Warranty = () => {
   let arrayOfSelectedNodes = [];
  
 let choosenCompanies = [];
+const [chosenCompanies , setChosenCompanies] = useState([]);
 
   let allCompanies = [];
 
@@ -73,6 +75,7 @@ let choosenCompanies = [];
     Object.keys(selectedNodes).forEach((k) => {
       const node = selectedNodes[k];
       if (node._depth === 0) {
+
         choosenCompanies.push(node.label);
       }
       if (node._depth === 1) {
@@ -93,7 +96,12 @@ let choosenCompanies = [];
       let str = JSON.stringify(node);
       return str;
     });
+    handleSearch();
   };
+
+  useEffect(()=>{
+
+  },[])
 
   let toggled = [];
 
@@ -138,8 +146,8 @@ let choosenCompanies = [];
   };
 
   //Hid & Show Filters //////////////////////////////////////////////////////////////
-  const [showFilters, setShowFilters] = useState(true);
-
+ // const [showFilters, setShowFilters] = useState(true);
+const showFilters = useSelector((state)=>state.show.showFilters)
   useEffect(() => {
     if (showFilters) {
       dispatch(getFilteredProducts(filters));
@@ -215,7 +223,12 @@ let choosenCompanies = [];
       <Grow in>
         <Container maxWidth='xl'>
           <div>
-            <Button onClick={() => setShowFilters(!showFilters)}>
+            <Button onClick={() =>
+               {
+               dispatch(setShowFilters(!showFilters))
+               //setShowFilters(!showFilters)
+               }
+               }>
               <ExpandCircleDownIcon />
             </Button>
           </div>
@@ -290,10 +303,11 @@ let choosenCompanies = [];
                   )}
               
                 </div>
-                <div className='right__filters'>
+                {/* <div className='right__filters'>
                   <SideFilters />
                   <Button onClick={handleSearch}>Show</Button>
                 </div>
+                      */}
             
             </>
           )}
@@ -302,8 +316,8 @@ let choosenCompanies = [];
               <Pagination page={page} />
             </Paper>
           )}
-
-          <Products filters={filters} />
+          
+          <Products />
         </Container>
       </Grow>
     </>
