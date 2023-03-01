@@ -365,9 +365,6 @@ const Warranty = () => {
                 {/* <div className='right__filters'>
                   <SideFilters />
                 </div> */}
-                <button onClick={handleSearch} className='add__items'>
-                  Show
-                </button>
               </div>
             </>
           )}
@@ -376,6 +373,21 @@ const Warranty = () => {
               <Pagination page={page} />
             </Paper>
           )}
+
+          <div className='pagination'>
+            <div className='prec__pag disable'>
+              <img src='/images/left.png' />
+            </div>
+            <div className='number active'>1</div>
+            <div className='number'>2</div>
+            <div className='number'>3</div>
+            <div className='number'>...</div>
+            <div className='number'>5</div>
+            <div className='number'>6</div>
+            <div className='next__pag'>
+              <img src='/images/right.png' />
+            </div>
+          </div>
 
           <Products filters={filters} />
         </Container>
