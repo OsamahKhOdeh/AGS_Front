@@ -360,3 +360,85 @@ p {
 .tree ul ul {
   display: none;
 }
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.number {
+  padding: 10px;
+}
+
+.pagination {
+  display: flex;
+}
+
+.prec__pag > img {
+  object-fit: contain;
+}
+
+.next__pag > img {
+  object-fit: contain;
+}
+
+.number {
+  display: grid;
+  place-items: center;
+  padding: 10px 20px;
+  background: #ffffff;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #000;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.prec__pag {
+  display: grid;
+  place-items: center;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  width: max-content;
+}
+
+.next__pag {
+  display: grid;
+  place-items: center;
+  padding: 10px 20px;
+  background: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  width: max-content;
+  border: 1px solid #dfe3e8;
+}
+
+.number:hover {
+  border: 1px solid #4200ff;
+  color: #000;
+}
+.active {
+  color: white;
+  border: 1px solid #4200ff;
+  color: #000;
+}
+
+.disable {
+  background-color: #919eab;
+}
+
+.prec__pag > img {
+  width: 15px;
+  height: 20px;
+}
+.next__pag > img {
+  width: 15px;
+  height: 20px;
+}

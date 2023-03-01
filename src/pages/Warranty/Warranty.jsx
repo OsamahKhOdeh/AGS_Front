@@ -326,8 +326,23 @@ const showFilters = useSelector((state)=>state.show.showFilters)
               <Pagination page={page} />
             </Paper>
           )}
-          
-          <Products />
+
+          <div className='pagination'>
+            <div className='prec__pag disable'>
+              <img src='/images/left.png' />
+            </div>
+            <div className='number active'>1</div>
+            <div className='number'>2</div>
+            <div className='number'>3</div>
+            <div className='number'>...</div>
+            <div className='number'>5</div>
+            <div className='number'>6</div>
+            <div className='next__pag'>
+              <img src='/images/right.png' />
+            </div>
+          </div>
+
+          <Products filters={filters} />
         </Container>
       </Grow>
     </>
