@@ -7,6 +7,9 @@ function CheckCustomer() {
 
   return (
     <>
+      <div className='image__logo'>
+        <img src='/images/logo.png' alt='' srcset='' />
+      </div>
       <div className='list__ite'>
         {cart.map((item, index) => (
           <div className='list__product' key={index}>

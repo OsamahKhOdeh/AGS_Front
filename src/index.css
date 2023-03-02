@@ -483,3 +483,12 @@ p {
   width: 100%;
   justify-content: space-between;
 }
+
+/* 
+styling  the logo */
+.image__logo {
+  padding: 10px;
+  margin: 50px 0;
+  display: grid;
+  place-items: center;
+}

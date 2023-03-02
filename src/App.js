@@ -18,16 +18,18 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index path="/" element={<Home />}></Route>
-        <Route path="/pricelist" element={<PriceList />}></Route>
-        <Route path="/addproduct" element={<ProductForm />}></Route>
-        <Route path="/makepi" element={<PiStepper />}></Route>
-        <Route path="/table" element={<ProformaInvoice />}></Route>
-        <Route path="/warranty" element={<Warranty />}></Route>
-        <Route path="/admin" element={<AdminPage />}></Route>
-        <Route path="/warranty-check" element={<WarrantyCheck />}></Route>
-        <Route path="/customer-price-list" element={<CustomerPriceList />}></Route>
-        <Route path="/checkCustomer" element={<CheckCustomer />}></Route>
+        <Route index path='/' element={<Home />}></Route>
+        {/* <Route path="/pricelist" element={<PriceList />}></Route> */}
+        <Route path='/addproduct' element={<ProductForm />}></Route>
+        <Route path='/makepi' element={<PiStepper />}></Route>
+        <Route path='/table' element={<ProformaInvoice />}></Route>
+        <Route path='/pricelist' element={<Warranty />}></Route>
+        <Route path='/admin' element={<AdminPage />}></Route>
+        <Route path='/warranty-check' element={<WarrantyCheck />}></Route>
+        <Route
+          path='/customer-price-list'
+          element={<CustomerPriceList />}></Route>
+        <Route path='/checkCustomer' element={<CheckCustomer />}></Route>
       </Routes>
     </BrowserRouter>
   );
