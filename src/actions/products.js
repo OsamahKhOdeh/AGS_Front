@@ -26,3 +26,16 @@ export const getFilteredProducts = (filters) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const updateProduct = (id, product) => async (dispatch) => {
+  console.log("here");
+  console.log(id);
+
+  try {
+    const { data } = await api.updateProduct(id, product);
+    console.log(data);
+    //  dispatch({ type: UPDATE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

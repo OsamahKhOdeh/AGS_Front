@@ -9,6 +9,8 @@ export const fetchProducts = (page) => API.get(`/products?page=${page}`);
 
 export const fetchFilteredProducts = (filters) => API.get(`/products/search?categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands || ""}&capacities=${JSON.stringify(filters.capacities) || ""}`);
 
+export const updateProduct = (id, updatedProduct) => API.patch(`/products/${id}`, updatedProduct);
+
 /*
 export const fetchPost = (id) => API.get(`/posts/${id}`);
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
