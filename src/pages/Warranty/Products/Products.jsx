@@ -18,6 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { FaCarBattery } from "react-icons/fa";
 import FilteredPagination from "../FilteredPagination";
+import ReactPaginate from "react-paginate";
 const Products = () => {
 
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Products = () => {
   const cart = useSelector((state) => state.cart.cart);
 
   const spliceCart = (item) => {
-    dispatch(deletProductformCart(item));
+     (deletProductformCart(item));
   };
 
   const deleteALl = () => {
@@ -41,6 +42,9 @@ const Products = () => {
   // };
 
   const cartLength = useSelector((state) => state.cart.cart);
+
+
+  
 
   const closeside = () => {
     document.querySelector(".sidebar").style.display = "none";
@@ -88,11 +92,81 @@ useEffect(() => {
 
 //End Pagination ////////////////
 
+function Items({ currentItems }) {
+  return (
+    <>
+      {
+      currentItems?.map((product, index) => (
+            <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
+              <Product product={product} index={index} />
+            </Grid>
+          )) 
+        }
+    </>
+  );
+}function PaginatedItems({ itemsPerPage }) {
+  // Here we use item offsets; we could also use page offsets
+  // following the API or data you're working with.
+  const [itemOffset, setItemOffset] = useState(0);
+
+  // Simulate fetching items from another resources.
+  // (This could be items from props; or items loaded in a local state
+  // from an API endpoint with useEffect and useState)
+  const endOffset = itemOffset + itemsPerPage;
+  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  const currentItems = products.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(products.length / itemsPerPage);
+
+  // Invoke when user click to request another page.
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % products.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+  return (
+    <><ReactPaginate
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+      />
+      <Items currentItems={currentItems} />
+      
+    </>
+  );
+}
 
 
 
 
 
+
+
+
+
+//New Pagination ////////////////
+
+
+
+
+  console.log((totalPages));
 
 
 
@@ -105,15 +179,21 @@ useEffect(() => {
       />
     </Container>
   ) : (
-    <>  
-      <p className='total__product'>
-        {products.length < 1 && !isLoading
-          ? "No products Found" 
-          : `There are  ${productsCount} products found`}
-      </p>
+    <div className="app__container">  
+     
+        
 
       {showFilters && 
-      <div>
+
+
+<div className="search__">
+  
+  {products.length < 1 && !isLoading
+          ? "No products Found" 
+          : <p> There are <b>  {`${productsCount}`} </b> products found </p>}
+ </div>
+
+     /* <div>
       
       <button onClick={handlePrevClick} disabled={currentPage === 1}>
         Prev
@@ -122,7 +202,7 @@ useEffect(() => {
         Next
       </button>
     </div>
-
+*/
       }
 
       <Grid
@@ -134,11 +214,9 @@ useEffect(() => {
         
         showFilters ?
         (
-          displayData?.map((product, index) => (
-            <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
-              <Product product={product} index={index} />
-            </Grid>
-          )) 
+
+          <PaginatedItems itemsPerPage={16} />
+          
         )
 
 :       
@@ -199,7 +277,7 @@ useEffect(() => {
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 
