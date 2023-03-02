@@ -29,7 +29,7 @@ const Products = () => {
   const cart = useSelector((state) => state.cart.cart);
 
   const spliceCart = (item) => {
-    deletProductformCart(item);
+    dispatch(deletProductformCart(item));
   };
 
   const deleteALl = () => {
@@ -211,26 +211,28 @@ const Products = () => {
       {cartLength.length > 0 ? (
         <div className='modal'>
           <div className='sidebar'>
-            <div className='list__'>
-              <span>List of Items : {cart.length} </span>
-              <div className='close__' onClick={() => closeside()}>
-                <AiFillCloseCircle color='' size={40} />
-              </div>
-            </div>
-            <ul className='list__ofItems'>
-              {cart.map((item, index) => (
-                <div className='card__item' key={index}>
-                  <div>{item.code}</div>
-                  <div
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                      spliceCart(item);
-                    }}>
-                    <AiTwotoneDelete color='#E34A44' size={20} />
-                  </div>
+            <div className='list__modal'>
+              <div className='list__'>
+                <span>List of Items : {cart.length} </span>
+                <div className='close__' onClick={() => closeside()}>
+                  <AiFillCloseCircle color='' size={40} />
                 </div>
-              ))}
-            </ul>
+              </div>
+              <ul className='list__ofItems'>
+                {cart.map((item, index) => (
+                  <div className='card__item' key={index}>
+                    <div>{item.code}</div>
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        spliceCart(item);
+                      }}>
+                      <AiTwotoneDelete color='#E34A44' size={26} />
+                    </div>
+                  </div>
+                ))}
+              </ul>
+            </div>
 
             <div className='sidebar__buttons'>
               <div

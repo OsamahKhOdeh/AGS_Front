@@ -13,13 +13,10 @@ export const addToCart = createSlice({
         : state.cart.push(action.payload);
     },
     deletProductformCart: (state, action) => {
-
-      let index = state.cart.findIndex( obj => obj._id === action.payload._id); 
-      if(index != -1 ){ 
-        state.cart.splice(index,1)
+      let index = state.cart.findIndex((obj) => obj._id === action.payload._id);
+      if (index !== -1) {
+        state.cart.splice(index, 1);
       }
-
-      
     },
     deleteAll: (state, action) => {
       state.cart = [];
