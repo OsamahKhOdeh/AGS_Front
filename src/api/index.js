@@ -1,13 +1,21 @@
 import axios from "axios";
 console.log("From api");
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API = axios.create({ baseURL: "http://143.42.61.215:5000" });
 
 //export const createProduct = (newProduct) => API.post("/products", newProduct);
-export const createProduct = (newProduct) => axios.post("https://server1-ustg.onrender.com/products", newProduct);
+export const createProduct = (newProduct) =>
+  axios.post("https://server1-ustg.onrender.com/products", newProduct);
 
 export const fetchProducts = (page) => API.get(`/products?page=${page}`);
 
-export const fetchFilteredProducts = (filters) => API.get(`/products/search?categories=${filters.categories || ""}&countries=${filters.countries || ""}&companies=${filters.companies || ""}&brands=${filters.brands || ""}&capacities=${JSON.stringify(filters.capacities) || ""}`);
+export const fetchFilteredProducts = (filters) =>
+  API.get(
+    `/products/search?categories=${filters.categories || ""}&countries=${
+      filters.countries || ""
+    }&companies=${filters.companies || ""}&brands=${
+      filters.brands || ""
+    }&capacities=${JSON.stringify(filters.capacities) || ""}`
+  );
 
 export const updateProduct = (id, updatedProduct) => API.patch(`/products/${id}`, updatedProduct);
 
