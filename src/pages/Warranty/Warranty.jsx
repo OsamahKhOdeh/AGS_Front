@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { china, india, south_korea, oman, veitnam, thailand } from "./data";
 import useStyles from "./styles";
 import Products from "./Products/Products";
-import {setFiltersState } from "../../store/filtersSlice";
+import { setFiltersState } from "../../store/filtersSlice";
 
 import "./style/warranty.css";
 import Category from "./Category";
@@ -39,15 +39,22 @@ const Warranty = () => {
       }
       return unique;
     }, []);
-    dispatch(setFiltersState({ ...filters, companies: companies, brands: brands, capacities: capacities }));
+    dispatch(
+      setFiltersState({
+        ...filters,
+        companies: companies,
+        brands: brands,
+        capacities: capacities,
+      })
+    );
     choosenCompanies = [];
     choosenBrands = [];
   };
 
-//Osama///////////
-   const query = useQuery();
-    const page = query.get("page") || 1;
-///////////////////////////
+  //Osama///////////
+  const query = useQuery();
+  const page = query.get("page") || 1;
+  ///////////////////////////
   const dispatch = useDispatch();
   const classes = useStyles();
   const shows = useSelector((state) => state.show.showPrice);
@@ -56,29 +63,27 @@ const Warranty = () => {
 
   ///////////////////////////////////////////////////////////////////////
   let arrayOfSelectedNodes = [];
- 
-let choosenCompanies = [];
-const [chosenCompanies , setChosenCompanies] = useState([]);
+
+  let choosenCompanies = [];
+  const [chosenCompanies, setChosenCompanies] = useState([]);
 
   let allCompanies = [];
-
 
   let choosenBrands = [];
   let choosenCapacities = [];
 
-function onAction(node, action) {
-  console.log('onAction::', action, node)
-}
+  function onAction(node, action) {
+    console.log("onAction::", action, node);
+  }
   const onChange = (currentNode, selectedNodes) => {
     console.log("im the best in the world");
     //choosenCompanies = [];
-   // choosenBrands = []; 
-   // choosenCapacities = [];
+    // choosenBrands = [];
+    // choosenCapacities = [];
 
     Object.keys(selectedNodes).forEach((k) => {
       const node = selectedNodes[k];
       if (node._depth === 0) {
-
         choosenCompanies.push(node.label);
       }
       if (node._depth === 1) {
@@ -102,9 +107,7 @@ function onAction(node, action) {
     handleSearch();
   };
 
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
 
   let toggled = [];
 
@@ -149,8 +152,8 @@ function onAction(node, action) {
   };
 
   //Hid & Show Filters //////////////////////////////////////////////////////////////
- // const [showFilters, setShowFilters] = useState(true);
-const showFilters = useSelector((state)=>state.show.showFilters)
+  // const [showFilters, setShowFilters] = useState(true);
+  const showFilters = useSelector((state) => state.show.showFilters);
   useEffect(() => {
     if (showFilters) {
       dispatch(getFilteredProducts(filters));
@@ -226,12 +229,11 @@ const showFilters = useSelector((state)=>state.show.showFilters)
       <Grow in>
         <Container maxWidth='xl'>
           <div>
-            <Button onClick={() =>
-               {
-               dispatch(setShowFilters(!showFilters))
-               //setShowFilters(!showFilters)
-               }
-               }>
+            <Button
+              onClick={() => {
+                dispatch(setShowFilters(!showFilters));
+                //setShowFilters(!showFilters)
+              }}>
               <ExpandCircleDownIcon />
             </Button>
           </div>
@@ -239,81 +241,60 @@ const showFilters = useSelector((state)=>state.show.showFilters)
           {showFilters && (
             <>
               <div className='search__list'>
-                {/* end of header */}
-                <div className='search__withfilters'>
-                  <div style={{ display: "flex", gap: 20 }}>
-                    {categories.map((item, i) => (
-                      <Category
-                        title={item.label}
-                        img={item.img}
-                        onClick={handleCategoryChange}
-                        key={i}
-                        //  checklevel1={checklevel1}
-                        // setcheck={setcheck}
-                      />
-                    ))}
-                  </div>
-                  {/* end of container */}
-               
-                {/* end of quiz_section */}
-              </div>
-              {selectedCategories.length !== 0 && (
-                    <div className='filter__search'>
-                      {countries.map((item, i) => (
-                        <>
-                          <CountryItem
-                            key={i}
+                <div className='change__'>
+                  {/* end of header */}
+
+                  <div>
+                    <div className='search__withfilters'>
+                      <div style={{ display: "flex", gap: 20 }}>
+                        {categories.map((item, i) => (
+                          <Category
                             title={item.label}
                             img={item.img}
-                            onClick={handleCountryChange}
+                            onClick={handleCategoryChange}
+                            key={i}
+                            //  checklevel1={checklevel1}
+                            // setcheck={setcheck}
                           />
-                        </>
-                      ))}
-                    </div>
-                  )}
-              <div className='list__filter'>
-                {selectedItems.length !== 0
-                  ? selectedItems.map((item , i) => (
-                      <div className='select__list'>
-                        <DropDown
-                            item={item}
-                            onChange={onChange}
-                            onNodeToggle={onNodeToggle}
-                            onAction={onAction}
-                          />
+                        ))}
                       </div>
-                    ))
-                  : null}
-              </div>
+                      {/* end of container */}
 
-                  {/* end of quiz_content_area */}
-
-                  {/* end of col12 */}
-
-                  {/* end of row */}
-
-                  {/* end of container */}
-
-                  {/* end of quiz_section */}
-
-                  {/* {selectedCategories.length !== 0 && (
-                    <div className='filter__search'>
-                      {countries.map((item, i) => (
-                        <>
-                          <CountryItem
-                            key={i}
-                            title={item.label}
-                            img={item.img}
-                            onClick={handleCountryChange}
-                          />
-                        </>
-                      ))}
+                      {/* end of quiz_section */}
                     </div>
-                  )} */}
-              
+                    {selectedCategories.length !== 0 && (
+                      <div className='filter__search'>
+                        {countries.map((item, i) => (
+                          <>
+                            <CountryItem
+                              key={i}
+                              title={item.label}
+                              img={item.img}
+                              onClick={handleCountryChange}
+                            />
+                          </>
+                        ))}
+                      </div>
+                    )}
+                    <div className='list__filter'>
+                      {selectedItems.length !== 0
+                        ? selectedItems.map((item, i) => (
+                            <div className='select__list'>
+                              <DropDown
+                                item={item}
+                                onChange={onChange}
+                                onNodeToggle={onNodeToggle}
+                                onAction={onAction}
+                              />
+                            </div>
+                          ))
+                        : null}
+                    </div>
+                  </div>
+
+                  <SideFilters />
                 </div>
-           
-            
+              </div>
             </>
           )}
           {!showFilters && (
@@ -321,8 +302,6 @@ const showFilters = useSelector((state)=>state.show.showFilters)
               <Pagination page={page} />
             </Paper>
           )}
-
-          
 
           <Products filters={filters} />
         </Container>
