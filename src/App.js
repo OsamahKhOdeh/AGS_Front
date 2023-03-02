@@ -13,6 +13,7 @@ import PiStepper from "./pages/MakePi/PiStepper";
 import Warranty from "./pages/Warranty/Warranty";
 import WarrantyCheck from "./pages/Warranty/WarrantyCheck/WarrantyCheck";
 import CheckCustomer from "./pages/Invoice/CheckCustomer";
+import AdminPage from "./pages/Admin/AdminPage";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/makepi" element={<PiStepper />}></Route>
         <Route path="/table" element={<ProformaInvoice />}></Route>
         <Route path="/warranty" element={<Warranty />}></Route>
+        <Route path="/admin" element={<AdminPage />}></Route>
         <Route path="/warranty-check" element={<WarrantyCheck />}></Route>
         <Route path="/customer-price-list" element={<CustomerPriceList />}></Route>
         <Route path="/checkCustomer" element={<CheckCustomer />}></Route>

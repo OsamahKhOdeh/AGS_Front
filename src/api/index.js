@@ -17,6 +17,8 @@ export const fetchFilteredProducts = (filters) =>
     }&capacities=${JSON.stringify(filters.capacities) || ""}`
   );
 
+export const updateProduct = (id, updatedProduct) => API.patch(`/products/${id}`, updatedProduct);
+
 /*
 export const fetchPost = (id) => API.get(`/posts/${id}`);
 export const fetchPosts = (page) => API.get(`/posts?page=${page}`);

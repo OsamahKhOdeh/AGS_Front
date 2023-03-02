@@ -1,0 +1,115 @@
+img {
+  max-width: 100%;
+  max-width: 100%;
+  object-fit: fill;
+  height: 200px;
+}
+.product__item {
+  background-color: #fff;
+  padding: 13px;
+  border: 2.3px solid #d6d6d6;
+  border-radius: 13px;
+  transition: 0.5s;
+}
+.product__image {
+  height: 100%;
+  padding: 0 0 50px 0;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  position: relative;
+}
+
+.check__product {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  border: 3px solid #437cce;
+  position: absolute;
+  top: 5px;
+  right: 0;
+  color: #437cce;
+  font-size: 25px;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  cursor: pointer;
+  transition: background-color 1s fade-in;
+}
+.check__product:hover {
+  color: white;
+  background-color: red;
+  border: 0px;
+  animation: 2s forwards;
+}
+.Product__title {
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.product__description {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.product__description {
+  color: black;
+  font-size: 18px;
+}
+.product__capacity {
+  color: rgb(53, 152, 19);
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+.product__button {
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+
+.detaills__product {
+  background-color: transparent;
+  padding: 10px;
+  border: 3px solid #5580c2;
+  color: #5580c2;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 9px;
+}
+.item__prices {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.battery__bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+.bottom > img {
+  height: 70px !important;
+}
+.bottom {
+  position: relative;
+  z-index: 1;
+}
+.battery__coutn {
+  display: grid;
+  place-items: center;
+  place-content: center;
+  color: #fff;
+  font-weight: bold;
+  position: absolute;
+  top: -10px;
+  z-index: 3;
+  background-color: #5580c2;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  right: 0;
+}

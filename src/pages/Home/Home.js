@@ -16,6 +16,9 @@ const Home = () => {
         </Button>
         <Button style={{ width: "25%", padding: "25px" }} variant="outlined" onClick={() => navigate("/makepi")}>
           Make PI
+        </Button>{" "}
+        <Button style={{ width: "25%", padding: "25px" }} variant="outlined" onClick={() => navigate("/admin")}>
+          Admin
         </Button>
         <Button style={{ width: "25%", padding: "25px" }} variant="contained">
           Make PKL
