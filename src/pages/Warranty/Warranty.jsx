@@ -292,7 +292,9 @@ const Warranty = () => {
                     </div>
                   </div>
 
-                  <SideFilters />
+                  <div className='search__filters'>
+                    <SideFilters />
+                  </div>
                 </div>
               </div>
             </>

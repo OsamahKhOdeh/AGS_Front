@@ -342,6 +342,8 @@ p {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 1440px;
+  margin: auto;
 }
 .search__withfilters {
   display: flex;
@@ -491,4 +493,8 @@ styling  the logo */
   margin: 50px 0;
   display: grid;
   place-items: center;
+}
+
+.search__filters {
+  flex: 0;
 }

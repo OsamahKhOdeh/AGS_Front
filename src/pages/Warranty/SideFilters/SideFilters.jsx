@@ -64,7 +64,7 @@ const SideFilters = () => {
   //Hid & Show Filters //////////////////////////////////////////////////////////////
   return (
     <div>
-      <Grid item xs={12} sm={6} md={8}>
+      <Grid>
         <ToggleButtonGroup
           fullWidth
           value={["rr", "rr"]}

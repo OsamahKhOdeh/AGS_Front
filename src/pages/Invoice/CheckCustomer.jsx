@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Price from "../Warranty/Products/Product/Price";
 import ProductItem from "../Warranty/Products/Product/ProductItem";
 
 function CheckCustomer() {
@@ -15,7 +16,9 @@ function CheckCustomer() {
           <div className='list__product' key={index}>
             <img src={item.image} alt='' />
             <div className='description__product'>
-              <div className='price'>Price : {item.price}</div>
+              <div className='price'>
+                <Price price={item.price} />
+              </div>
               <div className='product__description'>{item.code}</div>
             </div>
           </div>

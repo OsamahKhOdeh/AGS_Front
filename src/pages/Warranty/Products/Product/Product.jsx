@@ -93,25 +93,30 @@ const Product = ({ product, index }) => {
         </div>
         <div className='product__description'>
           <div className='item__prices'>
-            <div>
-              <label htmlFor=''>Capacity : {product.capacity} </label>
-              <label htmlFor=''>Price : {product.price} </label>
-            </div>
-          </div>
-          <div className='item__prices'>
             {showPrice && (
               <div>
-                <label htmlFor=''>Price : {product.price}</label>
+                <label htmlFor=''>
+                  <Price price={product.price} />
+                </label>
               </div>
             )}
             {showStock && (
               <div>
-                <label htmlFor=''>Stock : 250 </label>
+                <label htmlFor=''> Stock : {product.stock}</label>
               </div>
             )}
           </div>
 
-          <div className='product__description'>{product.code}</div>
+          <div className='product__description'>
+            {product.code}
+            <div className='item__prices'>
+              <div>
+                <label htmlFor=''>Capacity : {product.capacity} </label>
+                <label htmlFor=''></label>
+              </div>
+            </div>
+          </div>
+
           {showDatasheet && (
             <div className='product__button'>
               <div className='detaills__product'>Download Datasheet</div>
