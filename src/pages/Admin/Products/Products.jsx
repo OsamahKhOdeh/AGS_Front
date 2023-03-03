@@ -19,7 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { FaCarBattery } from "react-icons/fa";
 import FilteredPagination from "../FilteredPagination";
 import ReactPaginate from "react-paginate";
-const Products = () => {
+const Products = (props) => {
+  const { admin } = props.admin;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
@@ -182,7 +183,7 @@ const Products = () => {
           ) : (
             products?.map((product, index) => (
               <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
-                <Product product={product} index={index} />
+                <Product admin={admin} product={product} index={index} />
               </Grid>
             ))
           )
@@ -191,14 +192,14 @@ const Products = () => {
         )}
       </Grid>
 
-      <div className='battery__bottom' onClick={showList}>
+      {/* <div className='battery__bottom' onClick={showList}>
         <div className='bottom'>
           <img src='/images/battery.png' width={80} height={80} />
           <div className='battery__coutn'>{cart.length}</div>
         </div>
-      </div>
+      </div> */}
 
-      {cartLength.length > 0 ? (
+      {/* {cartLength.length > 0 ? (
         <div className='modal'>
           <div className='sidebar'>
             <div className='list__'>
@@ -236,7 +237,7 @@ const Products = () => {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

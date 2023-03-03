@@ -300,7 +300,7 @@ const AdminPage = () => {
             </Paper>
           )}
 
-          <Products filters={filters} />
+          <Products admin={true} filters={filters} />
         </Container>
       </Grow>
     </>

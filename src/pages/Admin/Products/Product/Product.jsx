@@ -20,7 +20,7 @@ import {
 import product from "../Product/style/product.css";
 import Price from "./Price";
 import { Button, TextField } from "@material-ui/core";
-const Product = ({ product, index }) => {
+const Product = ({ product, index, admin }) => {
   const showPrice = useSelector((state) => state.show.showPrice);
   const showStock = useSelector((state) => state.show.showStock);
   const showDatasheet = useSelector((state) => state.show.showDatasheet);
@@ -34,13 +34,13 @@ const Product = ({ product, index }) => {
   const [stock, setStock] = useState(product.stock);
 
   const classes = useStyles();
-  
-  const handlePriceStockChange =() => {
-         dispatch(updateProduct(product._id , {...product , price : price , stock : stock}));
-               showToastMessage();
 
-
-  }
+  const handlePriceStockChange = () => {
+    dispatch(
+      updateProduct(product._id, { ...product, price: price, stock: stock })
+    );
+    showToastMessage();
+  };
 
   const addTocart = (items, index) => {
     dispatch(addProducttocart(items));
@@ -73,7 +73,7 @@ const Product = ({ product, index }) => {
 
   return (
     <>
-              <ToastContainer />
+      <ToastContainer />
 
       <div
         className={exist ? "product__item background_color" : "product__item"}
@@ -86,7 +86,8 @@ const Product = ({ product, index }) => {
             }
             alt=''
           />
-          {exist ? (
+
+          {/* {admin === true ? null : exist ? (
             <div
               className='check__product'
               onClick={() => {
@@ -102,7 +103,7 @@ const Product = ({ product, index }) => {
               }}>
               +
             </div>
-          )}
+          )} */}
         </div>
         <div className='product__description'>
           <div className='item__prices'>
@@ -126,11 +127,32 @@ const Product = ({ product, index }) => {
 
           <div className='product__description'>{product.code}</div>
           <div className='product_price_stock'>
-           <TextField fullWidth style={{marginBottom : "10px "}} variant="outlined" label="Price" value={price} onChange={(e)=>{setPrice(e.target.value)}}></TextField>
-           <TextField fullWidth style={{marginBottom : "10px "}} variant="outlined" label="Stock" value={stock} onChange={(e)=>{setStock(e.target.value)}}></TextField>
-            <Button variant="contained" style={{backgroundColor :"#ed3615"}} onClick={handlePriceStockChange} fullWidth>Update Product</Button>
-
-          </div>  
+            <TextField
+              fullWidth
+              style={{ marginBottom: "10px " }}
+              variant='outlined'
+              label='Price'
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}></TextField>
+            <TextField
+              fullWidth
+              style={{ marginBottom: "10px " }}
+              variant='outlined'
+              label='Stock'
+              value={stock}
+              onChange={(e) => {
+                setStock(e.target.value);
+              }}></TextField>
+            <Button
+              variant='contained'
+              style={{ backgroundColor: "#ed3615" }}
+              onClick={handlePriceStockChange}
+              fullWidth>
+              Update Product
+            </Button>
+          </div>
         </div>
       </div>
     </>
