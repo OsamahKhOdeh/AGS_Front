@@ -14,6 +14,7 @@ import Warranty from "./pages/Warranty/Warranty";
 import WarrantyCheck from "./pages/Warranty/WarrantyCheck/WarrantyCheck";
 import CheckCustomer from "./pages/Invoice/CheckCustomer";
 import AdminPage from "./pages/Admin/AdminPage";
+import SigninPage from "./auth/SigninPage";
 function App() {
   return (
     <BrowserRouter>
@@ -24,7 +25,9 @@ function App() {
         <Route path='/makepi' element={<PiStepper />}></Route>
         <Route path='/table' element={<ProformaInvoice />}></Route>
         <Route path='/pricelist' element={<Warranty />}></Route>
-        <Route path='/admin' element={<AdminPage />}></Route>
+        <Route path='/editprice' element={<AdminPage />}></Route>
+        <Route path='/admin' element={<SigninPage />}></Route>
+
         <Route path='/warranty-check' element={<WarrantyCheck />}></Route>
         <Route
           path='/customer-price-list'

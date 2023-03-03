@@ -498,3 +498,13 @@ styling  the logo */
 .search__filters {
   flex: 0;
 }
+
+.image__logo > img {
+  height: auto !important;
+  max-width: 500px;
+  width: auto;
+}
+.MuiButton-fullWidth {
+  background-color: rgb(235 235 235) !important;
+  font-weight: bold !important;
+}
