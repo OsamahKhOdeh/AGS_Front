@@ -20,7 +20,6 @@ import { FaCarBattery } from "react-icons/fa";
 import FilteredPagination from "../FilteredPagination";
 import ReactPaginate from "react-paginate";
 const Products = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
@@ -30,7 +29,7 @@ const Products = () => {
   const cart = useSelector((state) => state.cart.cart);
 
   const spliceCart = (item) => {
-     (deletProductformCart(item));
+    dispatch(deletProductformCart(item));
   };
 
   const deleteALl = () => {
@@ -42,9 +41,6 @@ const Products = () => {
   // };
 
   const cartLength = useSelector((state) => state.cart.cart);
-
-
-  
 
   const closeside = () => {
     document.querySelector(".sidebar").style.display = "none";
@@ -59,17 +55,14 @@ const Products = () => {
   const classes = useStyles();
   let productsCount = products.length;
 
+  //Pagination//////////////////////////////
 
+  const showFilters = useSelector((state) => state.show.showFilters);
 
-
-//Pagination//////////////////////////////
-
-const showFilters = useSelector((state)=>state.show.showFilters)
-
-const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [displayData, setDisplayData] = useState([]);
-useEffect(() => {
+  useEffect(() => {
     const totalPages = Math.ceil(products.length / 12);
     setTotalPages(totalPages);
     const startIndex = (currentPage - 1) * 12;
@@ -86,81 +79,61 @@ useEffect(() => {
     setCurrentPage((currentPage) => Math.min(currentPage + 1, totalPages));
   };
 
+  //End Pagination ////////////////
 
-
-
-
-//End Pagination ////////////////
-
-function Items({ currentItems }) {
-  return (
-    <>
-      {
-      currentItems?.map((product, index) => (
-            <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
-              <Product product={product} index={index} />
-            </Grid>
-          )) 
-        }
-    </>
-  );
-}function PaginatedItems({ itemsPerPage }) {
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = products.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(products.length / itemsPerPage);
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % products.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
+  function Items({ currentItems }) {
+    return (
+      <>
+        {currentItems?.map((product, index) => (
+          <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
+            <Product product={product} index={index} />
+          </Grid>
+        ))}
+      </>
     );
-    setItemOffset(newOffset);
-  };
+  }
+  function PaginatedItems({ itemsPerPage }) {
+    const [itemOffset, setItemOffset] = useState(0);
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const currentItems = products.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(products.length / itemsPerPage);
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % products.length;
+      console.log(
+        `User requested page number ${event.selected}, which is offset ${newOffset}`
+      );
+      setItemOffset(newOffset);
+    };
 
-  return (
-    <>
-      <Items currentItems={currentItems} />
-      <ReactPaginate
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-        renderOnZeroPageCount={null}
-      />
-    </>
-  );
-}
+    return (
+      <>
+        <Items currentItems={currentItems} />
+        <ReactPaginate
+          nextLabel='next >'
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel='< previous'
+          pageClassName='page-item'
+          pageLinkClassName='page-link'
+          previousClassName='page-item'
+          previousLinkClassName='page-link'
+          nextClassName='page-item'
+          nextLinkClassName='page-link'
+          breakLabel='...'
+          breakClassName='page-item'
+          breakLinkClassName='page-link'
+          containerClassName='pagination'
+          activeClassName='active'
+          renderOnZeroPageCount={null}
+        />
+      </>
+    );
+  }
 
-
-
-
-
-
-
-
-
-//New Pagination ////////////////
-
-
-
-
-  console.log((totalPages));
-
-
+  //New Pagination ////////////////
 
   return isLoading ? (
     <Container
@@ -171,21 +144,22 @@ function Items({ currentItems }) {
       />
     </Container>
   ) : (
-    <div className="app__container">  
-     
-        
+    <div className='app__container'>
+      {
+        showFilters && (
+          <div className='search__'>
+            {products.length < 1 && !isLoading ? (
+              "No products Found"
+            ) : (
+              <p>
+                {" "}
+                There are <b> {`${productsCount}`} </b> products found{" "}
+              </p>
+            )}
+          </div>
+        )
 
-      {showFilters && 
-
-
-<div className="search__">
-  
-  {products.length < 1 && !isLoading
-          ? "No products Found" 
-          : <p> There are <b>  {`${productsCount}`} </b> products found </p>}
- </div>
-
-     /* <div>
+        /* <div>
       
       <button onClick={handlePrevClick} disabled={currentPage === 1}>
         Prev
@@ -202,23 +176,17 @@ function Items({ currentItems }) {
         className={classes.mainContainer}
         alignitems='stretch'
         spacing={3}>
-        {products ? 
-        
-        showFilters ?
-        (
-
-          <PaginatedItems itemsPerPage={16} />
-          
-        )
-
-:       
- (products?.map((product, index) => (
-            <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
-              <Product product={product} index={index} />
-            </Grid>
-          ))) 
-          
-        : (
+        {products ? (
+          showFilters ? (
+            <PaginatedItems itemsPerPage={16} />
+          ) : (
+            products?.map((product, index) => (
+              <Grid item key={product._id} xs={12} sm={12} md={6} lg={3}>
+                <Product product={product} index={index} />
+              </Grid>
+            ))
+          )
+        ) : (
           <h1>Loading</h1>
         )}
       </Grid>
@@ -230,7 +198,7 @@ function Items({ currentItems }) {
         </div>
       </div>
 
-      {cartLength.length > 0 ? (  
+      {cartLength.length > 0 ? (
         <div className='modal'>
           <div className='sidebar'>
             <div className='list__'>
@@ -248,7 +216,7 @@ function Items({ currentItems }) {
                     onClick={() => {
                       spliceCart(item);
                     }}>
-                    <AiTwotoneDelete color='#E34A44' size={20} />
+                    <AiTwotoneDelete color='#E34A44' size={26} />
                   </div>
                 </div>
               ))}

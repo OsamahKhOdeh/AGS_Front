@@ -291,31 +291,6 @@ const AdminPage = () => {
                       ))
                     : null}
                 </div>
-
-                {/* end of quiz_content_area */}
-
-                {/* end of col12 */}
-
-                {/* end of row */}
-
-                {/* end of container */}
-
-                {/* end of quiz_section */}
-
-                {/* {selectedCategories.length !== 0 && (
-                    <div className='filter__search'>
-                      {countries.map((item, i) => (
-                        <>
-                          <CountryItem
-                            key={i}
-                            title={item.label}
-                            img={item.img}
-                            onClick={handleCountryChange}
-                          />
-                        </>
-                      ))}
-                    </div>
-                  )} */}
               </div>
             </>
           )}
