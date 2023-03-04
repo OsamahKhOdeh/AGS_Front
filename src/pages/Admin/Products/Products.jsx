@@ -25,7 +25,6 @@ const Products = () => {
   const navigate = useNavigate();
   const products = useSelector((state) => state.products.products);
 
-  const allProducts = staticProducts;
   const isLoading = useSelector((state) => state.show.isLoading);
   const cart = useSelector((state) => state.cart.cart);
 

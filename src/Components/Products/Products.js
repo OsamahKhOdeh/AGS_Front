@@ -56,7 +56,6 @@ const Products = () => {
   */
   // console.log(products.data);
 
-  const allProducts = staticProducts;
   const isLoading = useSelector((state) => state.show.isLoading);
   const classes = useStyles();
   console.log(products?.length);

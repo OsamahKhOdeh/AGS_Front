@@ -21,6 +21,10 @@ import product from "../Product/style/product.css";
 import Price from "./Price";
 import { Button, TextField } from "@material-ui/core";
 const Product = ({ product, index }) => {
+ 
+
+
+
   const showPrice = useSelector((state) => state.show.showPrice);
   const showStock = useSelector((state) => state.show.showStock);
   const showDatasheet = useSelector((state) => state.show.showDatasheet);
@@ -30,14 +34,24 @@ const Product = ({ product, index }) => {
   // const QtyRef = useRef('')
 
   const [qty, setQty] = useState("");
+  const [stateProduct , setStateProduct] = useState(product)
   const [price, setPrice] = useState(product.price);
   const [stock, setStock] = useState(product.stock);
+  const [freezoneToLocalPercentage, setFreezoneToLocalPercentage] = useState(product.freezoneToLocalPercentage);
+  const [additionOnLocalPercentage, setAdditionOnLocalPercentage] = useState(product.additionOnLocalPercentage);
 
   const classes = useStyles();
   
   const handlePriceStockChange =() => {
-         dispatch(updateProduct(product._id , {...product , price : price , stock : stock}));
-               showToastMessage();
+    
+         dispatch(updateProduct(product._id , {...product , price : price , stock : stock ,
+        freezoneToLocalPercentage : freezoneToLocalPercentage,
+        additionOnLocalPercentage : additionOnLocalPercentage}));
+        setStateProduct({...stateProduct , price : price , stock : stock ,
+        freezoneToLocalPercentage : freezoneToLocalPercentage,
+        additionOnLocalPercentage : additionOnLocalPercentage})
+        console.log(stateProduct);
+                showToastMessage();
 
 
   }
@@ -108,7 +122,8 @@ const Product = ({ product, index }) => {
           <div className='item__prices'>
             <div>
               <label htmlFor=''>Capacity : {product.capacity} </label>
-              <label htmlFor=''>Price : {product.price} </label>
+              <label htmlFor=''>Price : <Price price={product.price} freezoneToLocalPercentage={product.freezoneToLocalPercentage}
+              additionOnLocalPercentage={product.additionOnLocalPercentage}/> </label>
             </div>
           </div>
           <div className='item__prices'>
@@ -126,8 +141,16 @@ const Product = ({ product, index }) => {
 
           <div className='product__description'>{product.code}</div>
           <div className='product_price_stock'>
-           <TextField fullWidth style={{marginBottom : "10px "}} variant="outlined" label="Price" value={price} onChange={(e)=>{setPrice(e.target.value)}}></TextField>
+           <TextField fullWidth style={{marginBottom : "10px "}} variant="outlined" label="Price" value={price} onChange={
+            (e)=>{setPrice(e.target.value); setStateProduct({...stateProduct , price : (e.target.value) , stock : stock ,
+        freezoneToLocalPercentage : freezoneToLocalPercentage,
+        additionOnLocalPercentage : additionOnLocalPercentage})}}>
+
+           </TextField>
            <TextField fullWidth style={{marginBottom : "10px "}} variant="outlined" label="Stock" value={stock} onChange={(e)=>{setStock(e.target.value)}}></TextField>
+           <TextField error={freezoneToLocalPercentage > 100 } fullWidth style={{marginBottom : "10px "}} variant="outlined" label="Addition on Freezone" value={freezoneToLocalPercentage} onChange={(e)=>{setFreezoneToLocalPercentage(e.target.value)}}></TextField>
+           <TextField error={additionOnLocalPercentage>100} fullWidth style={{marginBottom : "10px "}} variant="outlined" label="Addition on Local" value={additionOnLocalPercentage} onChange={(e)=>{setAdditionOnLocalPercentage(e.target.value)}}></TextField>
+           
             <Button variant="contained" style={{backgroundColor :"#ed3615"}} onClick={handlePriceStockChange} fullWidth>Update Product</Button>
 
           </div>  

@@ -95,7 +95,8 @@ const Product = ({ product, index }) => {
           <div className='item__prices'>
             <div>
               <label htmlFor=''>Capacity : {product.capacity} </label>
-              <label htmlFor=''>Price : {product.price} </label>
+              <label htmlFor=''>Price :<Price price={product.price} freezoneToLocalPercentage={product.freezoneToLocalPercentage}
+              additionOnLocalPercentage={product.additionOnLocalPercentage}/> </label>
             </div>
           </div>
           <div className='item__prices'>
@@ -114,7 +115,9 @@ const Product = ({ product, index }) => {
           <div className='product__description'>{product.code}</div>
           {showDatasheet && (
             <div className='product__button'>
-              <div className='detaills__product'>Download Datasheet</div>
+              <div className='detaills__product'>
+               <a href="" >Download Datasheet</a>
+                </div>
             </div>
           )}
         </div>

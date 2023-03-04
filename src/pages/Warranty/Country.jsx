@@ -1,16 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
 function CountryItem(props) {
   const { title, img, setcheck } = props;
+    const filters = useSelector((state) => state.filters.filters);
+
   return (
     <div class='checkbox'>
       <label class='checkbox-wrapper'>
         <input
           type='checkbox'
-          class='checkbox-input'
+          checked ={filters.countries.includes(title)}
+          class='checkbox-input '
           onClick={() => props.onClick(title)}
         />
         <span class='checkbox-tile'>
-          <img src={img} alt='' srcset='' className='logo__level1' />
+          {title}
         </span>
       </label>
     </div>

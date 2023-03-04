@@ -1,123 +1,3 @@
-export const staticProducts = [
-  {
-    _id: 1,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 2,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 3,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 4,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 5,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 6,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 7,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 8,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 9,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-];
-
 /////////////////////////////////////////////////////////////////////////////
 export const categories = [
   { label: "All", img: "/images/All.png" },
@@ -138,19 +18,7 @@ export const countries = [
   { label: "Other", img: "/images/Other.png" },
 ];
 ////////////////////////////////////////////////////////////////////
-export const china = [
-  "Huawei",
-  "Felicity",
-  "Growatt",
-  "SunRay",
-  "Must Power",
-  "Voltronic",
-  "Enkeel",
-  "Dongjin",
-  "Longi",
-  "Jinhua Jujiang",
-  "Suoer",
-];
+export const china = ["Huawei", "Felicity", "Growatt", "SunRay", "Must Power", "Voltronic", "Enkeel", "Dongjin", "Longi", "Jinhua Jujiang", "Suoer"];
 
 export const india = ["Pacer", "Z Power", "Exide", "LUMINOUS", "Deepak"];
 
@@ -168,22 +36,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "Huawei",
-        capacities: [
-          "50 KTL",
-          "60 KTL",
-          "65 KTL",
-          "75 KTL",
-          "100 KTL",
-          "110 KTL",
-          "125 KTL",
-          "25 KTL",
-          "30 KTL",
-          "2 KTL",
-          "3 KTL",
-          "4 KTL",
-          "5 KTL",
-          "6 KTL",
-        ],
+        capacities: ["50 KTL", "60 KTL", "65 KTL", "75 KTL", "100 KTL", "110 KTL", "125 KTL", "25 KTL", "30 KTL", "2 KTL", "3 KTL", "4 KTL", "5 KTL", "6 KTL"],
       },
     ],
   },
@@ -262,16 +115,7 @@ export const companyBrandCapacity = [
       },
       {
         brandName: "Kinfon",
-        capacities: [
-          "8 AH",
-          "14 AH",
-          "22 AH",
-          "28 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-          "70 AH",
-        ],
+        capacities: ["8 AH", "14 AH", "22 AH", "28 AH", "100 AH", "150 AH", "200 AH", "70 AH"],
       },
     ],
   },
@@ -284,14 +128,7 @@ export const companyBrandCapacity = [
       },
       {
         brandName: "Himo 5",
-        capacities: [
-          "540 W",
-          "545 W",
-          "550 W",
-          "555 W",
-          "bi facial 540 W",
-          "bi facial 550 W",
-        ],
+        capacities: ["540 W", "545 W", "550 W", "555 W", "bi facial 540 W", "bi facial 550 W"],
       },
     ],
   },
@@ -300,33 +137,11 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "Golden Power",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "Rambo",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
     ],
   },
@@ -378,36 +193,15 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "EXIDE",
-        capacities: [
-          "115 AH",
-          "150 AH",
-          "200 AH",
-          "220 AH",
-          "230 AH",
-          "240 AH",
-        ],
+        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "230 AH", "240 AH"],
       },
       {
         brandName: "INDEX",
-        capacities: [
-          "115 AH",
-          "150 AH",
-          "200 AH",
-          "220 AH",
-          "230 AH",
-          "240 AH",
-        ],
+        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "230 AH", "240 AH"],
       },
       {
         brandName: "CEIL",
-        capacities: [
-          "115 AH",
-          "150 AH",
-          "200 AH",
-          "220 AH",
-          "230 AH",
-          "240 AH",
-        ],
+        capacities: ["115 AH", "150 AH", "200 AH", "220 AH", "230 AH", "240 AH"],
       },
     ],
   },
@@ -416,14 +210,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "LUMINOUS",
-        capacities: [
-          "100 AH",
-          "125 AH",
-          "150 AH",
-          "175 AH",
-          "200 AH",
-          "220 AH",
-        ],
+        capacities: ["100 AH", "125 AH", "150 AH", "175 AH", "200 AH", "220 AH"],
       },
       {
         brandName: "LUMINOUS INVERTERS",
@@ -445,78 +232,23 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "KOREANA",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "VOLTEX",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "KINGSLIGHT",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "DTR",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "FLASH",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
     ],
   },
@@ -525,63 +257,19 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "SUPREME",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "MEGAPOWER",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "ROCKET",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
       {
         brandName: "MAXTORM",
-        capacities: [
-          "30 AH",
-          "40 AH",
-          "55 AH",
-          "66 AH",
-          "70 AH",
-          "74 AH",
-          "90 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["30 AH", "40 AH", "55 AH", "66 AH", "70 AH", "74 AH", "90 AH", "100 AH", "150 AH", "200 AH"],
       },
     ],
   },
@@ -603,21 +291,7 @@ export const companyBrandCapacity = [
     brands: [
       {
         brandName: "ROCKET VRLA",
-        capacities: [
-          "4.5 AH",
-          "7 AH",
-          "9 AH",
-          "12 AH",
-          "18 AH",
-          "26 AH",
-          "33 AH",
-          "40 AH",
-          "55 AH",
-          "65 AH",
-          "100 AH",
-          "150 AH",
-          "200 AH",
-        ],
+        capacities: ["4.5 AH", "7 AH", "9 AH", "12 AH", "18 AH", "26 AH", "33 AH", "40 AH", "55 AH", "65 AH", "100 AH", "150 AH", "200 AH"],
       },
     ],
   },
