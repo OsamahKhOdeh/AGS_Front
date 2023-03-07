@@ -11,7 +11,7 @@ function Category(props) {
       <div class='checkbox'>
         <label class='checkbox-wrapper'>
           <input
-          checked ={filters.categories.includes(title)}
+            checked={filters.categories.includes(title)}
             type='checkbox'
             class='checkbox-input'
             onClick={() => props.onClick(title)}

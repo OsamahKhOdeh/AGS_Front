@@ -481,5 +481,7 @@ p {
 .change__ {
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
+  max-width: 1550px;
+  margin: auto;
 }

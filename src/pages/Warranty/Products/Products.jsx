@@ -142,8 +142,6 @@ const Products = () => {
 
   //New Pagination ////////////////
 
-  console.log(totalPages);
-
   return isLoading ? (
     <Container
       alignitems='center'

@@ -31,17 +31,16 @@ function useQuery() {
 }
 
 const Warranty = () => {
-
-  const countriesProducts = useSelector((state)=>state.products.productsForCountries)
+  const countriesProducts = useSelector(
+    (state) => state.products.productsForCountries
+  );
   let countries = [];
-    countriesProducts.map((product)=> {
-        if(!countries.includes(product.country)){
-          countries.push(product.country)
-        }
-    })
-    console.log(countries);
- 
-
+  countriesProducts.map((product) => {
+    if (!countries.includes(product.country)) {
+      countries.push(product.country);
+    }
+  });
+  console.log(countries);
 
   const handleSearch = () => {
     let companies = [...new Set(choosenCompanies)];
@@ -181,7 +180,9 @@ const Warranty = () => {
     const isALL = selectedItems.includes("All");
     const index = selectedItems.indexOf(item);
     if (item === "All") {
-      dispatch(setFiltersState({ ...filters, countries: ["All"], brands :[""] }));
+      dispatch(
+        setFiltersState({ ...filters, countries: ["All"], brands: [""] })
+      );
       setSelectedItems(["All"]);
       return;
     }
@@ -191,7 +192,11 @@ const Warranty = () => {
       // If the item is not in the array, add it
       if (index === -1) {
         dispatch(
-          setFiltersState({ ...filters, countries: [...selectedItems2, item] ,brands : [""] })
+          setFiltersState({
+            ...filters,
+            countries: [...selectedItems2, item],
+            brands: [""],
+          })
         );
         setSelectedItems([...selectedItems2, item]);
       } else {
@@ -200,7 +205,7 @@ const Warranty = () => {
           setFiltersState({
             ...filters,
             countries: selectedItems2.filter((_, i) => i !== index),
-            brands :[""]
+            brands: [""],
           })
         );
         setSelectedItems(selectedItems2.filter((_, i) => i !== index));
@@ -212,7 +217,9 @@ const Warranty = () => {
     const isALL = selectedCategories.includes("All");
     const index = selectedCategories.indexOf(item);
     if (item === "All") {
-      dispatch(setFiltersState({ ...filters, categories: ["All"], brands :[""] }));
+      dispatch(
+        setFiltersState({ ...filters, categories: ["All"], brands: [""] })
+      );
       setSelectedCategories(["All"]);
       return;
     }
@@ -222,7 +229,11 @@ const Warranty = () => {
       // If the item is not in the array, add it
       if (index === -1) {
         dispatch(
-          setFiltersState({ ...filters, categories: [...selectedItems2, item], brands :[""] })
+          setFiltersState({
+            ...filters,
+            categories: [...selectedItems2, item],
+            brands: [""],
+          })
         );
         setSelectedCategories([...selectedItems2, item]);
       } else {
@@ -230,7 +241,8 @@ const Warranty = () => {
         dispatch(
           setFiltersState({
             ...filters,
-            categories: selectedItems2.filter((_, i) => i !== index), brands :[""]
+            categories: selectedItems2.filter((_, i) => i !== index),
+            brands: [""],
           })
         );
         setSelectedCategories(selectedItems2.filter((_, i) => i !== index));
@@ -292,12 +304,12 @@ const Warranty = () => {
                     )}
 
                     <div className='list__filter'>
-                      {(selectedItems.length !== 0 && !selectedItems.includes("All"))
-                        ? 
-                        <Brands/>
-                        : null}
-                       
-                        {/*selectedItems.map((item, i) => (
+                      {selectedItems.length !== 0 &&
+                      !selectedItems.includes("All") ? (
+                        <Brands />
+                      ) : null}
+
+                      {/*selectedItems.map((item, i) => (
                             <div className='select__list'>
                               <DropDown
                                 item={item}
@@ -307,8 +319,6 @@ const Warranty = () => {
                               />
                             </div>
                         )) */}
-
-                        
                     </div>
                   </div>
 
