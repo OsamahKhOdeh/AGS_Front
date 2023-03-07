@@ -20,7 +20,11 @@ export const getFilteredProducts = (filters) => async (dispatch) => {
   try {
     dispatch(setIsLoading(true));
     const data = await api.fetchFilteredProducts(filters);
+    // if (data.data2) {
+    //  console.log(data.data2);
+    // }
     dispatch(fetchFilterd(data.data));
+
     dispatch(setIsLoading(false));
   } catch (error) {
     console.log(error);

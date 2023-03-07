@@ -14,12 +14,13 @@ import { setFiltersState } from "../../store/filtersSlice";
 import "./style/warranty.css";
 import Category from "./Category";
 import CountryItem from "./Country";
-import { categories, countries } from "../../data";
+import { categories } from "../../data";
 import { getFilteredProducts } from "../../actions/products";
 import { useEffect } from "react";
 import SideFilters from "./SideFilters/SideFilters";
 import DropDown from "./DropDown";
 import { setShowFilters } from "../../store/showingSlice";
+import Brands from "./Brands/Brands";
 
 let choosenCompanies = [];
 let choosenBrands = [];
@@ -30,6 +31,17 @@ function useQuery() {
 }
 
 const Warranty = () => {
+  const countriesProducts = useSelector(
+    (state) => state.products.productsForCountries
+  );
+  let countries = [];
+  countriesProducts.map((product) => {
+    if (!countries.includes(product.country)) {
+      countries.push(product.country);
+    }
+  });
+  console.log(countries);
+
   const handleSearch = () => {
     let companies = [...new Set(choosenCompanies)];
     let brands = [...new Set(choosenBrands)];
@@ -168,7 +180,9 @@ const Warranty = () => {
     const isALL = selectedItems.includes("All");
     const index = selectedItems.indexOf(item);
     if (item === "All") {
-      dispatch(setFiltersState({ ...filters, countries: ["All"] }));
+      dispatch(
+        setFiltersState({ ...filters, countries: ["All"], brands: [""] })
+      );
       setSelectedItems(["All"]);
       return;
     }
@@ -178,7 +192,11 @@ const Warranty = () => {
       // If the item is not in the array, add it
       if (index === -1) {
         dispatch(
-          setFiltersState({ ...filters, countries: [...selectedItems2, item] })
+          setFiltersState({
+            ...filters,
+            countries: [...selectedItems2, item],
+            brands: [""],
+          })
         );
         setSelectedItems([...selectedItems2, item]);
       } else {
@@ -187,6 +205,7 @@ const Warranty = () => {
           setFiltersState({
             ...filters,
             countries: selectedItems2.filter((_, i) => i !== index),
+            brands: [""],
           })
         );
         setSelectedItems(selectedItems2.filter((_, i) => i !== index));
@@ -198,7 +217,9 @@ const Warranty = () => {
     const isALL = selectedCategories.includes("All");
     const index = selectedCategories.indexOf(item);
     if (item === "All") {
-      dispatch(setFiltersState({ ...filters, categories: ["All"] }));
+      dispatch(
+        setFiltersState({ ...filters, categories: ["All"], brands: [""] })
+      );
       setSelectedCategories(["All"]);
       return;
     }
@@ -208,7 +229,11 @@ const Warranty = () => {
       // If the item is not in the array, add it
       if (index === -1) {
         dispatch(
-          setFiltersState({ ...filters, categories: [...selectedItems2, item] })
+          setFiltersState({
+            ...filters,
+            categories: [...selectedItems2, item],
+            brands: [""],
+          })
         );
         setSelectedCategories([...selectedItems2, item]);
       } else {
@@ -217,6 +242,7 @@ const Warranty = () => {
           setFiltersState({
             ...filters,
             categories: selectedItems2.filter((_, i) => i !== index),
+            brands: [""],
           })
         );
         setSelectedCategories(selectedItems2.filter((_, i) => i !== index));
@@ -268,7 +294,7 @@ const Warranty = () => {
                           <>
                             <CountryItem
                               key={i}
-                              title={item.label}
+                              title={item}
                               img={item.img}
                               onClick={handleCountryChange}
                             />
@@ -276,9 +302,14 @@ const Warranty = () => {
                         ))}
                       </div>
                     )}
+
                     <div className='list__filter'>
-                      {selectedItems.length !== 0
-                        ? selectedItems.map((item, i) => (
+                      {selectedItems.length !== 0 &&
+                      !selectedItems.includes("All") ? (
+                        <Brands />
+                      ) : null}
+
+                      {/*selectedItems.map((item, i) => (
                             <div className='select__list'>
                               <DropDown
                                 item={item}
@@ -287,8 +318,7 @@ const Warranty = () => {
                                 onAction={onAction}
                               />
                             </div>
-                          ))
-                        : null}
+                        )) */}
                     </div>
                   </div>
 

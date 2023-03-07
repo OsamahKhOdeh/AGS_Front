@@ -1,141 +1,21 @@
-export const staticProducts = [
-  {
-    _id: 1,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 2,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 3,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 4,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 5,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 6,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 7,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 8,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-  {
-    _id: 9,
-    category: "Solar",
-    country: "China",
-    company: "LUMINOUS POWER TECHNOLOGIES",
-    productName: "LUMINOUS OPTIMUS S/W UPS 1100VA/12V",
-    capacity: "1100",
-    image:
-      "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675853855/luminos150Ah_ckxtam.jpg",
-    price: 200,
-    description:
-      "Engineered to the highest India standards. Patented PowerFrame® grid for reliable starting power, fast recharge and corrosion resistance. “Like-for-like” replacement",
-  },
-];
-
 /////////////////////////////////////////////////////////////////////////////
 export const categories = [
-  { label: "All", img: "/images/All.png" },
-  { label: "Solar", img: "/images/Solar.png" },
-  { label: "Inverter", img: "/images/Inverter.png" },
-  { label: "Battery", img: "/images/Battery.png" },
-  { label: "Other", img: "/images/Other.png" },
+  { label: "All", img: "/image/All.png" },
+  { label: "Solar", img: "/image/solar.png" },
+  { label: "Inverter", img: "/image/invertor.png" },
+  { label: "Battery", img: "/image/battery.png" },
+  { label: "Other", img: "/image/others.png" },
 ];
 
 export const countries = [
-  { label: "All", img: "/images/All.png" },
-  { label: "China", img: "/images/flag/china.png" },
-  { label: "India", img: "/images/flag/india.png" },
-  { label: "South korea", img: "/images/flag/korea.png" },
-  { label: "Oman", img: "/images/flag/oman.png" },
-  { label: "Veitnam", img: "/images/flag/vietnam.png" },
-  { label: "Thailand", img: "/images/flag/thailand.jpg" },
-  { label: "Other", img: "/images/Other.png" },
+  { label: "All", img: "/image/all.png" },
+  { label: "China", img: "/image/china.png" },
+  { label: "India", img: "/image/india.png" },
+  { label: "South korea", img: "/image/korea.png" },
+  { label: "Oman", img: "/image/oman.png" },
+  { label: "Veitnam", img: "/image/vietnam.png" },
+  { label: "Thailand", img: "/image/thailand.jpg" },
+  { label: "Other", img: "/image/others.png" },
 ];
 ////////////////////////////////////////////////////////////////////
 export const china = [

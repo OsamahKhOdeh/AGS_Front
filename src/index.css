@@ -507,4 +507,6 @@ styling  the logo */
 .MuiButton-fullWidth {
   background-color: rgb(235 235 235) !important;
   font-weight: bold !important;
+  max-width: 1550px;
+  margin: auto;
 }

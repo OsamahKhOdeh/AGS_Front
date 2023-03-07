@@ -93,6 +93,19 @@ const Product = ({ product, index }) => {
         </div>
         <div className='product__description'>
           <div className='item__prices'>
+            <div>
+              <label htmlFor=''>Capacity : {product.capacity} </label>
+              <label htmlFor=''>
+                Price :
+                <Price
+                  price={product.price}
+                  freezoneToLocalPercentage={product.freezoneToLocalPercentage}
+                  additionOnLocalPercentage={product.additionOnLocalPercentage}
+                />{" "}
+              </label>
+            </div>
+          </div>
+          <div className='item__prices'>
             {showPrice && (
               <div>
                 <label htmlFor=''>
@@ -119,7 +132,9 @@ const Product = ({ product, index }) => {
 
           {showDatasheet && (
             <div className='product__button'>
-              <div className='detaills__product'>Download Datasheet</div>
+              <div className='detaills__product'>
+                <a href=''>Download Datasheet</a>
+              </div>
             </div>
           )}
         </div>
