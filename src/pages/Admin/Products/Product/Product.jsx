@@ -61,151 +61,157 @@ const Product = ({ product, index }) => {
     });
     console.log(stateProduct);
     showToastMessage();
+  };
 
-    const handlePriceStockChange = () => {
-      dispatch(
-        updateProduct(product._id, { ...product, price: price, stock: stock })
-      );
-      showToastMessage();
-    };
+  const addTocart = (items, index) => {
+    dispatch(addProducttocart(items));
+    // document.querySelector(".sidebar").style.display = "block";
+  };
 
-    const addTocart = (items, index) => {
-      dispatch(addProducttocart(items));
-      // document.querySelector(".sidebar").style.display = "block";
-    };
+  const removefromcart = (items, index) => {
+    dispatch(deletProductformCart(items, index));
+  };
 
-    const removefromcart = (items, index) => {
-      dispatch(deletProductformCart(items, index));
-    };
+  const itemfromCart = useSelector((state) => state.cart.cart);
+  // const data = itemfromCart.map((item) =>
+  //   item._id.includes(product._id) ? true : false
+  // );
 
-    const itemfromCart = useSelector((state) => state.cart.cart);
-    // const data = itemfromCart.map((item) =>
-    //   item._id.includes(product._id) ? true : false
-    // );
+  const exist = itemfromCart.some((item) => item._id === product._id);
 
-    const exist = itemfromCart.some((item) => item._id === product._id);
+  const showToastMessage = () => {
+    toast.success("Product updated Succesfully ✅", {
+      position: "top-center",
+      autoClose: 200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
-    const showToastMessage = () => {
-      toast.success("Product updated Succesfully ✅", {
-        position: "top-center",
-        autoClose: 200,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    };
+  return (
+    <>
+      <ToastContainer />
 
-    return (
-      <>
-        <ToastContainer />
-
-        <div
-          className={exist ? "product__item background_color" : "product__item"}
-          style={{}}>
-          <div className='product__image '>
-            <img
-              src={
-                product.image ||
-                "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"
-              }
-              alt=''
-            />
+      <div
+        className={exist ? "product__item background_color" : "product__item"}
+        style={{}}>
+        <div className='product__image '>
+          <img
+            src={
+              product.image ||
+              "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"
+            }
+            alt=''
+          />
+          {exist ? (
+            <div
+              className='check__product'
+              onClick={() => {
+                removefromcart(product, index);
+              }}>
+              -
+            </div>
+          ) : (
+            <div
+              className='check__product'
+              onClick={() => {
+                addTocart(product, index);
+              }}>
+              +
+            </div>
+          )}
+        </div>
+        <div className='product__description'>
+          <div className='item__prices'>
+            <div>
+              <label htmlFor=''>Capacity : {product.capacity} </label>
+              <label htmlFor=''>
+                Price :{" "}
+                <Price
+                  price={product.price}
+                  freezoneToLocalPercentage={product.freezoneToLocalPercentage}
+                  additionOnLocalPercentage={product.additionOnLocalPercentage}
+                />{" "}
+              </label>
+            </div>
           </div>
-          <div className='product__description'>
-            <div className='item__prices'>
+          <div className='item__prices'>
+            {showPrice && (
               <div>
-                <label htmlFor=''>Capacity : {product.capacity} </label>
-                <label htmlFor=''>
-                  Price :{" "}
-                  <Price
-                    price={product.price}
-                    freezoneToLocalPercentage={
-                      product.freezoneToLocalPercentage
-                    }
-                    additionOnLocalPercentage={
-                      product.additionOnLocalPercentage
-                    }
-                  />{" "}
-                </label>
+                <label htmlFor=''>Price : {product.price}</label>
               </div>
-            </div>
-            <div className='item__prices'>
-              {showPrice && (
-                <div>
-                  <label htmlFor=''>Price : {product.price}</label>
-                </div>
-              )}
-              {showStock && (
-                <div>
-                  <label htmlFor=''>Stock : {product.stock} </label>
-                </div>
-              )}
-            </div>
+            )}
+            {showStock && (
+              <div>
+                <label htmlFor=''>Stock : {product.stock} </label>
+              </div>
+            )}
+          </div>
 
-            <div className='product__description'>{product.code}</div>
-            <div className='product_price_stock'>
-              <TextField
-                fullWidth
-                style={{ marginBottom: "10px " }}
-                variant='outlined'
-                label='Price'
-                value={price}
-                onChange={(e) => {
-                  setPrice(e.target.value);
-                  setStateProduct({
-                    ...stateProduct,
-                    price: e.target.value,
-                    stock: stock,
-                    freezoneToLocalPercentage: freezoneToLocalPercentage,
-                    additionOnLocalPercentage: additionOnLocalPercentage,
-                  });
-                }}></TextField>
-              <TextField
-                fullWidth
-                style={{ marginBottom: "10px " }}
-                variant='outlined'
-                label='Stock'
-                value={stock}
-                onChange={(e) => {
-                  setStock(e.target.value);
-                }}></TextField>
-              <TextField
-                error={freezoneToLocalPercentage > 100}
-                fullWidth
-                style={{ marginBottom: "10px " }}
-                variant='outlined'
-                label='Addition on Freezone'
-                value={freezoneToLocalPercentage}
-                onChange={(e) => {
-                  setFreezoneToLocalPercentage(e.target.value);
-                }}></TextField>
-              <TextField
-                error={additionOnLocalPercentage > 100}
-                fullWidth
-                style={{ marginBottom: "10px " }}
-                variant='outlined'
-                label='Addition on Local'
-                value={additionOnLocalPercentage}
-                onChange={(e) => {
-                  setAdditionOnLocalPercentage(e.target.value);
-                }}></TextField>
+          <div className='product__description'>{product.code}</div>
+          <div className='product_price_stock'>
+            <TextField
+              fullWidth
+              style={{ marginBottom: "10px " }}
+              variant='outlined'
+              label='Price'
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+                setStateProduct({
+                  ...stateProduct,
+                  price: e.target.value,
+                  stock: stock,
+                  freezoneToLocalPercentage: freezoneToLocalPercentage,
+                  additionOnLocalPercentage: additionOnLocalPercentage,
+                });
+              }}></TextField>
+            <TextField
+              fullWidth
+              style={{ marginBottom: "10px " }}
+              variant='outlined'
+              label='Stock'
+              value={stock}
+              onChange={(e) => {
+                setStock(e.target.value);
+              }}></TextField>
+            <TextField
+              error={freezoneToLocalPercentage > 100}
+              fullWidth
+              style={{ marginBottom: "10px " }}
+              variant='outlined'
+              label='Addition on Freezone'
+              value={freezoneToLocalPercentage}
+              onChange={(e) => {
+                setFreezoneToLocalPercentage(e.target.value);
+              }}></TextField>
+            <TextField
+              error={additionOnLocalPercentage > 100}
+              fullWidth
+              style={{ marginBottom: "10px " }}
+              variant='outlined'
+              label='Addition on Local'
+              value={additionOnLocalPercentage}
+              onChange={(e) => {
+                setAdditionOnLocalPercentage(e.target.value);
+              }}></TextField>
 
-              <Button
-                variant='contained'
-                style={{ backgroundColor: "#ed3615" }}
-                onClick={handlePriceStockChange}
-                fullWidth>
-                Update Product
-              </Button>
-            </div>
+            <Button
+              variant='contained'
+              style={{ backgroundColor: "#ed3615" }}
+              onClick={handlePriceStockChange}
+              fullWidth>
+              Update Product
+            </Button>
           </div>
         </div>
-      </>
-    );
-  };
+      </div>
+    </>
+  );
 };
 
 export default Product;
