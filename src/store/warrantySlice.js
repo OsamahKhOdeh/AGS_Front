@@ -11,9 +11,7 @@ export const warrantySlice = createSlice({
       state.products.push(action.payload);
     },
     removeProductFromWarrantyList: (state, action) => {
-      const filtered = state.products.filter(
-        (item) => item._id !== action.payload._id
-      );
+      const filtered = state.products.filter((item) => item._id !== action.payload._id);
       state.products = filtered;
     },
     setProductQty: (state, action) => {
@@ -27,10 +25,6 @@ export const warrantySlice = createSlice({
   },
 });
 
-export const {
-  addProductToWarrantyList,
-  removeProductFromWarrantyList,
-  setProductQty,
-} = warrantySlice.actions;
+export const { addProductToWarrantyList, removeProductFromWarrantyList, setProductQty } = warrantySlice.actions;
 
 export default warrantySlice.reducer;
