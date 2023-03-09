@@ -3,7 +3,7 @@ export const categories = [
   { label: "All", img: "/images/All.png" },
   { label: "Solar", img: "/images/Solar.png" },
   { label: "Inverter", img: "/images/Inverter.png" },
-  { label: "Battery", img: "/images/Battery.png" },
+  { label: "Battery", img: "/images/Battero.png" },
   { label: "Other", img: "/images/Other.png" },
 ];
 
