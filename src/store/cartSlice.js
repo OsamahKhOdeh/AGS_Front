@@ -8,9 +8,7 @@ export const addToCart = createSlice({
   },
   reducers: {
     addProducttocart: (state, action) => {
-      state.cart.some((item) => item._id === action.payload._id)
-        ? null
-        : state.cart.push(action.payload);
+      state.cart.some((item) => item._id === action.payload._id) ? null : state.cart.push(action.payload);
     },
     deletProductformCart: (state, action) => {
       let index = state.cart.findIndex((obj) => obj._id === action.payload._id);
@@ -21,10 +19,23 @@ export const addToCart = createSlice({
     deleteAll: (state, action) => {
       state.cart = [];
     },
+    setProductQty: (state, action) => {
+      state.cart.map((item) => {
+        if (action.payload.id === item._id) {
+          item.qty = action.payload.qty;
+        }
+      });
+    },
+    modifyProductPrice: (state, action) => {
+      state.cart.map((item) => {
+        if (action.payload.id === item._id) {
+          item.price = action.payload.price;
+        }
+      });
+    },
   },
 });
 
-export const { addProducttocart, deletProductformCart, deleteAll } =
-  addToCart.actions;
+export const { addProducttocart, deletProductformCart, deleteAll, setProductQty, modifyProductPrice } = addToCart.actions;
 
 export default addToCart.reducer;

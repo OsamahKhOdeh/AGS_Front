@@ -1,14 +1,40 @@
 import { Button, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProductQty, removeProductFromCheckedList } from "../../store/productSlice";
+import { deletProductformCart, setProductQty, modifyProductPrice } from "../../store/cartSlice";
 import { contents } from "./test";
 const TablePage = () => {
   const dispatch = useDispatch();
   const totalAmount = useSelector((state) => state.products.total);
-  const selectedProducts = useSelector((state) => state.products.products);
+  const selectedProducts = useSelector((state) => state.cart.cart);
+  const location = useSelector((state) => state.filters.location);
+  const currency = useSelector((state) => state.filters.currency);
+  const usdToAedRate = useSelector((state) => state.filters.usdToAedRate);
+
   const [qty, setQty] = useState("");
   console.log(selectedProducts);
+
+  function calcPrice(price, freezoneToLocalPercentage, additionOnLocalPercentage) {
+    let netToFreezonePer = freezoneToLocalPercentage;
+    let freezoneToLocalPer = additionOnLocalPercentage;
+    let freezonePrice = price + (price * netToFreezonePer) / 100;
+    let localPrice = freezonePrice + (freezonePrice * freezoneToLocalPer) / 100;
+
+    if (location === "freezone") {
+      if (currency === "USD") {
+        return freezonePrice;
+      } else {
+        return (Math.round(freezonePrice * usdToAedRate * 100) / 100).toFixed(2);
+      }
+    } else {
+      if (currency === "USD") {
+        return localPrice.toFixed(2);
+      } else {
+        return ((localPrice * usdToAedRate * 100) / 100).toFixed(2);
+      }
+    }
+  }
+
   return (
     <>
       <div className="container mx-auto">
@@ -36,15 +62,24 @@ const TablePage = () => {
                   <p className="font-medium">{item.qty}</p>
                 </td>
                 <td className="pl-12">
-                  <p className="font-medium">${item.price}</p>
+                  <p className="font-medium">
+                    {" "}
+                    {currency === "USD" ? " $ " : " AED "}
+                    {calcPrice(item.price, item.freezoneToLocalPercentage, item.additionOnLocalPercentage)}
+                  </p>
                 </td>
                 <td className="pl-12">
-                  <p className="font-medium">${item.price * item.qty}</p>
+                  <p className="font-medium">
+                    {currency === "USD" ? " $ " : " AED "}
+                    {(calcPrice(item.price, item.freezoneToLocalPercentage, item.additionOnLocalPercentage) * item.qty).toFixed(2)}
+                  </p>
                 </td>
                 <td className="pl-12">
                   <Button
                     variant="contained"
                     onClick={() => {
+                      dispatch(modifyProductPrice({ id: item._id, price: calcPrice(item.price, item.freezoneToLocalPercentage, item.additionOnLocalPercentage) }));
+
                       dispatch(setProductQty({ id: item._id, qty: qty }));
                     }}
                     style={{ marginRight: "20px" }}
@@ -61,7 +96,7 @@ const TablePage = () => {
                   />
                   <Button
                     onClick={() => {
-                      dispatch(removeProductFromCheckedList(item));
+                      dispatch(deletProductformCart(item));
                     }}
                     variant="contained"
                     style={{ backgroundColor: "red" }}

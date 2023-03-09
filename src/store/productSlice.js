@@ -24,7 +24,6 @@ export const productSlice = createSlice({
       state.products.map((item) => {
         if (action.payload.id === item._id) {
           item.qty = action.payload.qty;
-          state.total += action.payload.qty * 34;
         }
       });
     },

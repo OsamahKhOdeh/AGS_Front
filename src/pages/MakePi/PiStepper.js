@@ -9,6 +9,10 @@ import MakiPi from "./MakePi";
 import InvoiceInfo from "./InvoiceInfo";
 import Table from "../../Components/Table/Table";
 import FinalPi from "./FinalPi";
+import Invoice from "../../Components/Invoice/Invoice";
+import { PDFViewer } from "@react-pdf/renderer";
+import invoiceData from "../../data/invoice-data";
+import ProformaInvoice from "../../Components/PoformaInvoice/ProformaInvoice";
 
 const steps = ["Select Products", "Select PI Information", "Make and Download PI"];
 
@@ -72,7 +76,7 @@ export default function PiStepper() {
               <Table />
             </>
           )}
-          {activeStep === 2 && <FinalPi />}
+          {activeStep === 2 && <ProformaInvoice />}
         </React.Fragment>
       )}
     </Box>

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import useStyles from "./styles";
+//import './style/product.css'
 import { useSelector, useDispatch } from "react-redux";
 import {
   addProductToWarrantyList,
@@ -15,7 +16,35 @@ import {
 } from "../../../../store/cartSlice";
 import product from "../Product/style/product.css";
 import Price from "./Price";
+import axios from "axios";
 const Product = ({ product, index }) => {
+
+//DataSheets//////////////////////////////////
+// Function will execute on click of button
+    const onButtonClick = (url , downloadedFileName) => {
+        // using Java Script method to get PDF file
+        fetch(`${url}.pdf`).then(response => {
+            response.blob().then(blob => {
+                // Creating new object of PDF file
+                const fileURL = window.URL.createObjectURL(blob);
+                // Setting various property values
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = `${downloadedFileName.trim()}.pdf`;
+                alink.click();
+            })
+        })
+    }
+
+
+   function fetchFile(){ 
+      
+  axios.get('www.pdf').then(res => console.log(res.data))
+    .catch(err => console.log(err))
+}
+//End DataSheets////////////////////////////////
+
+
   const showPrice = useSelector((state) => state.show.showPrice);
   const showStock = useSelector((state) => state.show.showStock);
   const showDatasheet = useSelector((state) => state.show.showDatasheet);
@@ -68,7 +97,7 @@ const Product = ({ product, index }) => {
         <div className='product__image '>
           <img
             src={
-              product.image ||
+              `images/${product._id}_1.png` ||
               "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"
             }
             alt=''
@@ -95,29 +124,29 @@ const Product = ({ product, index }) => {
           <div className='item__prices'>
             <div>
               <label htmlFor=''>Capacity : {product.capacity} </label>
-              <label htmlFor=''>Price :<Price price={product.price} freezoneToLocalPercentage={product.freezoneToLocalPercentage}
-              additionOnLocalPercentage={product.additionOnLocalPercentage}/> </label>
             </div>
           </div>
           <div className='item__prices'>
             {showPrice && (
               <div>
-                <label htmlFor=''>Price : {product.price}</label>
+                <label htmlFor=''>Price : <Price price={product.price} freezoneToLocalPercentage={product.freezoneToLocalPercentage}
+              additionOnLocalPercentage={product.additionOnLocalPercentage}/></label>
               </div>
             )}
             {showStock && (
               <div>
-                <label htmlFor=''>Stock : 250 </label>
+                <label htmlFor=''>Stock : {product.stock} </label>
               </div>
             )}
           </div>
 
-          <div className='product__description'>{product.code}</div>
+          <div className='product__description'>{product.brand}  {product.code}</div>
           {showDatasheet && (
             <div className='product__button'>
-              <div className='detaills__product'>
-               <a href="" >Download Datasheet</a>
-                </div>
+              <button
+               onClick={()=>onButtonClick(product._id , product.code)} className='detaills__product'>
+                Download Datasheet
+                </button>
             </div>
           )}
         </div>

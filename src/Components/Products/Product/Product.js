@@ -60,7 +60,7 @@ const Product = ({ product }) => {
           maxHeight: "200px",
         }}
         className={classes.media}
-        image={product.image || "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"}
+        image={product.image[0] || "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"}
       ></CardMedia>
       <div className={classes.overlay}></div>
       <Typography className={classes.title} variant="h6" component="h2">

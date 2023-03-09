@@ -4,7 +4,7 @@ function ProductItem(props) {
     <div>
       <div>Print</div>
       <div>
-        <img src={props.data.image} alt='' />
+        <img src={props.data.image[0]} alt='' />
         <div className='product__description'>{props.data.code}</div>
         <div>{props.data.price}</div>
       </div>

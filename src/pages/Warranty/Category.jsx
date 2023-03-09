@@ -8,16 +8,16 @@ function Category(props) {
   console.log(filters.categories);
   return (
     <>
-      <div class='checkbox'>
-        <label class='checkbox-wrapper'>
+      <div className='checkbox'>
+        <label className='checkbox-wrapper'>
           <input
-          checked ={filters.categories.includes(title)}
+           checked ={filters.categories.includes(title)}
             type='checkbox'
-            class='checkbox-input'
+            className='checkbox-input'
             onClick={() => props.onClick(title)}
           />
-          <span class='checkbox-tile'>
-            <img src={img} alt='' srcset='' className='logo__level1' />
+          <span className='checkbox-tile'>
+            <img src={img} alt='' className='logo__level1' />
           </span>
         </label>
       </div>

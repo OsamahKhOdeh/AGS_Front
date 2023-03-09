@@ -95,7 +95,7 @@ const Product = ({ product, index }) => {
         <div className='product__image '>
           <img
             src={
-              product.image ||
+              product.image[0] ||
               "https://res.cloudinary.com/dwen6dx2a/image/upload/v1675842264/2038830_twveih.png"
             }
             alt=''

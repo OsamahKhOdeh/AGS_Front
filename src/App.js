@@ -5,7 +5,8 @@ import Home from "./pages/Home/Home";
 import ProductForm from "./pages/ProductForm/ProductForm";
 import PriceList from "./pages/PriceList/PriceList";
 import Table from "./Components/Table/Table";
-import ProformaInvoice from "./pages/ProformaInvoice/ProformaInvoice";
+//import ProformaInvoice from "./pages/ProformaInvoice/ProformaInvoice";
+import ProformaInvoice from "./Components/PoformaInvoice/ProformaInvoice";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CustomerPriceList from "./pages/CustomerPriceList/CustomerPriceList";
 import MakiPi from "./pages/MakePi/MakePi";
@@ -20,6 +21,8 @@ function App() {
       <Routes>
         <Route index path="/" element={<Home />}></Route>
         <Route path="/pricelist" element={<PriceList />}></Route>
+        <Route path="/pdf" element={<ProformaInvoice />}></Route>
+
         <Route path="/addproduct" element={<ProductForm />}></Route>
         <Route path="/makepi" element={<PiStepper />}></Route>
         <Route path="/table" element={<ProformaInvoice />}></Route>
